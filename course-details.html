@@ -144,12 +144,16 @@
             </a>
           </div>
           <nav class="hidden lg:flex lg:items-center lg:space-x-8">
-            <a href="index.html#single-session" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">單堂體驗</a>
-            <a href="index.html#thematic-unit" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">主題單元</a>
-            <a href="index.html#sculpting-plan" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">體態雕塑</a>
-            <a href="#" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">常見問題</a>
+            <a href="index.html#single-session" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a>
+            <a href="index.html#thematic-unit" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a>
+            <a href="index.html#sculpting-plan" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a>
+            <a href="#" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a>
           </nav>
           <div class="flex items-center space-x-4">
+            <button id="language-switcher-button" class="text-stone-600 hover:text-[#c1bcb8] transition-colors flex items-center space-x-1" aria-label="Switch language">
+                <i class="fas fa-globe"></i>
+                <span id="current-lang-text" class="text-sm font-medium">繁中</span>
+            </button>
              <button id="user-icon-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="User account">
                 <i aria-hidden="true" class="fas fa-user text-xl"></i> 
              </button>
@@ -170,17 +174,17 @@
     <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform -translate-x-full lg:hidden">
         <div class="flex flex-col h-full">
             <div class="flex items-center justify-between p-6 border-b border-stone-200">
-                <h2 class="text-xl font-semibold text-stone-800">選單</h2>
+                <h2 class="text-xl font-semibold text-stone-800" data-translate-key="mobile_menu_title">選單</h2>
                 <button id="mobile-menu-close" class="text-stone-500 hover:text-stone-800 transition-colors">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
             <nav class="flex-grow p-6">
                 <ul class="space-y-4">
-                    <li><a href="index.html#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">單堂體驗</a></li>
-                    <li><a href="index.html#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">主題單元</a></li>
-                    <li><a href="index.html#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">體態雕塑</a></li>
-                    <li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">常見問題</a></li>
+                    <li><a href="index.html#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a></li>
+                    <li><a href="index.html#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a></li>
+                    <li><a href="index.html#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a></li>
+                    <li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li>
                 </ul>
             </nav>
         </div>
@@ -191,7 +195,7 @@
     <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full">
         <div class="flex flex-col h-full">
             <div class="flex items-center justify-between p-6 border-b border-stone-200">
-                <h2 class="text-xl font-semibold text-stone-800">購物車</h2>
+                <h2 class="text-xl font-semibold text-stone-800" data-translate-key="cart_title">購物車</h2>
                 <button id="cart-close-button" class="text-stone-500 hover:text-stone-800 transition-colors">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
@@ -210,56 +214,56 @@
             <!-- Login View -->
             <div id="loginView" class="auth-view active">
                 <div class="auth-header">
-                    <h1 class="auth-title">會員登入</h1>
-                    <p class="auth-subtitle">登入開始您的皮拉提斯之旅</p>
+                    <h1 class="auth-title" data-translate-key="auth_login_title">會員登入</h1>
+                    <p class="auth-subtitle" data-translate-key="auth_login_subtitle">登入開始您的皮拉提斯之旅</p>
                 </div>
                 <form id="loginForm">
                     <div class="form-group">
-                        <label class="form-label">電子郵件</label>
-                        <input type="email" class="form-control" placeholder="輸入您的電子郵件" required>
+                        <label class="form-label" data-translate-key="auth_email_label">電子郵件</label>
+                        <input type="email" class="form-control" placeholder="輸入您的電子郵件" data-translate-key="auth_email_placeholder" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">密碼</label>
+                        <label class="form-label" data-translate-key="auth_password_label">密碼</label>
                         <div class="password-field">
-                            <input type="password" class="form-control password-input" placeholder="輸入您的密碼" required>
-                            <button type="button" class="password-toggle">顯示</button>
+                            <input type="password" class="form-control password-input" placeholder="輸入您的密碼" data-translate-key="auth_password_placeholder" required>
+                            <button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button>
                         </div>
                     </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="remember" class="checkbox">
-                        <label for="remember" class="checkbox-label">記住我</label>
+                        <label for="remember" class="checkbox-label" data-translate-key="auth_remember_me">記住我</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">登入</button>
-                    <div class="forgot-password"><a class="auth-view-switch" data-view="forgotPassword">忘記密碼？</a></div>
+                    <button type="submit" class="btn btn-primary" data-translate-key="auth_login_button">登入</button>
+                    <div class="forgot-password"><a class="auth-view-switch" data-view="forgotPassword" data-translate-key="auth_forgot_password">忘記密碼？</a></div>
                 </form>
-                <div class="divider"><span>或</span></div>
+                <div class="divider"><span data-translate-key="auth_or">或</span></div>
                 <div class="social-buttons">
-                    <button type="button" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>使用 Google 登入</span></span></button>
-                    <button type="button" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span>使用 LINE 登入</span></span></button>
+                    <button type="button" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-translate-key="auth_google_login">使用 Google 登入</span></span></button>
+                    <button type="button" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span data-translate-key="auth_line_login">使用 LINE 登入</span></span></button>
                 </div>
-                <div class="auth-switch">還沒有帳號？ <a class="auth-view-switch" data-view="signup">立即註冊</a></div>
+                <div class="auth-switch"><span data-translate-key="auth_no_account">還沒有帳號？</span> <a class="auth-view-switch" data-view="signup" data-translate-key="auth_signup_now">立即註冊</a></div>
             </div>
             <!-- Sign Up View -->
             <div id="signupView" class="auth-view">
-                <div class="auth-header"><h1 class="auth-title">建立帳號</h1><p class="auth-subtitle">加入 9's Pilates 開始您的健康之旅</p></div>
+                <div class="auth-header"><h1 class="auth-title" data-translate-key="auth_signup_title">建立帳號</h1><p class="auth-subtitle" data-translate-key="auth_signup_subtitle">加入 9's Pilates 開始您的健康之旅</p></div>
                 <form id="signupForm">
-                    <div class="form-group"><label class="form-label">姓名</label><input type="text" class="form-control" placeholder="輸入您的姓名" required></div>
-                    <div class="form-group"><label class="form-label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您的電子郵件" required></div>
-                    <div class="form-group"><label class="form-label">密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="至少8個字元" required><button type="button" class="password-toggle">顯示</button></div></div>
-                    <div class="form-group"><label class="form-label">確認密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="再次輸入密碼" required><button type="button" class="password-toggle">顯示</button></div></div>
-                    <div class="checkbox-group"><input type="checkbox" id="terms" class="checkbox" required><label for="terms" class="checkbox-label">我同意 <a>服務條款</a> 與 <a>隱私政策</a></label></div>
-                    <button type="submit" class="btn btn-primary">建立帳號</button>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_name_label">姓名</label><input type="text" class="form-control" placeholder="輸入您的姓名" data-translate-key="auth_name_placeholder" required></div>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_email_label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您的電子郵件" data-translate-key="auth_email_placeholder" required></div>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_password_label">密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="至少8個字元" data-translate-key="auth_password_placeholder_signup" required><button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button></div></div>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_confirm_password_label">確認密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="再次輸入密碼" data-translate-key="auth_confirm_password_placeholder" required><button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button></div></div>
+                    <div class="checkbox-group"><input type="checkbox" id="terms" class="checkbox" required><label for="terms" class="checkbox-label" data-translate-key="auth_terms_agree">我同意 <a>服務條款</a> 與 <a>隱私政策</a></label></div>
+                    <button type="submit" class="btn btn-primary" data-translate-key="auth_create_account_button">建立帳號</button>
                 </form>
-                <div class="auth-switch">已經有帳號？ <a class="auth-view-switch" data-view="login">立即登入</a></div>
+                <div class="auth-switch"><span data-translate-key="auth_already_have_account">已經有帳號？</span> <a class="auth-view-switch" data-view="login" data-translate-key="auth_login_now">立即登入</a></div>
             </div>
             <!-- Forgot Password View -->
             <div id="forgotPasswordView" class="auth-view">
-                <a class="back-link auth-view-switch" data-view="login"><span>←</span> 返回登入</a>
-                <div class="auth-header"><h1 class="auth-title">忘記密碼</h1><p class="auth-subtitle">輸入您的電子郵件，我們會發送密碼重設連結給您</p></div>
-                <div id="forgotPasswordSuccess" class="success-message">重設密碼連結已發送至您的信箱！</div>
+                <a class="back-link auth-view-switch" data-view="login"><span class="mr-1">←</span> <span data-translate-key="auth_back_to_login">返回登入</span></a>
+                <div class="auth-header"><h1 class="auth-title" data-translate-key="auth_forgot_password_title">忘記密碼</h1><p class="auth-subtitle" data-translate-key="auth_forgot_password_subtitle">輸入您的電子郵件，我們會發送密碼重設連結給您</p></div>
+                <div id="forgotPasswordSuccess" class="success-message" data-translate-key="auth_forgot_password_success">重設密碼連結已發送至您的信箱！</div>
                 <form id="forgotPasswordForm">
-                    <div class="form-group"><label class="form-label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您註冊的電子郵件" required></div>
-                    <button type="submit" class="btn btn-primary">發送重設連結</button>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_email_label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您註冊的電子郵件" data-translate-key="auth_registered_email_placeholder" required></div>
+                    <button type="submit" class="btn btn-primary" data-translate-key="auth_send_reset_link_button">發送重設連結</button>
                 </form>
             </div>
         </div>
@@ -279,12 +283,12 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center justify-between">
                  <div class="text-left">
-                    <span class="text-sm text-stone-500">課程價格</span>
+                    <span id="footer-price-label" class="text-sm text-stone-500">課程價格</span>
                     <p id="footer-course-price" class="text-2xl font-bold text-stone-800">NT$ 0</p>
                 </div>
                 <div class="flex flex-col items-center space-y-1">
                     <button id="buy-now-button" class="w-full sm:w-auto px-10 py-3 brand-bg text-white rounded-lg font-semibold brand-bg-hover transition-colors whitespace-nowrap">立即購買</button>
-                    <a href="index.html" class="text-xs text-stone-500 hover:underline">返回課程列表</a>
+                    <a href="index.html" id="footer-back-link" class="text-xs text-stone-500 hover:underline">返回課程列表</a>
                 </div>
             </div>
         </div>
@@ -300,12 +304,12 @@
          <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
             <img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" />
             <div class="flex justify-center space-x-6 my-6">
-                <a href="index.html" class="hover:text-white transition-colors">所有課程</a>
-                <a href="#" class="hover:text-white transition-colors">常見問題</a>
-                <a href="#" id="footer-login-link" class="hover:text-white transition-colors">會員登入</a>
+                <a href="index.html" class="hover:text-white transition-colors" data-translate-key="footer_all_courses">所有課程</a>
+                <a href="#" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a>
+                <a href="#" id="footer-login-link" class="hover:text-white transition-colors" data-translate-key="footer_member_login">會員登入</a>
             </div>
              <p class="my-4">
-                <a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors">客服信箱：9spilates@gmail.com</a>
+                <a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors"><span data-translate-key="footer_contact_email">客服信箱</span>：9spilates@gmail.com</a>
             </p>
             <div class="flex justify-center space-x-6 my-6">
                  <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Instagram">
@@ -315,11 +319,11 @@
                     <i class="fab fa-line text-2xl"></i>
                 </a>
             </div>
-            <p class="text-sm text-stone-400">© 2025 9's Pilates. 版權所有</p>
+            <p class="text-sm text-stone-400" data-translate-key="footer_copyright">© 2025 9's Pilates. 版權所有</p>
             <div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500">
-                <a href="#" class="hover:text-stone-300 transition-colors">使用條款</a>
+                <a href="#" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a>
                 <span>|</span>
-                <a href="#" class="hover:text-stone-300 transition-colors">隱私政策</a>
+                <a href="#" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a>
             </div>
         </div>
     </footer>
@@ -327,26 +331,174 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+         // --- TRANSLATIONS ---
+        const translations = {
+            'en': {
+                'page_title_details': "${courseTitle} - 9's Pilates Studio",
+                'nav_single_session': 'Single Session',
+                'nav_thematic_unit': 'Thematic Unit',
+                'nav_sculpting_plan': 'Body Sculpting',
+                'nav_faq': 'FAQ',
+                'mobile_menu_title': 'Menu',
+                'cart_title': 'Shopping Cart',
+                'cart_empty': 'Your cart is empty',
+                'cart_continue_shopping': 'Continue Shopping',
+                'cart_subtotal': 'Subtotal',
+                'cart_checkout': 'Checkout',
+                'footer_all_courses': 'All Courses',
+                'footer_member_login': 'Member Login',
+                'footer_contact_email': 'Contact Email',
+                'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved',
+                'footer_terms': 'Terms of Use',
+                'footer_privacy': 'Privacy Policy',
+                'logout_confirm': 'Are you sure you want to log out?',
+                'already_logged_in': 'You are already logged in.',
+                // Details Page
+                'loading': 'Loading course information...',
+                'promo_banner': '🎉 New Year Special! 15% off all courses. Use code PILATES2025 at checkout. 🎉',
+                'back_to_list': 'Back to course list',
+                'duration': 'Duration',
+                'difficulty': 'Difficulty',
+                'equipment': 'Equipment',
+                'rating': 'Rating',
+                'intro': 'Course Introduction',
+                'instructor': 'Instructor',
+                'footer_price': 'Price',
+                'buy_now': 'Buy Now',
+                'course_not_found': 'Course information not found. Please <a href="index.html" class="underline font-semibold">return to the course list</a>.',
+                'invalid_id': 'Invalid course ID. Please <a href="index.html" class="underline font-semibold">return to the course list</a>.',
+                // Auth Modal
+                'auth_login_title': 'Member Login',
+                'auth_login_subtitle': 'Log in to begin your Pilates journey',
+                'auth_email_label': 'Email',
+                'auth_email_placeholder': 'Enter your email',
+                'auth_password_label': 'Password',
+                'auth_password_placeholder': 'Enter your password',
+                'auth_show_password': 'Show',
+                'auth_hide_password': 'Hide',
+                'auth_remember_me': 'Remember me',
+                'auth_login_button': 'Log In',
+                'auth_forgot_password': 'Forgot password?',
+                'auth_or': 'or',
+                'auth_google_login': 'Sign in with Google',
+                'auth_line_login': 'Sign in with LINE',
+                'auth_no_account': 'Don\'t have an account?',
+                'auth_signup_now': 'Sign up now',
+                'auth_signup_title': 'Create Account',
+                'auth_signup_subtitle': 'Join 9\'s Pilates to start your wellness journey',
+                'auth_name_label': 'Name',
+                'auth_name_placeholder': 'Enter your name',
+                'auth_password_placeholder_signup': 'At least 8 characters',
+                'auth_confirm_password_label': 'Confirm Password',
+                'auth_confirm_password_placeholder': 'Enter password again',
+                'auth_terms_agree': 'I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>',
+                'auth_create_account_button': 'Create Account',
+                'auth_already_have_account': 'Already have an account?',
+                'auth_login_now': 'Log in now',
+                'auth_back_to_login': 'Back to login',
+                'auth_forgot_password_title': 'Forgot Password',
+                'auth_forgot_password_subtitle': 'Enter your email and we\'ll send you a reset link',
+                'auth_forgot_password_success': 'A password reset link has been sent to your email!',
+                'auth_registered_email_placeholder': 'Enter your registered email',
+                'auth_send_reset_link_button': 'Send Reset Link',
+            },
+            'zh-TW': {
+                'page_title_details': "${courseTitle} - 9's Pilates Studio",
+                'nav_single_session': '單堂體驗',
+                'nav_thematic_unit': '主題單元',
+                'nav_sculpting_plan': '體態雕塑',
+                'nav_faq': '常見問題',
+                'mobile_menu_title': '選單',
+                'cart_title': '購物車',
+                'cart_empty': '您的購物車是空的',
+                'cart_continue_shopping': '繼續選購',
+                'cart_subtotal': '小計',
+                'cart_checkout': '前往結帳',
+                'footer_all_courses': '所有課程',
+                'footer_member_login': '會員登入',
+                'footer_contact_email': '客服信箱',
+                'footer_copyright': '© 2025 9\'s Pilates. 版權所有',
+                'footer_terms': '使用條款',
+                'footer_privacy': '隱私政策',
+                'logout_confirm': '您確定要登出嗎？',
+                'already_logged_in': '您已經登入。',
+                // Details Page
+                'loading': '正在載入課程資訊...',
+                'promo_banner': '🎉 新春優惠！全站課程85折，輸入優惠碼 PILATES2025 結帳即可享優惠 🎉',
+                'back_to_list': '返回課程列表',
+                'duration': '課程時長',
+                'difficulty': '難度等級',
+                'equipment': '建議裝備',
+                'rating': '課程評價',
+                'intro': '課程介紹',
+                'instructor': '授課教師',
+                'footer_price': '課程價格',
+                'buy_now': '立即購買',
+                'course_not_found': '找不到課程資訊，請<a href="index.html" class="underline font-semibold">返回所有課程</a>頁面。',
+                'invalid_id': '無效的課程ID，請<a href="index.html" class="underline font-semibold">返回所有課程</a>頁面。',
+                // Auth Modal
+                'auth_login_title': '會員登入',
+                'auth_login_subtitle': '登入開始您的皮拉提斯之旅',
+                'auth_email_label': '電子郵件',
+                'auth_email_placeholder': '輸入您的電子郵件',
+                'auth_password_label': '密碼',
+                'auth_password_placeholder': '輸入您的密碼',
+                'auth_show_password': '顯示',
+                'auth_hide_password': '隱藏',
+                'auth_remember_me': '記住我',
+                'auth_login_button': '登入',
+                'auth_forgot_password': '忘記密碼？',
+                'auth_or': '或',
+                'auth_google_login': '使用 Google 登入',
+                'auth_line_login': '使用 LINE 登入',
+                'auth_no_account': '還沒有帳號？',
+                'auth_signup_now': '立即註冊',
+                'auth_signup_title': '建立帳號',
+                'auth_signup_subtitle': '加入 9\'s Pilates 開始您的健康之旅',
+                'auth_name_label': '姓名',
+                'auth_name_placeholder': '輸入您的姓名',
+                'auth_password_placeholder_signup': '至少8個字元',
+                'auth_confirm_password_label': '確認密碼',
+                'auth_confirm_password_placeholder': '再次輸入密碼',
+                'auth_terms_agree': '我同意 <a>服務條款</a> 與 <a>隱私政策</a>',
+                'auth_create_account_button': '建立帳號',
+                'auth_already_have_account': '已經有帳號？',
+                'auth_login_now': '立即登入',
+                'auth_back_to_login': '返回登入',
+                'auth_forgot_password_title': '忘記密碼',
+                'auth_forgot_password_subtitle': '輸入您的電子郵件，我們會發送密碼重設連結給您',
+                'auth_forgot_password_success': '重設密碼連結已發送至您的信箱！',
+                'auth_registered_email_placeholder': '輸入您註冊的電子郵件',
+                'auth_send_reset_link_button': '發送重設連結',
+            }
+        };
+
         // --- DATA (This acts as a mock database) ---
         const courseData = {
           sections: [
             {
-              id: 'single-session', category: '單堂課程', courses: [
-                { id: 1, title: "久坐上班族：全⾝活化⽪拉提斯", subtitle: "單堂上上看 | 60 minutes", price: 800, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop", duration: "60 minutes", difficulty: "初學者", equipment: "瑜珈墊", rating: 4.8, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>專為長時間久坐、缺乏運動的現代上班族設計。您是否經常感到肩頸僵硬、腰背酸痛？這堂課將帶您透過皮拉提斯的核心訓練，喚醒沉睡的肌群，找回身體的覺知與活力。</p><p>課程將從基礎的呼吸調節開始，引導您感受核心肌群的啟動。透過一系列溫和而精準的動作，我們將逐步伸展緊繃的背部與髖部，強化支撐脊椎的深層肌肉，有效改善因久坐帶來的不良姿勢與身體不適。</p>" },
-                { id: 2, title: "核心強化：穩定與力量", subtitle: "核心挑戰 | 60 minutes", price: 850, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop", duration: "60 minutes", difficulty: "中級者", equipment: "瑜珈墊, 抗力球", rating: 4.9, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>這是一堂專注於核心肌群的深度訓練課程。我們將挑戰您的腹部、背部及骨盆底肌，建立身體中心的力量與穩定性，為所有動態活動打下堅實基礎。</p>" },
-                { id: 3, title: "美體雕塑：曲線與伸展", subtitle: "優雅體態 | 60 minutes", price: 850, image: "https://images.unsplash.com/photo-1549576490-9426cf64ab4a?q=80&w=1470&auto=format&fit=crop", duration: "60 minutes", difficulty: "所有程度", equipment: "瑜珈墊, 彈力帶", rating: 4.7, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>結合皮拉提斯與芭蕾元素，這堂課將帶您進行一系列優雅的伸展與肌力訓練，專注於雕塑修長的肌肉線條，提升身體的柔軟度與協調性。</p>" },
-                { id: 4, title: "孕婦皮拉提斯：溫和與支持", subtitle: "孕期呵護 | 60 minutes", price: 900, image: "https://images.unsplash.com/photo-1588533639019-215264b3697e?q=80&w=1323&auto=format&fit=crop", duration: "60 minutes", difficulty: "孕期媽媽", equipment: "瑜珈墊, 抱枕", rating: 5.0, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>專為孕期媽媽設計的溫和課程，著重於強化骨盆底肌、舒緩下背不適，並幫助您在孕期保持身心連結與舒適。課程安全，並會根據不同孕期提供調整建議。</p>" },
+              id: 'single-session', 
+              category: {'zh-TW': '單堂課程', 'en': 'Single Session'}, 
+              courses: [
+                { id: 1, title: {'zh-TW': "久坐上班族：全⾝活化⽪拉提斯", 'en': "Desk Worker's Relief: Full Body Activation"}, subtitle: {'zh-TW': "單堂上上看 | 60 minutes", 'en': "Single Session | 60 minutes"}, price: 800, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop", duration: "60 minutes", difficulty: {'zh-TW': "初學者", 'en': "Beginner"}, equipment: {'zh-TW': "瑜珈墊", 'en': "Yoga Mat"}, rating: 4.8, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>專為長時間久坐、缺乏運動的現代上班族設計。您是否經常感到肩頸僵硬、腰背酸痛？這堂課將帶您透過皮拉提斯的核心訓練，喚醒沉睡的肌群，找回身體的覺知與活力。</p><p>課程將從基礎的呼吸調節開始，引導您感受核心肌群的啟動。透過一系列溫和而精準的動作，我們將逐步伸展緊繃的背部與髖部，強化支撐脊椎的深層肌肉，有效改善因久坐帶來的不良姿勢與身體不適。</p>", 'en': "<p>Designed for modern office workers who sit for long periods and lack exercise. Do you often feel stiff in your neck and shoulders, or sore in your lower back? This class will guide you through Pilates core training to awaken dormant muscle groups and rediscover your body's awareness and vitality.</p><p>The class begins with basic breathing regulation to help you feel the activation of your core muscles. Through a series of gentle and precise movements, we will gradually stretch tight back and hip muscles, strengthen the deep muscles that support the spine, and effectively improve poor posture and discomfort caused by prolonged sitting.</p>"} },
+                { id: 2, title: {'zh-TW': "核心強化：穩定與力量", 'en': "Core Strengthening: Stability & Power"}, subtitle: {'zh-TW': "核心挑戰 | 60 minutes", 'en': "Core Challenge | 60 minutes"}, price: 850, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop", duration: "60 minutes", difficulty: {'zh-TW': "中級者", 'en': "Intermediate"}, equipment: {'zh-TW': "瑜珈墊, 抗力球", 'en': "Yoga Mat, Stability Ball"}, rating: 4.9, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>這是一堂專注於核心肌群的深度訓練課程。我們將挑戰您的腹部、背部及骨盆底肌，建立身體中心的力量與穩定性，為所有動態活動打下堅實基礎。</p>", 'en': "<p>This is a deep training class focused on the core muscle groups. We will challenge your abdomen, back, and pelvic floor muscles to build central body strength and stability, laying a solid foundation for all dynamic activities.</p>"} },
+                { id: 3, title: {'zh-TW': "美體雕塑：曲線與伸展", 'en': "Body Sculpting: Curves & Stretches"}, subtitle: {'zh-TW': "優雅體態 | 60 minutes", 'en': "Elegant Posture | 60 minutes"}, price: 850, image: "https://images.unsplash.com/photo-1549576490-9426cf64ab4a?q=80&w=1470&auto=format&fit=crop", duration: "60 minutes", difficulty: {'zh-TW': "所有程度", 'en': "All Levels"}, equipment: {'zh-TW': "瑜珈墊, 彈力帶", 'en': "Yoga Mat, Resistance Band"}, rating: 4.7, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>結合皮拉提斯與芭蕾元素，這堂課將帶您進行一系列優雅的伸展與肌力訓練，專注於雕塑修長的肌肉線條，提升身體的柔軟度與協調性。</p>", 'en': "<p>Combining elements of Pilates and ballet, this class will lead you through a series of elegant stretches and strength training exercises, focusing on sculpting long, lean muscle lines and improving flexibility and coordination.</p>"} },
+                { id: 4, title: {'zh-TW': "孕婦皮拉提斯：溫和與支持", 'en': "Prenatal Pilates: Gentle & Supportive"}, subtitle: {'zh-TW': "孕期呵護 | 60 minutes", 'en': "Pregnancy Care | 60 minutes"}, price: 900, image: "https://images.unsplash.com/photo-1588533639019-215264b3697e?q=80&w=1323&auto=format&fit=crop", duration: "60 minutes", difficulty: {'zh-TW': "孕期媽媽", 'en': "Expecting Mothers"}, equipment: {'zh-TW': "瑜珈墊, 抱枕", 'en': "Yoga Mat, Pillow"}, rating: 5.0, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>專為孕期媽媽設計的溫和課程，著重於強化骨盆底肌、舒緩下背不適，並幫助您在孕期保持身心連結與舒適。課程安全，並會根據不同孕期提供調整建議。</p>", 'en': "<p>A gentle class designed for expecting mothers, focusing on strengthening the pelvic floor, relieving lower back discomfort, and helping you maintain a mind-body connection and comfort throughout your pregnancy. The class is safe and provides modifications for different trimesters.</p>"} },
               ]
             },
              {
-              id: 'thematic-unit', category: '主題單元', courses: [
-                { id: 5, title: "四周告別圓肩駝背", subtitle: "挺拔姿態 | 4堂課", price: 3200, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop", duration: "4週", difficulty: "所有程度", equipment: "瑜珈墊, 按摩球", rating: 4.9, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>透過為期四週的系統性訓練，針對性地放鬆胸肌、強化背肌，從根本改善現代人常見的圓肩駝背問題，找回自信挺拔的姿態。</p>" },
-                { id: 6, title: "四周打造緊實翹臀", subtitle: "蜜桃臀計畫 | 4堂課", price: 3400, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop", duration: "4週", difficulty: "中級者", equipment: "瑜珈墊, 彈力帶", rating: 4.8, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>想要擁有迷人的臀部曲線嗎？這套課程將集中火力訓練您的臀大肌、中肌與小肌，不僅提升外觀，更能增強核心穩定，改善下背痛。</p>" },
+              id: 'thematic-unit', 
+              category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'}, 
+              courses: [
+                { id: 5, title: {'zh-TW': "四周告別圓肩駝背", 'en': "4 Weeks to Fix Rounded Shoulders"}, subtitle: {'zh-TW': "挺拔姿態 | 4堂課", 'en': "Upright Posture | 4 Classes"}, price: 3200, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop", duration: "4週", difficulty: {'zh-TW': "所有程度", 'en': "All Levels"}, equipment: {'zh-TW': "瑜珈墊, 按摩球", 'en': "Yoga Mat, Massage Ball"}, rating: 4.9, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>透過為期四週的系統性訓練，針對性地放鬆胸肌、強化背肌，從根本改善現代人常見的圓肩駝背問題，找回自信挺拔的姿態。</p>", 'en': "<p>Through a four-week systematic training program, we will target and relax chest muscles while strengthening back muscles to fundamentally improve the common issue of rounded shoulders and hunchback, helping you regain a confident and upright posture.</p>"} },
+                { id: 6, title: {'zh-TW': "四周打造緊實翹臀", 'en': "4 Weeks to a Firm, Lifted Glutes"}, subtitle: {'zh-TW': "蜜桃臀計畫 | 4堂課", 'en': "Peach Glute Plan | 4 Classes"}, price: 3400, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop", duration: "4週", difficulty: {'zh-TW': "中級者", 'en': "Intermediate"}, equipment: {'zh-TW': "瑜珈墊, 彈力帶", 'en': "Yoga Mat, Resistance Band"}, rating: 4.8, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>想要擁有迷人的臀部曲線嗎？這套課程將集中火力訓練您的臀大肌、中肌與小肌，不僅提升外觀，更能增強核心穩定，改善下背痛。</p>", 'en': "<p>Want to achieve charming glute curves? This course focuses on training your gluteus maximus, medius, and minimus, not only improving appearance but also enhancing core stability and alleviating lower back pain.</p>"} },
               ]
             },
             {
-              id: 'sculpting-plan', category: '體態雕塑', courses: [
-                { id: 7, title: "8週完美體態重塑", subtitle: "煥然一新 | 8堂課", price: 7800, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop", duration: "8週", difficulty: "所有程度", equipment: "全套工作室器材", rating: 5.0, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>這不僅僅是課程，更是一趟完整的身心改造旅程。從一對一的體態評估開始，為您量身打造為期八週的訓練菜單，結合器械與墊上皮拉提斯，全面改善您的體態與健康。</p>" },
+              id: 'sculpting-plan', 
+              category: {'zh-TW': '體態雕塑', 'en': 'Body Sculpting'}, 
+              courses: [
+                { id: 7, title: {'zh-TW': "8週完美體態重塑", 'en': "8-Week Perfect Posture Transformation"}, subtitle: {'zh-TW': "煥然一新 | 8堂課", 'en': "Total Makeover | 8 Classes"}, price: 7800, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop", duration: "8週", difficulty: {'zh-TW': "所有程度", 'en': "All Levels"}, equipment: {'zh-TW': "全套工作室器材", 'en': "Full Studio Equipment"}, rating: 5.0, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: {'zh-TW': "<p>這不僅僅是課程，更是一趟完整的身心改造旅程。從一對一的體態評估開始，為您量身打造為期八週的訓練菜單，結合器械與墊上皮拉提斯，全面改善您的體態與健康。</p>", 'en': "<p>This is more than just a course; it's a complete journey of mind and body transformation. Starting with a one-on-one postural assessment, we create a customized eight-week training plan for you, combining equipment and mat Pilates to comprehensively improve your posture and health.</p>"} },
               ]
             }
           ],
@@ -362,6 +514,7 @@
         // --- STATE ---
         let cartItems = [];
         let courseIdToAddAfterLogin = null;
+        let currentLanguage = 'zh-TW';
 
         // --- DOM ELEMENTS ---
         const cartButton = document.getElementById('cart-button');
@@ -384,6 +537,68 @@
         const userIconButton = document.getElementById('user-icon-button');
         const footerLoginLink = document.getElementById('footer-login-link');
         const loginForm = document.getElementById('loginForm');
+        const languageSwitcherButton = document.getElementById('language-switcher-button');
+        
+        // --- I18N LOGIC ---
+        const t = (key) => translations[currentLanguage][key] || key;
+        
+        let currentCourse = null;
+
+        const updateStaticText = () => {
+            if (currentCourse) {
+                 document.title = t('page_title_details').replace('${courseTitle}', currentCourse.title[currentLanguage]);
+            }
+            document.documentElement.lang = currentLanguage;
+
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.dataset.translateKey;
+                const translation = t(key);
+                if (el.placeholder !== undefined) {
+                    el.placeholder = translation;
+                } else if (el.tagName === 'INPUT' && el.type === 'submit' || el.tagName === 'BUTTON') {
+                    const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textNode) {
+                        textNode.textContent = translation + ' ';
+                    } else if (el.querySelector('span')) {
+                        el.querySelector('span').textContent = translation;
+                    } else {
+                        el.textContent = translation;
+                    }
+                } else if (key === 'auth_terms_agree') {
+                     const parts = currentLanguage === 'en' ? 
+                        ['I agree to the ', ' and ', ''] : 
+                        ['我同意 ', ' 與 ', ''];
+                    const termsLink = '<a>' + (currentLanguage === 'en' ? 'Terms of Service' : '服務條款') + '</a>';
+                    const privacyLink = '<a>' + (currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策') + '</a>';
+                    el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`;
+                }
+                else {
+                    el.innerHTML = translation;
+                }
+            });
+             document.querySelectorAll('.password-toggle').forEach(btn => {
+                const input = btn.previousElementSibling;
+                btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password');
+            });
+        };
+
+        const setLanguage = (lang) => {
+            currentLanguage = lang;
+            localStorage.setItem('pilatesLanguage', lang);
+            document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中';
+            updateStaticText();
+            if (currentCourse) {
+                renderCourseDetails(currentCourse);
+            }
+            renderCart();
+        };
+        
+        const initLanguage = () => {
+            const savedLang = localStorage.getItem('pilatesLanguage');
+            const browserLang = navigator.language.startsWith('en') ? 'en' : 'zh-TW';
+            return savedLang || browserLang;
+        };
+
 
         // --- AUTH LOGIC ---
         const checkLoginStatus = () => {
@@ -401,7 +616,7 @@
         };
 
         const handleLogout = () => {
-            if (confirm('您確定要登出嗎？')) {
+            if (confirm(t('logout_confirm'))) {
                 sessionStorage.removeItem('isLoggedIn');
                 checkLoginStatus();
             }
@@ -422,7 +637,7 @@
         // --- RENDER FUNCTIONS ---
         const renderCart = () => {
             if (cartItems.length === 0) {
-                cartContent.innerHTML = `<div class="flex-grow flex flex-col items-center justify-center text-center p-6 h-full"><p class="text-stone-500">您的購物車是空的</p><button id="cart-continue-shopping" class="mt-4 px-6 py-2 brand-bg text-white rounded-full brand-bg-hover transition-colors">繼續選購</button></div>`;
+                cartContent.innerHTML = `<div class="flex-grow flex flex-col items-center justify-center text-center p-6 h-full"><p class="text-stone-500">${t('cart_empty')}</p><button id="cart-continue-shopping" class="mt-4 px-6 py-2 brand-bg text-white rounded-full brand-bg-hover transition-colors">${t('cart_continue_shopping')}</button></div>`;
                 const continueShoppingBtn = document.getElementById('cart-continue-shopping');
                 if(continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeCart);
             } else {
@@ -431,9 +646,9 @@
                     <div class="flex-grow overflow-y-auto p-6 space-y-4">
                         ${cartItems.map(item => `
                             <div class="flex items-start space-x-4">
-                                <img src="${item.image}" alt="${item.title}" class="w-24 h-24 object-cover rounded-md" />
+                                <img src="${item.image}" alt="${item.title[currentLanguage]}" class="w-24 h-24 object-cover rounded-md" />
                                 <div class="flex-grow">
-                                    <h3 class="font-semibold text-stone-800">${item.title}</h3>
+                                    <h3 class="font-semibold text-stone-800">${item.title[currentLanguage]}</h3>
                                     <p class="text-sm text-stone-500">NT$ ${item.price.toLocaleString()}</p>
                                     <div class="flex items-center mt-2">
                                         <button data-cart-action="decrease" data-course-id="${item.id}" class="p-1 border rounded-full hover:bg-stone-100"><svg class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></button>
@@ -446,8 +661,8 @@
                         `).join('')}
                     </div>
                     <div class="p-6 border-t border-stone-200">
-                        <div class="flex justify-between items-center mb-4"><span class="text-stone-600">小計</span><span class="text-xl font-semibold text-stone-800">NT$ ${subtotal.toLocaleString()}</span></div>
-                        <button class="w-full py-3 brand-bg text-white rounded-full text-lg font-semibold brand-bg-hover transition-colors">前往結帳</button>
+                        <div class="flex justify-between items-center mb-4"><span class="text-stone-600">${t('cart_subtotal')}</span><span class="text-xl font-semibold text-stone-800">NT$ ${subtotal.toLocaleString()}</span></div>
+                        <button class="w-full py-3 brand-bg text-white rounded-full text-lg font-semibold brand-bg-hover transition-colors">${t('cart_checkout')}</button>
                     </div>`;
             }
             updateCartCount();
@@ -464,8 +679,8 @@
         };
 
         const renderCourseDetails = (course) => {
-            document.title = `${course.title} - 9's Pilates Studio`;
-
+            document.title = t('page_title_details').replace('${courseTitle}', course.title[currentLanguage]);
+            
             const starIcon = (filled) => `<svg class="w-5 h-5 ${filled ? 'text-yellow-400' : 'text-stone-300'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>`;
             
             let stars = '';
@@ -476,28 +691,28 @@
             const content = `
                 <main class="pt-6">
                     <div class="w-full bg-[#eae5da] text-center py-3 text-stone-800 font-semibold">
-                        <p>🎉 新春優惠！全站課程85折，輸入優惠碼 PILATES2025 結帳即可享優惠 🎉</p>
+                        <p>${t('promo_banner')}</p>
                     </div>
                     
                     <div class="py-6">
                         <div class="flex items-center space-x-4 mb-4">
                             <a href="index.html" class="inline-flex items-center text-stone-600 hover:text-stone-900">
                                 <i class="fas fa-long-arrow-alt-left w-4 h-4 mr-2"></i>
-                                返回課程列表
+                                ${t('back_to_list')}
                             </a>
-                            <span class="inline-block bg-stone-200 text-stone-700 text-sm font-semibold px-3 py-1 rounded-full">${course.category}</span>
+                            <span class="inline-block bg-stone-200 text-stone-700 text-sm font-semibold px-3 py-1 rounded-full">${course.category[currentLanguage]}</span>
                         </div>
                         
-                        <h1 class="text-3xl lg:text-4xl font-bold text-stone-900 mb-6">${course.subtitle}</h1>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-stone-900 mb-6">${course.subtitle[currentLanguage]}</h1>
                         
-                        <img src="${course.image}" alt="${course.title}" class="w-full h-auto object-cover rounded-lg border border-stone-200 shadow-sm mb-8">
+                        <img src="${course.image}" alt="${course.title[currentLanguage]}" class="w-full h-auto object-cover rounded-lg border border-stone-200 shadow-sm mb-8">
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center mb-12">
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">課程時長</h3><p class="text-xl font-bold">${course.duration}</p></div>
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">難度等級</h3><p class="text-xl font-bold">${course.difficulty}</p></div>
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">建議裝備</h3><p class="text-xl font-bold">${course.equipment}</p></div>
+                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('duration')}</h3><p class="text-xl font-bold">${course.duration}</p></div>
+                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('difficulty')}</h3><p class="text-xl font-bold">${course.difficulty[currentLanguage]}</p></div>
+                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('equipment')}</h3><p class="text-xl font-bold">${course.equipment[currentLanguage]}</p></div>
                             <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm">
-                                <h3 class="font-semibold text-sm text-stone-500 mb-1">課程評價</h3>
+                                <h3 class="font-semibold text-sm text-stone-500 mb-1">${t('rating')}</h3>
                                 <div class="flex items-center justify-center space-x-1">
                                     ${stars}
                                     <span class="text-lg font-bold ml-2">(${course.rating})</span>
@@ -507,12 +722,12 @@
                         
                         <div class="space-y-12">
                             <section>
-                                <h2 class="text-2xl font-bold mb-4">課程介紹</h2>
-                                <div class="prose max-w-none text-stone-700 leading-relaxed">${course.intro}</div>
+                                <h2 class="text-2xl font-bold mb-4">${t('intro')}</h2>
+                                <div class="prose max-w-none text-stone-700 leading-relaxed">${course.intro[currentLanguage]}</div>
                             </section>
                             
                             <section>
-                                <h2 class="text-2xl font-bold mb-4">授課教師</h2>
+                                <h2 class="text-2xl font-bold mb-4">${t('instructor')}</h2>
                                 <div class="flex items-center space-x-6 bg-stone-100 p-6 rounded-lg">
                                     <img src="${course.instructor.image}" alt="${course.instructor.name}" class="w-24 h-24 rounded-full object-cover">
                                     <div>
@@ -527,7 +742,11 @@
             loadingPlaceholder.style.display = 'none';
             detailsContainer.innerHTML = content;
             
+            document.getElementById('footer-price-label').textContent = t('footer_price');
             document.getElementById('footer-course-price').textContent = `NT$ ${course.price.toLocaleString()}`;
+            document.getElementById('buy-now-button').textContent = t('buy_now');
+            document.getElementById('footer-back-link').textContent = t('back_to_list');
+            
             stickyFooter.classList.remove('hidden');
             document.getElementById('buy-now-button').dataset.courseId = course.id;
         };
@@ -590,9 +809,17 @@
         };
         
         const init = () => {
+            const lang = initLanguage();
+            currentLanguage = lang; // Set language before initial renders
+            document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中';
+
             checkLoginStatus();
             loadCart();
+            
+            updateStaticText();
             renderCart();
+            loadingPlaceholder.innerHTML = `<p class="text-stone-500 text-lg">${t('loading')}</p>`;
+
 
             cartButton.addEventListener('click', openCart);
             cartCloseButton.addEventListener('click', closeCart);
@@ -601,6 +828,11 @@
             mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
             mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
             
+            languageSwitcherButton.addEventListener('click', () => {
+                const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en';
+                setLanguage(newLang);
+            });
+
             userIconButton.addEventListener('click', () => {
                 if (checkLoginStatus()) {
                     handleLogout();
@@ -612,7 +844,7 @@
              footerLoginLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (checkLoginStatus()) {
-                    alert('您已經登入。');
+                    alert(t('already_logged_in'));
                 } else {
                     openAuthModal();
                 }
@@ -624,7 +856,7 @@
             document.querySelectorAll('.auth-view-switch').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    openAuthModal(e.target.dataset.view);
+                    openAuthModal(e.target.closest('[data-view]').dataset.view);
                 });
             });
             
@@ -633,10 +865,10 @@
                     const passwordInput = button.previousElementSibling;
                     if (passwordInput.type === 'password') {
                         passwordInput.type = 'text';
-                        button.textContent = '隱藏';
+                        button.textContent = t('auth_hide_password');
                     } else {
                         passwordInput.type = 'password';
-                        button.textContent = '顯示';
+                        button.textContent = t('auth_show_password');
                     }
                 });
             });
@@ -675,6 +907,7 @@
             const courseId = parseInt(urlParams.get('id'));
             if (!isNaN(courseId)) {
                 const course = courseData.findCourseById(courseId);
+                currentCourse = course;
                 if (course) {
                     renderCourseDetails(course);
                     document.getElementById('buy-now-button').addEventListener('click', (e) => {
@@ -687,10 +920,10 @@
                         }
                     });
                 } else {
-                     loadingPlaceholder.innerHTML = `<div class="py-20 text-center"><p class="text-red-500 text-lg">找不到課程資訊，請<a href="index.html" class="underline font-semibold">返回所有課程</a>頁面。</p></div>`;
+                     loadingPlaceholder.innerHTML = `<div class="py-20 text-center"><p class="text-red-500 text-lg">${t('course_not_found')}</p></div>`;
                 }
             } else {
-                loadingPlaceholder.innerHTML = `<div class="py-20 text-center"><p class="text-red-500 text-lg">無效的課程ID，請<a href="index.html" class="underline font-semibold">返回所有課程</a>頁面。</p></div>`;
+                loadingPlaceholder.innerHTML = `<div class="py-20 text-center"><p class="text-red-500 text-lg">${t('invalid_id')}</p></div>`;
             }
         };
 
