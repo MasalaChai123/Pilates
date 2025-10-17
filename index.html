@@ -97,7 +97,8 @@
         .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         .checkbox { width: 18px; height: 18px; accent-color: #c1bcb8; }
         .checkbox-label { font-size: 14px; color: #666; flex: 1; }
-        .checkbox-label a { color: #c1bcb8; text-decoration: none; }
+        .checkbox-label a { color: #c1bcb8; text-decoration: underline; }
+        .checkbox-label a:hover { color: #b0a9a4; }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; gap: 8px; width: 100%; }
         .btn-primary { background: linear-gradient(135deg, #c1bcb8, #b0a9a4); color: white; box-shadow: 0 8px 25px rgba(193, 188, 184, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(193, 188, 184, 0.4); }
@@ -302,9 +303,9 @@
             </div>
             <p class="text-sm text-stone-400" data-translate-key="footer_copyright">© 2025 9's Pilates. 版權所有</p>
             <div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500">
-                <a href="#" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a>
+                <a href="terms.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a>
                 <span>|</span>
-                <a href="#" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a>
+                <a href="privacy.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a>
             </div>
         </div>
     </footer>
@@ -536,8 +537,8 @@
                     const parts = currentLanguage === 'en' ? 
                         ['I agree to the ', ' and ', ''] : 
                         ['我同意 ', ' 與 ', ''];
-                    const termsLink = '<a>' + (currentLanguage === 'en' ? 'Terms of Service' : '服務條款') + '</a>';
-                    const privacyLink = '<a>' + (currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策') + '</a>';
+                    const termsLink = `<a href="terms.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Terms of Service' : '服務條款')}</a>`;
+                    const privacyLink = `<a href="privacy.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策')}</a>`;
                     el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`;
                 }
                  else {
