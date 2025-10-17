@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隱私政策 - 9's Pilates Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Noto Sans TC', sans-serif; background-color: #efefef; color: #292524; }
+      .font-serif { font-family: 'Playfair Display', serif; }
+      .transform { transition: transform 0.3s ease-in-out; }
+      .opacity-transition { transition: opacity 0.3s ease-in-out; }
+      .prose h2 { font-family: 'Playfair Display', serif; font-weight: 700; margin-top: 2em; margin-bottom: 1em; }
+      .prose p { margin-bottom: 1.25em; }
+    </style>
+    <style id="auth-modal-styles">
+        .auth-modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 1000; opacity: 0; transition: opacity 0.3s ease-out; pointer-events: none; }
+        .auth-modal-backdrop.active { opacity: 1; pointer-events: auto; }
+        .auth-modal-container { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); z-index: 1001; opacity: 0; transition: opacity 0.3s ease-out, transform 0.3s ease-out; pointer-events: none; width: 100%; max-width: 450px; padding: 20px; max-height: 95vh; overflow-y: auto; }
+        .auth-modal-container.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+        .auth-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); width: 100%; position: relative; overflow: hidden; }
+        .auth-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #d1cfcd, #c1bcb8, #d1cfcd); }
+        .auth-header { text-align: center; margin-bottom: 30px; }
+        .auth-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #333, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .auth-subtitle { color: #666; font-size: 14px; }
+        .form-group { margin-bottom: 20px; position: relative; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; font-size: 14px; }
+        .form-control { width: 100%; padding: 15px 20px; border: 2px solid #e8e8e8; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.8); }
+        .form-control:focus { outline: none; border-color: #c1bcb8; box-shadow: 0 0 0 4px rgba(193, 188, 184, 0.1); background: white; }
+        .password-field { position: relative; }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer; font-size: 14px; padding: 5px; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .checkbox { width: 18px; height: 18px; accent-color: #c1bcb8; }
+        .checkbox-label { font-size: 14px; color: #666; flex: 1; }
+        .checkbox-label a { color: #c1bcb8; text-decoration: none; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; gap: 8px; width: 100%; }
+        .btn-primary { background: linear-gradient(135deg, #c1bcb8, #b0a9a4); color: white; box-shadow: 0 8px 25px rgba(193, 188, 184, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(193, 188, 184, 0.4); }
+        .auth-switch { text-align: center; margin-top: 25px; padding-top: 25px; border-top: 1px solid #e8e8e8; color: #666; font-size: 14px; }
+        .auth-switch a { color: #c1bcb8; font-weight: 600; text-decoration: none; cursor: pointer; }
+        .auth-view { display: none; animation: fadeIn 0.3s ease-out; }
+        .auth-view.active { display: block; }
+        .auth-modal-close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; color: #999; font-size: 24px; line-height: 1; padding: 5px; }
+    </style>
+</head>
+<body class="bg-[#efefef] text-stone-800">
+    <!-- Header -->
+    <header class="sticky top-0 bg-[#f9f9f9]/80 backdrop-blur-md z-40 shadow-sm">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex-shrink-0">
+            <a href="index.html" class="flex items-center space-x-2">
+               <img class="h-10 w-auto" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iIzAwMCI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates Logo" />
+            </a>
+          </div>
+          <nav class="hidden lg:flex lg:items-center lg:space-x-8">
+            <a href="index.html#single-session" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a>
+            <a href="index.html#thematic-unit" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a>
+            <a href="index.html#sculpting-plan" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a>
+            <a href="#" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+            <button id="language-switcher-button" class="text-stone-600 hover:text-[#c1bcb8] transition-colors flex items-center space-x-1" aria-label="Switch language">
+                <i class="fas fa-globe"></i>
+                <span id="current-lang-text" class="text-sm font-medium">繁中</span>
+            </button>
+             <button id="user-icon-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="User account">
+                <i aria-hidden="true" class="fas fa-user text-xl"></i> 
+             </button>
+            <button id="cart-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open shopping cart">
+              <i aria-hidden="true" class="fas fa-shopping-cart text-xl"></i>
+              <span id="cart-item-count" class="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#c1bcb8] text-xs font-medium text-white hidden">0</span>
+            </button>
+            <button id="menu-button" class="lg:hidden text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open menu">
+              <i aria-hidden="true" class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none lg:hidden"></div>
+    <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform -translate-x-full lg:hidden">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-6 border-b border-stone-200">
+                <h2 class="text-xl font-semibold text-stone-800" data-translate-key="mobile_menu_title">選單</h2>
+                <button id="mobile-menu-close" class="text-stone-500 hover:text-stone-800 transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <nav class="flex-grow p-6">
+                <ul class="space-y-4">
+                    <li><a href="index.html#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a></li>
+                    <li><a href="index.html#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a></li>
+                    <li><a href="index.html#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a></li>
+                    <li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div id="cart-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none"></div>
+    <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-6 border-b border-stone-200">
+                <h2 class="text-xl font-semibold text-stone-800" data-translate-key="cart_title">購物車</h2>
+                <button id="cart-close-button" class="text-stone-500 hover:text-stone-800 transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="cart-content" class="flex-grow"></div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal-backdrop" class="auth-modal-backdrop"></div>
+    <div id="auth-modal-container" class="auth-modal-container">
+        <div class="auth-card">
+            <button id="auth-modal-close-btn" class="auth-modal-close-btn">&times;</button>
+            <div id="loginView" class="auth-view active">
+                <div class="auth-header">
+                    <h1 class="auth-title" data-translate-key="auth_login_title">會員登入</h1>
+                    <p class="auth-subtitle" data-translate-key="auth_login_subtitle">登入開始您的皮拉提斯之旅</p>
+                </div>
+                <div class="auth-switch"><span data-translate-key="auth_no_account">還沒有帳號？</span> <a class="auth-view-switch" data-view="signup" data-translate-key="auth_signup_now">立即註冊</a></div>
+            </div>
+            <div id="signupView" class="auth-view">
+                <div class="auth-header"><h1 class="auth-title" data-translate-key="auth_signup_title">建立帳號</h1><p class="auth-subtitle" data-translate-key="auth_signup_subtitle">加入 9's Pilates 開始您的健康之旅</p></div>
+                <div class="checkbox-group"><input type="checkbox" id="terms" class="checkbox" required><label for="terms" class="checkbox-label" data-translate-key="auth_terms_agree">我同意 <a>服務條款</a> 與 <a>隱私政策</a></label></div>
+                <div class="auth-switch"><span data-translate-key="auth_already_have_account">已經有帳號？</span> <a class="auth-view-switch" data-view="login" data-translate-key="auth_login_now">立即登入</a></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <h1 id="page-title" class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-stone-800 tracking-tight text-center mb-12"></h1>
+            <div id="page-content" class="prose prose-lg max-w-4xl mx-auto text-stone-700 leading-relaxed bg-stone-50 p-8 sm:p-12 rounded-lg shadow-inner">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300">
+        <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" />
+            <div class="flex justify-center space-x-6 my-6">
+                <a href="index.html" class="hover:text-white transition-colors" data-translate-key="footer_all_courses">所有課程</a>
+                <a href="#" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a>
+                <a href="#" id="footer-login-link" class="hover:text-white transition-colors" data-translate-key="footer_member_login">會員登入</a>
+            </div>
+            <p class="my-4">
+                <a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors"><span data-translate-key="footer_contact_email">客服信箱</span>：9spilates@gmail.com</a>
+            </p>
+            <div class="flex justify-center space-x-6 my-6">
+                 <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Instagram">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Line">
+                    <i class="fab fa-line text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm text-stone-400" data-translate-key="footer_copyright">© 2025 9's Pilates. 版權所有</p>
+            <div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500">
+                <a href="terms.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a>
+                <span>|</span>
+                <a href="privacy.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const translations = {
+            'en': {
+                'page_title': "Privacy Policy - 9's Pilates Studio",
+                'page_main_title': "Privacy Policy",
+                'page_content_html': `
+                    <p class="text-stone-500 text-sm">Last updated: October 26, 2025</p>
+                    <h2>1. Information We Collect</h2>
+                    <p>We collect information you provide directly to us when you create an account, enroll in a course, or communicate with us. This may include your name, email address, and payment information. This is a mock document for demonstration purposes.</p>
+                    <h2>2. How We Use Your Information</h2>
+                    <p>We use the information we collect to provide, maintain, and improve our services. This includes processing transactions, sending you related information, responding to your comments and questions, and providing customer service.</p>
+                    <h2>3. Information Sharing</h2>
+                    <p>We do not share your personal information with third parties except as necessary to process your payment or as required by law. We will not sell your personal information to any third party.</p>
+                    <h2>4. Data Security</h2>
+                    <p>We take reasonable measures to help protect information about you from loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction.</p>
+                    <h2>5. Cookies</h2>
+                    <p>Our website may use "cookies" to enhance user experience. Your web browser places cookies on your hard drive for record-keeping purposes and sometimes to track information about them. You may choose to set your web browser to refuse cookies, or to alert you when cookies are being sent.</p>
+                    <h2>6. Your Rights</h2>
+                    <p>You have the right to access, update, or delete the personal information we have on you. You can do this by accessing your account settings or by contacting us directly.</p>
+                    <h2>7. Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:9spilates@gmail.com" class="text-[#c1bcb8] hover:underline">9spilates@gmail.com</a>.</p>
+                `,
+                'nav_single_session': 'Single Session', 'nav_thematic_unit': 'Thematic Unit', 'nav_sculpting_plan': 'Body Sculpting', 'nav_faq': 'FAQ', 'mobile_menu_title': 'Menu', 'cart_title': 'Shopping Cart', 'cart_empty': 'Your cart is empty', 'cart_continue_shopping': 'Continue Shopping', 'cart_subtotal': 'Subtotal', 'cart_checkout': 'Checkout', 'footer_all_courses': 'All Courses', 'footer_member_login': 'Member Login', 'footer_contact_email': 'Contact Email', 'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved', 'footer_terms': 'Terms of Use', 'footer_privacy': 'Privacy Policy', 'logout_confirm': 'Are you sure you want to log out?', 'already_logged_in': 'You are already logged in.', 'auth_login_title': 'Member Login', 'auth_login_subtitle': 'Log in to begin your Pilates journey', 'auth_no_account': 'Don\'t have an account?', 'auth_signup_now': 'Sign up now', 'auth_signup_title': 'Create Account', 'auth_signup_subtitle': 'Join 9\'s Pilates to start your wellness journey', 'auth_terms_agree': 'I agree to the <a href="terms.html" class="underline">Terms of Service</a> and <a href="privacy.html" class="underline">Privacy Policy</a>', 'auth_already_have_account': 'Already have an account?', 'auth_login_now': 'Log in now'
+            },
+            'zh-TW': {
+                'page_title': "隱私政策 - 9's Pilates Studio",
+                'page_main_title': "隱私政策",
+                'page_content_html': `
+                    <p class="text-stone-500 text-sm">最後更新日期：2025年10月26日</p>
+                    <h2>1. 我們收集的資訊</h2>
+                    <p>我們收集您在創建帳戶、註冊課程或與我們溝通時直接提供給我們的資訊。這可能包括您的姓名、電子郵件地址和付款資訊。這是一份用於演示目的的模擬文件。</p>
+                    <h2>2. 我們如何使用您的資訊</h2>
+                    <p>我們使用收集到的資訊來提供、維護和改進我們的服務。這包括處理交易、向您發送相關資訊、回應您的評論和問題，以及提供客戶服務。</p>
+                    <h2>3. 資訊共享</h2>
+                    <p>除非為處理您的付款或法律要求所必需，否則我們不會與第三方共享您的個人資訊。我們不會將您的個人資訊出售給任何第三方。</p>
+                    <h2>4. 數據安全</h2>
+                    <p>我們採取合理措施，幫助保護您的資訊免於丟失、盜竊、濫用以及未經授權的訪問、披露、更改和銷毀。</p>
+                    <h2>5. Cookie</h2>
+                    <p>我們的網站可能使用「Cookie」來增強用戶體驗。您的網絡瀏覽器會將Cookie放置在您的硬盤上以作記錄，有時還用於追踪有關它們的資訊。您可以選擇將您的網絡瀏覽器設置為拒絕Cookie，或在發送Cookie時提醒您。</p>
+                    <h2>6. 您的權利</h2>
+                    <p>您有權訪問、更新或刪除我們持有的關於您的個人資訊。您可以通過訪問您的帳戶設置或直接與我們聯繫來執行此操作。</p>
+                    <h2>7. 聯繫我們</h2>
+                    <p>如果您對本隱私政策有任何疑問，請通過 <a href="mailto:9spilates@gmail.com" class="text-[#c1bcb8] hover:underline">9spilates@gmail.com</a> 與我們聯繫。</p>
+                `,
+                'nav_single_session': '單堂體驗', 'nav_thematic_unit': '主題單元', 'nav_sculpting_plan': '體態雕塑', 'nav_faq': '常見問題', 'mobile_menu_title': '選單', 'cart_title': '購物車', 'cart_empty': '您的購物車是空的', 'cart_continue_shopping': '繼續選購', 'cart_subtotal': '小計', 'cart_checkout': '前往結帳', 'footer_all_courses': '所有課程', 'footer_member_login': '會員登入', 'footer_contact_email': '客服信箱', 'footer_copyright': '© 2025 9\'s Pilates. 版權所有', 'footer_terms': '使用條款', 'footer_privacy': '隱私政策', 'logout_confirm': '您確定要登出嗎？', 'already_logged_in': '您已經登入。', 'auth_login_title': '會員登入', 'auth_login_subtitle': '登入開始您的皮拉提斯之旅', 'auth_no_account': '還沒有帳號？', 'auth_signup_now': '立即註冊', 'auth_signup_title': '建立帳號', 'auth_signup_subtitle': '加入 9\'s Pilates 開始您的健康之旅', 'auth_terms_agree': '我同意 <a href="terms.html" class="underline">服務條款</a> 與 <a href="privacy.html" class="underline">隱私政策</a>', 'auth_already_have_account': '已經有帳號？', 'auth_login_now': '立即登入'
+            }
+        };
+        let currentLanguage = 'zh-TW';
+        let cartItems = [];
+
+        const t = (key) => translations[currentLanguage][key] || key;
+
+        const updateStaticText = () => {
+            document.documentElement.lang = currentLanguage;
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.dataset.translateKey;
+                el.innerHTML = t(key);
+            });
+        };
+
+        const renderPageContent = () => {
+            document.title = t('page_title');
+            document.getElementById('page-title').innerHTML = t('page_main_title');
+            document.getElementById('page-content').innerHTML = t('page_content_html');
+        }
+
+        const setLanguage = (lang) => {
+            currentLanguage = lang;
+            localStorage.setItem('pilatesLanguage', lang);
+            document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中';
+            updateStaticText();
+            renderPageContent();
+            renderCart();
+        };
+        
+        const initLanguage = () => {
+            const savedLang = localStorage.getItem('pilatesLanguage');
+            const browserLang = navigator.language.startsWith('en') ? 'en' : 'zh-TW';
+            return savedLang || browserLang;
+        };
+
+        const saveCart = () => localStorage.setItem('pilatesCart', JSON.stringify(cartItems));
+        const loadCart = () => {
+            const savedCart = localStorage.getItem('pilatesCart');
+            cartItems = savedCart ? JSON.parse(savedCart) : [];
+        };
+
+        const updateCartCount = () => {
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            const cartItemCountBadge = document.getElementById('cart-item-count');
+            if (totalItems > 0) {
+                cartItemCountBadge.textContent = totalItems;
+                cartItemCountBadge.classList.remove('hidden');
+            } else {
+                cartItemCountBadge.classList.add('hidden');
+            }
+        };
+
+        const renderCart = () => {
+            const cartContent = document.getElementById('cart-content');
+            if (cartItems.length === 0) {
+                cartContent.innerHTML = `<div class="flex-grow flex flex-col items-center justify-center text-center p-6 h-full"><p class="text-stone-500">${t('cart_empty')}</p><button id="cart-continue-shopping" class="mt-4 px-6 py-2 bg-[#c1bcb8] text-white rounded-full hover:bg-[#b0a9a4] transition-colors">${t('cart_continue_shopping')}</button></div>`;
+                document.getElementById('cart-continue-shopping')?.addEventListener('click', closeCart);
+            } else {
+                 cartContent.innerHTML = `<div class="p-6 border-t border-stone-200">
+                        <button class="w-full py-3 bg-[#c1bcb8] text-white rounded-full text-lg font-semibold hover:bg-[#b0a9a4] transition-colors">${t('cart_checkout')}</button>
+                    </div>`;
+            }
+            updateCartCount();
+        };
+
+        const openCart = () => {
+            document.getElementById('cart-panel').classList.remove('translate-x-full');
+            document.getElementById('cart-backdrop').classList.remove('opacity-0', 'pointer-events-none');
+        };
+        const closeCart = () => {
+            document.getElementById('cart-panel').classList.add('translate-x-full');
+            document.getElementById('cart-backdrop').classList.add('opacity-0', 'pointer-events-none');
+        };
+        const openMobileMenu = () => {
+            document.getElementById('mobile-menu-panel').classList.remove('-translate-x-full');
+            document.getElementById('mobile-menu-backdrop').classList.remove('opacity-0', 'pointer-events-none');
+        };
+        const closeMobileMenu = () => {
+            document.getElementById('mobile-menu-panel').classList.add('-translate-x-full');
+            document.getElementById('mobile-menu-backdrop').classList.add('opacity-0', 'pointer-events-none');
+        };
+        const openAuthModal = (view = 'login') => {
+            document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`${view}View`).classList.add('active');
+            document.getElementById('auth-modal-backdrop').classList.add('active');
+            document.getElementById('auth-modal-container').classList.add('active');
+        };
+        const closeAuthModal = () => {
+            document.getElementById('auth-modal-backdrop').classList.remove('active');
+            document.getElementById('auth-modal-container').classList.remove('active');
+        };
+
+        // --- Init ---
+        const lang = initLanguage();
+        currentLanguage = lang;
+        document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中';
+
+        loadCart();
+        updateStaticText();
+        renderPageContent();
+        renderCart();
+
+        document.getElementById('language-switcher-button').addEventListener('click', () => setLanguage(currentLanguage === 'en' ? 'zh-TW' : 'en'));
+        document.getElementById('cart-button').addEventListener('click', openCart);
+        document.getElementById('cart-close-button').addEventListener('click', closeCart);
+        document.getElementById('cart-backdrop').addEventListener('click', closeCart);
+        document.getElementById('menu-button').addEventListener('click', openMobileMenu);
+        document.getElementById('mobile-menu-close').addEventListener('click', closeMobileMenu);
+        document.getElementById('mobile-menu-backdrop').addEventListener('click', closeMobileMenu);
+        document.getElementById('user-icon-button').addEventListener('click', () => openAuthModal());
+        document.getElementById('footer-login-link').addEventListener('click', (e) => { e.preventDefault(); openAuthModal(); });
+        document.getElementById('auth-modal-close-btn').addEventListener('click', closeAuthModal);
+        document.getElementById('auth-modal-backdrop').addEventListener('click', closeAuthModal);
+        document.querySelectorAll('.auth-view-switch').forEach(link => link.addEventListener('click', (e) => {
+            e.preventDefault();
+            openAuthModal(e.target.closest('[data-view]').dataset.view);
+        }));
+    });
+    </script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -321,9 +322,9 @@
             </div>
             <p class="text-sm text-stone-400" data-translate-key="footer_copyright">© 2025 9's Pilates. 版權所有</p>
             <div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500">
-                <a href="#" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a>
+                <a href="terms.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a>
                 <span>|</span>
-                <a href="#" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a>
+                <a href="privacy.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a>
             </div>
         </div>
     </footer>
@@ -391,7 +392,7 @@
                 'auth_password_placeholder_signup': 'At least 8 characters',
                 'auth_confirm_password_label': 'Confirm Password',
                 'auth_confirm_password_placeholder': 'Enter password again',
-                'auth_terms_agree': 'I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>',
+                'auth_terms_agree': 'I agree to the <a href="terms.html" class="underline">Terms of Service</a> and <a href="privacy.html" class="underline">Privacy Policy</a>',
                 'auth_create_account_button': 'Create Account',
                 'auth_already_have_account': 'Already have an account?',
                 'auth_login_now': 'Log in now',
@@ -460,7 +461,7 @@
                 'auth_password_placeholder_signup': '至少8個字元',
                 'auth_confirm_password_label': '確認密碼',
                 'auth_confirm_password_placeholder': '再次輸入密碼',
-                'auth_terms_agree': '我同意 <a>服務條款</a> 與 <a>隱私政策</a>',
+                'auth_terms_agree': '我同意 <a href="terms.html" class="underline">服務條款</a> 與 <a href="privacy.html" class="underline">隱私政策</a>',
                 'auth_create_account_button': '建立帳號',
                 'auth_already_have_account': '已經有帳號？',
                 'auth_login_now': '立即登入',
@@ -564,13 +565,6 @@
                     } else {
                         el.textContent = translation;
                     }
-                } else if (key === 'auth_terms_agree') {
-                     const parts = currentLanguage === 'en' ? 
-                        ['I agree to the ', ' and ', ''] : 
-                        ['我同意 ', ' 與 ', ''];
-                    const termsLink = '<a>' + (currentLanguage === 'en' ? 'Terms of Service' : '服務條款') + '</a>';
-                    const privacyLink = '<a>' + (currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策') + '</a>';
-                    el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`;
                 }
                 else {
                     el.innerHTML = translation;
