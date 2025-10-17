@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9's Pilates Studio - 所有課程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Noto Sans TC', sans-serif;
+        background-color: #efefef;
+        color: #292524; /* text-stone-800 */
+      }
+      .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      .transform { transition: transform 0.3s ease-in-out; }
+      .opacity-transition { transition: opacity 0.3s ease-in-out; }
+    </style>
+    <style id="auth-modal-styles">
+        /* Modal Container */
+        .auth-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            pointer-events: none;
+        }
+        .auth-modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .auth-modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            pointer-events: none;
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        .auth-modal-container.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+
+        /* Auth Card Styles from user */
+        .auth-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d1cfcd, #c1bcb8, #d1cfcd);
+        }
+        .auth-header { text-align: center; margin-bottom: 30px; }
+        .auth-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #333, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .auth-subtitle { color: #666; font-size: 14px; }
+        .form-group { margin-bottom: 20px; position: relative; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; font-size: 14px; }
+        .form-control { width: 100%; padding: 15px 20px; border: 2px solid #e8e8e8; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.8); }
+        .form-control:focus { outline: none; border-color: #c1bcb8; box-shadow: 0 0 0 4px rgba(193, 188, 184, 0.1); background: white; }
+        .password-field { position: relative; }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer; font-size: 14px; padding: 5px; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .checkbox { width: 18px; height: 18px; accent-color: #c1bcb8; }
+        .checkbox-label { font-size: 14px; color: #666; flex: 1; }
+        .checkbox-label a { color: #c1bcb8; text-decoration: none; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; gap: 8px; width: 100%; }
+        .btn-primary { background: linear-gradient(135deg, #c1bcb8, #b0a9a4); color: white; box-shadow: 0 8px 25px rgba(193, 188, 184, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(193, 188, 184, 0.4); }
+        .social-buttons { margin-top: 20px; }
+        .btn-social { background: white; border: 2px solid #e8e8e8; color: #666; margin-bottom: 12px; font-weight: 500; }
+        .btn-social:hover { border-color: #c1bcb8; color: #c1bcb8; background: rgba(193, 188, 184, 0.1); }
+        .btn-social span { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+        .btn-social svg { width: 20px; height: 20px; }
+        .divider { text-align: center; margin: 25px 0; position: relative; color: #999; font-size: 14px; }
+        .divider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #e8e8e8; z-index: 0; }
+        .divider span { background: #fff; padding: 0 15px; position: relative; z-index: 1; }
+        .auth-switch { text-align: center; margin-top: 25px; padding-top: 25px; border-top: 1px solid #e8e8e8; color: #666; font-size: 14px; }
+        .auth-switch a { color: #c1bcb8; font-weight: 600; text-decoration: none; cursor: pointer; }
+        .forgot-password { text-align: center; margin-top: 15px; }
+        .forgot-password a { color: #c1bcb8; font-size: 14px; text-decoration: none; cursor: pointer; }
+        .auth-view { display: none; animation: fadeIn 0.3s ease-out; }
+        .auth-view.active { display: block; }
+        .back-link { display: inline-flex; align-items: center; gap: 5px; color: #c1bcb8; font-size: 14px; margin-bottom: 20px; cursor: pointer; }
+        .success-message { background: linear-gradient(135deg, #00b894, #00a085); color: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: 500; display: none; }
+        .success-message.show { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .auth-modal-close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; color: #999; font-size: 24px; line-height: 1; padding: 5px; }
+        .auth-modal-close-btn:hover { color: #333; }
+        @media (max-width: 480px) {
+            .auth-card { padding: 25px 20px; }
+            .auth-title { font-size: 22px; }
+        }
+    </style>
+</head>
+<body class="bg-[#efefef] text-stone-800">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[#f9f9f9]/80 backdrop-blur-md z-40 shadow-sm">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex-shrink-0">
+            <a href="/" class="flex items-center space-x-2">
+               <img class="h-10 w-auto" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iIzAwMCI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates Logo" />
+            </a>
+          </div>
+          <nav class="hidden lg:flex lg:items-center lg:space-x-8">
+            <a href="#single-session" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">單堂體驗</a>
+            <a href="#thematic-unit" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">主題單元</a>
+            <a href="#sculpting-plan" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">體態雕塑</a>
+            <a href="#" class="text-stone-600 hover:text-[#c1bcb8] transition-colors">常見問題</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+             <button id="user-icon-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="User account">
+                <i aria-hidden="true" class="fas fa-user text-xl"></i> 
+             </button>
+            <button id="cart-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open shopping cart">
+              <i aria-hidden="true" class="fas fa-shopping-cart text-xl"></i>
+              <span id="cart-item-count" class="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#c1bcb8] text-xs font-medium text-white hidden">0</span>
+            </button>
+            <button id="menu-button" class="lg:hidden text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open menu">
+              <i aria-hidden="true" class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none lg:hidden"></div>
+    <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform -translate-x-full lg:hidden">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-6 border-b border-stone-200">
+                <h2 class="text-xl font-semibold text-stone-800">選單</h2>
+                <button id="mobile-menu-close" class="text-stone-500 hover:text-stone-800 transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <nav class="flex-grow p-6">
+                <ul class="space-y-4">
+                    <li><a href="#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">單堂體驗</a></li>
+                    <li><a href="#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">主題單元</a></li>
+                    <li><a href="#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">體態雕塑</a></li>
+                    <li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors">常見問題</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div id="cart-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none"></div>
+    <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-6 border-b border-stone-200">
+                <h2 class="text-xl font-semibold text-stone-800">購物車</h2>
+                <button id="cart-close-button" class="text-stone-500 hover:text-stone-800 transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="cart-content" class="flex-grow">
+                <!-- Cart items will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal-backdrop" class="auth-modal-backdrop"></div>
+    <div id="auth-modal-container" class="auth-modal-container">
+        <div class="auth-card">
+            <button id="auth-modal-close-btn" class="auth-modal-close-btn">&times;</button>
+            <!-- Login View -->
+            <div id="loginView" class="auth-view active">
+                <div class="auth-header">
+                    <h1 class="auth-title">會員登入</h1>
+                    <p class="auth-subtitle">登入開始您的皮拉提斯之旅</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">電子郵件</label>
+                        <input type="email" class="form-control" placeholder="輸入您的電子郵件" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">密碼</label>
+                        <div class="password-field">
+                            <input type="password" class="form-control password-input" placeholder="輸入您的密碼" required>
+                            <button type="button" class="password-toggle">顯示</button>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" class="checkbox">
+                        <label for="remember" class="checkbox-label">記住我</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">登入</button>
+                    <div class="forgot-password"><a class="auth-view-switch" data-view="forgotPassword">忘記密碼？</a></div>
+                </form>
+                <div class="divider"><span>或</span></div>
+                <div class="social-buttons">
+                    <button type="button" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>使用 Google 登入</span></span></button>
+                    <button type="button" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span>使用 LINE 登入</span></span></button>
+                </div>
+                <div class="auth-switch">還沒有帳號？ <a class="auth-view-switch" data-view="signup">立即註冊</a></div>
+            </div>
+            <!-- Sign Up View -->
+            <div id="signupView" class="auth-view">
+                <div class="auth-header"><h1 class="auth-title">建立帳號</h1><p class="auth-subtitle">加入 9's Pilates 開始您的健康之旅</p></div>
+                <form id="signupForm">
+                    <div class="form-group"><label class="form-label">姓名</label><input type="text" class="form-control" placeholder="輸入您的姓名" required></div>
+                    <div class="form-group"><label class="form-label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您的電子郵件" required></div>
+                    <div class="form-group"><label class="form-label">密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="至少8個字元" required><button type="button" class="password-toggle">顯示</button></div></div>
+                    <div class="form-group"><label class="form-label">確認密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="再次輸入密碼" required><button type="button" class="password-toggle">顯示</button></div></div>
+                    <div class="checkbox-group"><input type="checkbox" id="terms" class="checkbox" required><label for="terms" class="checkbox-label">我同意 <a>服務條款</a> 與 <a>隱私政策</a></label></div>
+                    <button type="submit" class="btn btn-primary">建立帳號</button>
+                </form>
+                <div class="auth-switch">已經有帳號？ <a class="auth-view-switch" data-view="login">立即登入</a></div>
+            </div>
+            <!-- Forgot Password View -->
+            <div id="forgotPasswordView" class="auth-view">
+                <a class="back-link auth-view-switch" data-view="login"><span>←</span> 返回登入</a>
+                <div class="auth-header"><h1 class="auth-title">忘記密碼</h1><p class="auth-subtitle">輸入您的電子郵件，我們會發送密碼重設連結給您</p></div>
+                <div id="forgotPasswordSuccess" class="success-message">重設密碼連結已發送至您的信箱！</div>
+                <form id="forgotPasswordForm">
+                    <div class="form-group"><label class="form-label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您註冊的電子郵件" required></div>
+                    <button type="submit" class="btn btn-primary">發送重設連結</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="relative bg-[#f9f9f9] pt-24 pb-16 sm:pt-32 sm:pb-24">
+            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop')"></div>
+            <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-stone-800 tracking-tight">所有課程</h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-stone-600">從專業教師指導的單堂課程到完整的主題訓練計劃，適合不同需求和程度的皮拉提斯課程。</p>
+            </div>
+        </div>
+
+        <!-- Courses Container -->
+        <div id="courses-container" class="py-12 md:py-20 px-4 md:px-8 space-y-16">
+            <!-- Course sections will be injected here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300">
+        <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" />
+            <div class="flex justify-center space-x-6 my-6">
+                <a href="#single-session" class="hover:text-white transition-colors">所有課程</a>
+                <a href="#" class="hover:text-white transition-colors">常見問題</a>
+                <a href="#" id="footer-login-link" class="hover:text-white transition-colors">會員登入</a>
+            </div>
+            <p class="my-4">
+                <a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors">客服信箱：9spilates@gmail.com</a>
+            </p>
+            <div class="flex justify-center space-x-6 my-6">
+                 <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Instagram">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Line">
+                    <i class="fab fa-line text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm text-stone-400">© 2025 9's Pilates. 版權所有</p>
+            <div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500">
+                <a href="#" class="hover:text-stone-300 transition-colors">使用條款</a>
+                <span>|</span>
+                <a href="#" class="hover:text-stone-300 transition-colors">隱私政策</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- DATA ---
+        const courseData = {
+          sections: [
+            {
+              id: 'single-session', category: '單堂課程', title: "單堂體驗 | 60分鐘⽪拉提斯", description: "各種60分鐘單堂課程，針對不同需求和身體部位進行專業訓練。", courses: [
+                { id: 1, title: "久坐上班族：全⾝活化⽪拉提斯", subtitle: "單堂上上看 | 60 minutes", price: 800, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop", duration: "60 minutes", difficulty: "初學者", equipment: "瑜珈墊", rating: 4.8, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>專為長時間久坐、缺乏運動的現代上班族設計。您是否經常感到肩頸僵硬、腰背酸痛？這堂課將帶您透過皮拉提斯的核心訓練，喚醒沉睡的肌群，找回身體的覺知與活力。</p><p>課程將從基礎的呼吸調節開始，引導您感受核心肌群的啟動。透過一系列溫和而精準的動作，我們將逐步伸展緊繃的背部與髖部，強化支撐脊椎的深層肌肉，有效改善因久坐帶來的不良姿勢與身體不適。</p>" },
+                { id: 2, title: "核心強化：穩定與力量", subtitle: "核心挑戰 | 60 minutes", price: 850, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop", duration: "60 minutes", difficulty: "中級者", equipment: "瑜珈墊, 抗力球", rating: 4.9, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>這是一堂專注於核心肌群的深度訓練課程。我們將挑戰您的腹部、背部及骨盆底肌，建立身體中心的力量與穩定性，為所有動態活動打下堅實基礎。</p>" },
+                { id: 3, title: "美體雕塑：曲線與伸展", subtitle: "優雅體態 | 60 minutes", price: 850, image: "https://images.unsplash.com/photo-1549576490-9426cf64ab4a?q=80&w=1470&auto=format&fit=crop", duration: "60 minutes", difficulty: "所有程度", equipment: "瑜珈墊, 彈力帶", rating: 4.7, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>結合皮拉提斯與芭蕾元素，這堂課將帶您進行一系列優雅的伸展與肌力訓練，專注於雕塑修長的肌肉線條，提升身體的柔軟度與協調性。</p>" },
+                { id: 4, title: "孕婦皮拉提斯：溫和與支持", subtitle: "孕期呵護 | 60 minutes", price: 900, image: "https://images.unsplash.com/photo-1588533639019-215264b3697e?q=80&w=1323&auto=format&fit=crop", duration: "60 minutes", difficulty: "孕期媽媽", equipment: "瑜珈墊, 抱枕", rating: 5.0, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>專為孕期媽媽設計的溫和課程，著重於強化骨盆底肌、舒緩下背不適，並幫助您在孕期保持身心連結與舒適。課程安全，並會根據不同孕期提供調整建議。</p>" },
+              ]
+            },
+            {
+              id: 'thematic-unit', category: '主題單元', title: "主題單元 | 4週週期⽪拉提斯", description: "系統化的四週訓練計劃，針對特定目標進行持續性訓練，見證身體的蛻變。", courses: [
+                { id: 5, title: "四周告別圓肩駝背", subtitle: "挺拔姿態 | 4堂課", price: 3200, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop", duration: "4週", difficulty: "所有程度", equipment: "瑜珈墊, 按摩球", rating: 4.9, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>透過為期四週的系統性訓練，針對性地放鬆胸肌、強化背肌，從根本改善現代人常見的圓肩駝背問題，找回自信挺拔的姿態。</p>" },
+                { id: 6, title: "四周打造緊實翹臀", subtitle: "蜜桃臀計畫 | 4堂課", price: 3400, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop", duration: "4週", difficulty: "中級者", equipment: "瑜珈墊, 彈力帶", rating: 4.8, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>想要擁有迷人的臀部曲線嗎？這套課程將集中火力訓練您的臀大肌、中肌與小肌，不僅提升外觀，更能增強核心穩定，改善下背痛。</p>" },
+              ]
+            },
+            {
+              id: 'sculpting-plan', category: '體態雕塑', title: "全⽅位體態雕塑計畫", description: "全方位體態改善課程，從檢測到伸展再到強化訓練的完整計劃。", courses: [
+                { id: 7, title: "8週完美體態重塑", subtitle: "煥然一新 | 8堂課", price: 7800, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop", duration: "8週", difficulty: "所有程度", equipment: "全套工作室器材", rating: 5.0, instructor: { name: "Wang Yating", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" }, intro: "<p>這不僅僅是課程，更是一趟完整的身心改造旅程。從一對一的體態評估開始，為您量身打造為期八週的訓練菜單，結合器械與墊上皮拉提斯，全面改善您的體態與健康。</p>" },
+              ]
+            }
+          ],
+          findCourseById(id) {
+              for (const section of this.sections) {
+                  const found = section.courses.find(course => course.id === id);
+                  if (found) return { ...found, category: section.category };
+              }
+              return null;
+          }
+        };
+
+        // --- STATE ---
+        let cartItems = [];
+        let courseIdToAddAfterLogin = null;
+
+        // --- DOM ELEMENTS ---
+        const coursesContainer = document.getElementById('courses-container');
+        const cartButton = document.getElementById('cart-button');
+        const cartPanel = document.getElementById('cart-panel');
+        const cartBackdrop = document.getElementById('cart-backdrop');
+        const cartCloseButton = document.getElementById('cart-close-button');
+        const cartContent = document.getElementById('cart-content');
+        const cartItemCountBadge = document.getElementById('cart-item-count');
+
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuCloseButton = document.getElementById('mobile-menu-close');
+        
+        const header = document.querySelector('header');
+        const allNavLinks = document.querySelectorAll('header nav a, .mobile-menu-link, footer a[href^="#"]');
+
+        const authModalBackdrop = document.getElementById('auth-modal-backdrop');
+        const authModalContainer = document.getElementById('auth-modal-container');
+        const authModalCloseBtn = document.getElementById('auth-modal-close-btn');
+        const userIconButton = document.getElementById('user-icon-button');
+        const footerLoginLink = document.getElementById('footer-login-link');
+        const loginForm = document.getElementById('loginForm');
+        
+        // --- AUTH LOGIC ---
+        const checkLoginStatus = () => {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            updateAuthUI(isLoggedIn);
+            return isLoggedIn;
+        };
+
+        const updateAuthUI = (isLoggedIn) => {
+            if (isLoggedIn) {
+                userIconButton.classList.add('text-[#c1bcb8]');
+            } else {
+                userIconButton.classList.remove('text-[#c1bcb8]');
+            }
+        };
+        
+        const handleLogout = () => {
+             if (confirm('您確定要登出嗎？')) {
+                sessionStorage.removeItem('isLoggedIn');
+                checkLoginStatus();
+            }
+        };
+
+        const openAuthModal = (view = 'login') => {
+            document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`${view}View`).classList.add('active');
+            authModalBackdrop.classList.add('active');
+            authModalContainer.classList.add('active');
+        };
+
+        const closeAuthModal = () => {
+            authModalBackdrop.classList.remove('active');
+            authModalContainer.classList.remove('active');
+        };
+
+        // --- RENDER FUNCTIONS ---
+        const renderCourses = () => {
+            if (!coursesContainer) return;
+            let content = '';
+            courseData.sections.forEach(section => {
+                content += `
+                    <section id="${section.id}" class="container mx-auto">
+                        <div class="text-center mb-10">
+                            <h2 class="text-3xl font-serif font-bold text-stone-800">${section.title}</h2>
+                            <p class="mt-2 text-md text-stone-500 max-w-2xl mx-auto">${section.description}</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                            ${section.courses.map(course => `
+                                <div class="bg-[#f9f9f9] rounded-lg shadow-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                                    <a href="course-details.html?id=${course.id}" class="block">
+                                        <div class="relative">
+                                            <img src="${course.image}" alt="${course.title}" class="w-full h-48 object-cover" />
+                                            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                                        </div>
+                                    </a>
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <h3 class="text-lg font-bold text-stone-800">${course.title}</h3>
+                                        <p class="text-sm text-stone-500 mt-1 flex-grow">${course.subtitle}</p>
+                                        <div class="mt-4 flex justify-between items-center">
+                                            <p class="text-xl font-semibold text-[#c1bcb8]">NT$ ${course.price.toLocaleString()}</p>
+                                            <div class="flex items-center space-x-2">
+                                                <a href="course-details.html?id=${course.id}" class="text-sm text-stone-600 hover:text-stone-900 border border-stone-300 rounded-full px-4 py-2 transition-all">查看</a>
+                                                <button 
+                                                    class="add-to-cart-btn p-2 rounded-full bg-[#c1bcb8] text-white hover:bg-[#b0a9a4] transition-all"
+                                                    aria-label="Add ${course.title} to cart"
+                                                    data-course-id="${course.id}"
+                                                >
+                                                    <svg class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            });
+            coursesContainer.innerHTML = content;
+        };
+
+        const renderCart = () => {
+            if (cartItems.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="flex-grow flex flex-col items-center justify-center text-center p-6 h-full">
+                        <p class="text-stone-500">您的購物車是空的</p>
+                        <button 
+                            id="cart-continue-shopping"
+                            class="mt-4 px-6 py-2 bg-[#c1bcb8] text-white rounded-full hover:bg-[#b0a9a4] transition-colors"
+                        >
+                            繼續選購
+                        </button>
+                    </div>
+                `;
+                const continueShoppingBtn = document.getElementById('cart-continue-shopping');
+                if(continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeCart);
+
+            } else {
+                const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+                cartContent.innerHTML = `
+                    <div class="flex-grow overflow-y-auto p-6 space-y-4">
+                        ${cartItems.map(item => `
+                            <div class="flex items-start space-x-4">
+                                <img src="${item.image}" alt="${item.title}" class="w-24 h-24 object-cover rounded-md" />
+                                <div class="flex-grow">
+                                    <h3 class="font-semibold text-stone-800">${item.title}</h3>
+                                    <p class="text-sm text-stone-500">NT$ ${item.price.toLocaleString()}</p>
+                                    <div class="flex items-center mt-2">
+                                        <button data-cart-action="decrease" data-course-id="${item.id}" class="p-1 border rounded-full hover:bg-stone-100"><svg class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></button>
+                                        <span class="w-10 text-center">${item.quantity}</span>
+                                        <button data-cart-action="increase" data-course-id="${item.id}" class="p-1 border rounded-full hover:bg-stone-100"><svg class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg></button>
+                                    </div>
+                                </div>
+                                <button data-cart-action="remove" data-course-id="${item.id}" class="text-stone-400 hover:text-red-500 transition-colors">
+                                    <svg class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="p-6 border-t border-stone-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-stone-600">小計</span>
+                            <span class="text-xl font-semibold text-stone-800">NT$ ${subtotal.toLocaleString()}</span>
+                        </div>
+                        <button class="w-full py-3 bg-[#c1bcb8] text-white rounded-full text-lg font-semibold hover:bg-[#b0a9a4] transition-colors">
+                            前往結帳
+                        </button>
+                    </div>
+                `;
+            }
+            updateCartCount();
+        };
+
+        const updateCartCount = () => {
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            if (totalItems > 0) {
+                cartItemCountBadge.textContent = totalItems;
+                cartItemCountBadge.classList.remove('hidden');
+            } else {
+                cartItemCountBadge.classList.add('hidden');
+            }
+        };
+
+        // --- CART LOGIC with localStorage ---
+        const saveCart = () => {
+            localStorage.setItem('pilatesCart', JSON.stringify(cartItems));
+        };
+
+        const loadCart = () => {
+            const savedCart = localStorage.getItem('pilatesCart');
+            if (savedCart) {
+                cartItems = JSON.parse(savedCart);
+            } else {
+                cartItems = [];
+            }
+        };
+        
+        const addToCart = (courseId) => {
+            const existingItem = cartItems.find(item => item.id === courseId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                const courseToAdd = courseData.findCourseById(courseId);
+                if (courseToAdd) {
+                    cartItems.push({ ...courseToAdd, quantity: 1 });
+                }
+            }
+            saveCart();
+            renderCart();
+            openCart();
+        };
+
+        const updateQuantity = (courseId, newQuantity) => {
+            const item = cartItems.find(item => item.id === courseId);
+            if(item) {
+                if (newQuantity <= 0) {
+                    cartItems = cartItems.filter(item => item.id !== courseId);
+                } else {
+                    item.quantity = newQuantity;
+                }
+            }
+            saveCart();
+            renderCart();
+        };
+
+        // --- EVENT HANDLERS ---
+        const openCart = () => {
+            cartPanel.classList.remove('translate-x-full');
+            cartBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+            cartBackdrop.classList.add('opacity-100');
+        };
+
+        const closeCart = () => {
+            cartPanel.classList.add('translate-x-full');
+            cartBackdrop.classList.add('opacity-0', 'pointer-events-none');
+            cartBackdrop.classList.remove('opacity-100');
+        };
+
+        const openMobileMenu = () => {
+            mobileMenuPanel.classList.remove('-translate-x-full');
+            mobileMenuBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+            mobileMenuBackdrop.classList.add('opacity-100');
+        };
+
+        const closeMobileMenu = () => {
+            mobileMenuPanel.classList.add('-translate-x-full');
+            mobileMenuBackdrop.classList.add('opacity-0', 'pointer-events-none');
+            mobileMenuBackdrop.classList.remove('opacity-100');
+        };
+        
+        const handleSmoothScroll = (event) => {
+            event.preventDefault();
+            const targetId = event.currentTarget.getAttribute('href');
+            if (!targetId || targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                const headerHeight = header ? header.offsetHeight : 0;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                if (event.currentTarget.classList.contains('mobile-menu-link')) {
+                    closeMobileMenu();
+                }
+            }
+        };
+
+
+        // --- EVENT LISTENERS ---
+        cartButton.addEventListener('click', openCart);
+        cartCloseButton.addEventListener('click', closeCart);
+        cartBackdrop.addEventListener('click', closeCart);
+        
+        menuButton.addEventListener('click', openMobileMenu);
+        mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
+        mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+        
+        allNavLinks.forEach(link => {
+            if(link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', handleSmoothScroll);
+            }
+        });
+
+        if (coursesContainer) {
+            coursesContainer.addEventListener('click', (e) => {
+                const button = e.target.closest('.add-to-cart-btn');
+                if (button) {
+                    e.preventDefault();
+                    const courseId = parseInt(button.dataset.courseId, 10);
+                    if (checkLoginStatus()) {
+                        addToCart(courseId);
+                    } else {
+                        courseIdToAddAfterLogin = courseId;
+                        openAuthModal();
+                    }
+                }
+            });
+        }
+        
+        userIconButton.addEventListener('click', () => {
+            if (checkLoginStatus()) {
+                handleLogout();
+            } else {
+                openAuthModal();
+            }
+        });
+        
+        footerLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (checkLoginStatus()) {
+                 alert('您已經登入。');
+            } else {
+                openAuthModal();
+            }
+        });
+
+        cartContent.addEventListener('click', (e) => {
+            const button = e.target.closest('button[data-cart-action]');
+            if(!button) return;
+            const action = button.dataset.cartAction;
+            const courseId = parseInt(button.dataset.courseId, 10);
+            if (!action || !courseId) return;
+
+            const item = cartItems.find(i => i.id === courseId);
+            if (!item) return;
+
+            if (action === 'increase') {
+                updateQuantity(courseId, item.quantity + 1);
+            } else if (action === 'decrease') {
+                updateQuantity(courseId, item.quantity - 1);
+            } else if (action === 'remove') {
+                updateQuantity(courseId, 0);
+            }
+        });
+        
+        // --- AUTH MODAL LISTENERS ---
+        authModalBackdrop.addEventListener('click', closeAuthModal);
+        authModalCloseBtn.addEventListener('click', closeAuthModal);
+
+        document.querySelectorAll('.auth-view-switch').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                openAuthModal(e.target.dataset.view);
+            });
+        });
+        
+        document.querySelectorAll('.password-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const passwordInput = button.previousElementSibling;
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    button.textContent = '隱藏';
+                } else {
+                    passwordInput.type = 'password';
+                    button.textContent = '顯示';
+                }
+            });
+        });
+        
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate successful login
+            sessionStorage.setItem('isLoggedIn', 'true');
+            checkLoginStatus();
+            closeAuthModal();
+            
+            // If user was trying to add a course, do it now
+            if (courseIdToAddAfterLogin !== null) {
+                addToCart(courseIdToAddAfterLogin);
+                courseIdToAddAfterLogin = null;
+            }
+        });
+        
+        // --- INITIALIZATION ---
+        checkLoginStatus();
+        loadCart();
+        renderCourses();
+        renderCart();
+
+    });
+    </script>
+</body>
+</html>
