@@ -143,7 +143,7 @@
         <div class="flex items-center justify-between h-20">
           <div class="flex-shrink-0">
             <a href="index.html" class="flex items-center space-x-2">
-               <img class="h-10 w-auto" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iIzAwMCI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHNcm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates Logo" />
+               <img class="h-10 w-auto" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iIzAwMCI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates Logo" />
             </a>
           </div>
           <nav class="hidden lg:flex lg:items-center lg:space-x-8">
@@ -658,10 +658,11 @@
             }
         };
 
-        const handleLogout = () => {
-            if (confirm(t('logout_confirm'))) {
-                sessionStorage.removeItem('isLoggedIn');
-                checkLoginStatus();
+        const handleUserIconClick = () => {
+             if (checkLoginStatus()) {
+                window.location.href = 'dashboard.html';
+            } else {
+                openAuthModal();
             }
         };
 
@@ -893,13 +894,7 @@
                 setLanguage(newLang);
             });
 
-            userIconButton.addEventListener('click', () => {
-                if (checkLoginStatus()) {
-                    handleLogout();
-                } else {
-                    openAuthModal();
-                }
-            });
+            userIconButton.addEventListener('click', handleUserIconClick);
 
              footerLoginLink.addEventListener('click', (e) => {
                 e.preventDefault();
