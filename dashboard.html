@@ -377,14 +377,19 @@
                 'tab_history': 'History',
                 'tab_settings': 'Settings',
                 'course_progress': 'Progress: ${progress}%',
+                'valid_until': 'Expires:',
                 'start_course': 'Start Course',
                 'continue_course': 'Continue',
                 'view_details': 'Details',
+                'empty_courses_title': 'You Have No Courses Yet',
+                'empty_courses_subtitle': 'It looks like you haven\'t enrolled in any courses. Explore our catalog to start your Pilates journey!',
+                'more_courses_title': 'Ready for Your Next Challenge?',
+                'more_courses_subtitle': 'Expand your practice and discover new ways to move. There\'s always something new to learn.',
                 'empty_favorites_title': 'No Favorites Yet',
                 'empty_favorites_subtitle': 'Add courses to your favorites for easy access.',
                 'empty_history_title': 'No Watch History',
                 'empty_history_subtitle': 'Your recently watched courses will appear here.',
-                'browse_courses': 'Browse Courses',
+                'browse_courses': 'Browse All Courses',
                 'settings_title': 'Account Information',
                 'settings_name': 'Name',
                 'settings_email': 'Email',
@@ -459,9 +464,14 @@
                 'tab_history': '觀看紀錄',
                 'tab_settings': '帳號設定',
                 'course_progress': '進度: ${progress}%',
+                'valid_until': '有效期至:',
                 'start_course': '開始上課',
                 'continue_course': '繼續觀看',
                 'view_details': '課程詳情',
+                'empty_courses_title': '您尚未購買任何課程',
+                'empty_courses_subtitle': '看起來您還沒有任何課程。立即探索我們的課程，開始您的皮拉提斯之旅吧！',
+                'more_courses_title': '準備好迎接下一個挑戰了嗎？',
+                'more_courses_subtitle': '拓展您的練習，探索新的動作方式。總有新的知識等著您來學習。',
                 'empty_favorites_title': '尚無收藏課程',
                 'empty_favorites_subtitle': '將您喜歡的課程加入收藏，方便日後查找。',
                 'empty_history_title': '尚無觀看紀錄',
@@ -526,12 +536,14 @@
                 },
             },
             courses: [
-                { id: 1, title: {'zh-TW': "久坐上班族：全⾝活化⽪拉提斯", 'en': "Desk Worker's Relief: Full Body Activation"}, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop", progress: 75, category: {'zh-TW': '單堂體驗', 'en': 'Single Session'} },
-                { id: 5, title: {'zh-TW': "四周告別圓肩駝背", 'en': "4 Weeks to Fix Rounded Shoulders"}, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop", progress: 25, category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'} },
-                { id: 7, title: {'zh-TW': "8週完美體態重塑", 'en': "8-Week Perfect Posture Transformation"}, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop", progress: 10, category: {'zh-TW': '體態雕塑', 'en': 'Body Sculpting'} },
-                { id: 2, title: {'zh-TW': "核心強化：穩定與力量", 'en': "Core Strengthening: Stability & Power"}, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop", progress: 100, category: {'zh-TW': '單堂體驗', 'en': 'Single Session'} },
-                { id: 6, title: {'zh-TW': "四周打造緊實翹臀", 'en': "4 Weeks to a Firm, Lifted Glutes"}, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop", progress: 0, category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'} },
+                { id: 1, title: {'zh-TW': "久坐上班族：全⾝活化⽪拉提斯", 'en': "Desk Worker's Relief: Full Body Activation"}, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop", progress: 75, category: {'zh-TW': '單堂體驗', 'en': 'Single Session'}, expiry: '2025/12/31' },
+                { id: 5, title: {'zh-TW': "四周告別圓肩駝背", 'en': "4 Weeks to Fix Rounded Shoulders"}, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop", progress: 25, category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'}, expiry: '2025/12/31' },
+                { id: 7, title: {'zh-TW': "8週完美體態重塑", 'en': "8-Week Perfect Posture Transformation"}, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop", progress: 10, category: {'zh-TW': '體態雕塑', 'en': 'Body Sculpting'}, expiry: '2026/03/15' },
+                { id: 2, title: {'zh-TW': "核心強化：穩定與力量", 'en': "Core Strengthening: Stability & Power"}, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop", progress: 100, category: {'zh-TW': '單堂體驗', 'en': 'Single Session'}, expiry: '2025/08/01' },
+                { id: 6, title: {'zh-TW': "四周打造緊實翹臀", 'en': "4 Weeks to a Firm, Lifted Glutes"}, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop", progress: 0, category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'}, expiry: '2025/09/20' },
             ]
+            // To test the empty state, use this instead:
+            // courses: []
         };
 
         // --- STATE ---
@@ -741,31 +753,52 @@
         };
 
         const renderMyCourses = (courses) => {
-            myCoursesContent.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    ${courses.map(course => `
-                        <a href="course-details.html?id=${course.id}" class="bg-[#f9f9f9] rounded-lg shadow-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                           <div class="relative">
-                                <img src="${course.image}" alt="${course.title[currentLanguage]}" class="w-full h-48 object-cover" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                    <div class="w-full bg-white/30 rounded-full h-1.5">
-                                        <div class="bg-[#c1bcb8] h-1.5 rounded-full" style="width: ${course.progress}%"></div>
-                                    </div>
-                                    <p class="text-xs font-medium mt-1.5 text-right">${t('course_progress', {progress: course.progress})}</p>
-                                </div>
-                           </div>
-                           <div class="p-5 flex flex-col flex-grow">
-                                <p class="text-xs font-semibold text-[#c1bcb8] uppercase">${course.category[currentLanguage]}</p>
-                                <h3 class="text-md font-bold text-stone-800 mt-1 flex-grow">${course.title[currentLanguage]}</h3>
-                                <button class="w-full mt-4 py-2.5 bg-[#c1bcb8] text-white rounded-md text-sm font-semibold hover:bg-[#b0a9a4] transition-colors">
-                                    ${course.progress > 0 ? t('continue_course') : t('start_course')}
-                                </button>
-                           </div>
+            if (!courses || courses.length === 0) {
+                myCoursesContent.innerHTML = `
+                    <div class="text-center py-16 px-6 bg-white rounded-lg shadow-md">
+                        <div class="text-6xl text-stone-300 mb-4">📚</div>
+                        <h2 class="text-2xl font-bold font-serif text-stone-800 mb-2">${t('empty_courses_title')}</h2>
+                        <p class="text-stone-500 mb-6">${t('empty_courses_subtitle')}</p>
+                        <a href="index.html" class="inline-block px-8 py-3 bg-[#c1bcb8] text-white rounded-full font-semibold hover:bg-[#b0a9a4] transition-colors">
+                            ${t('browse_courses')}
                         </a>
-                    `).join('')}
-                </div>
-            `;
+                    </div>
+                `;
+            } else {
+                myCoursesContent.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${courses.map(course => `
+                            <a href="course-details.html?id=${course.id}" class="bg-[#f9f9f9] rounded-lg shadow-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                               <div class="relative">
+                                    <img src="${course.image}" alt="${course.title[currentLanguage]}" class="w-full h-48 object-cover" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                    <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                        <div class="w-full bg-white/30 rounded-full h-1.5">
+                                            <div class="bg-white h-1.5 rounded-full" style="width: ${course.progress}%"></div>
+                                        </div>
+                                        <p class="text-xs font-medium mt-1.5 text-right">${t('course_progress', {progress: course.progress})}</p>
+                                    </div>
+                               </div>
+                               <div class="p-5 flex flex-col flex-grow">
+                                    <p class="text-xs font-semibold text-stone-500 uppercase">${course.category[currentLanguage]}</p>
+                                    <h3 class="text-md font-bold text-stone-800 mt-1">${course.title[currentLanguage]}</h3>
+                                    <p class="text-xs text-stone-500 mt-2 flex-grow">${t('valid_until')} ${course.expiry}</p>
+                                    <button class="w-full mt-4 py-2.5 bg-[#c1bcb8] text-white rounded-md text-sm font-semibold hover:bg-[#b0a9a4] transition-colors">
+                                        ${course.progress > 0 ? t('continue_course') : t('start_course')}
+                                    </button>
+                               </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                    <div class="mt-16 text-center py-12 px-6 bg-white rounded-lg shadow-md">
+                         <h2 class="text-2xl font-bold font-serif text-stone-800 mb-2">${t('more_courses_title')}</h2>
+                        <p class="text-stone-500 mb-6 max-w-xl mx-auto">${t('more_courses_subtitle')}</p>
+                        <a href="index.html" class="inline-block px-8 py-3 bg-[#c1bcb8] text-white rounded-full font-semibold hover:bg-[#b0a9a4] transition-colors">
+                            ${t('browse_courses')}
+                        </a>
+                    </div>
+                `;
+            }
         };
         
         const renderEmptyState = (container, { icon, titleKey, subtitleKey }) => {
@@ -875,7 +908,7 @@
 
         // --- INITIALIZATION ---
         
-        // Protect the page
+        // Protect the page - commented out for development as requested
         /*
         if (!checkLoginStatus()) {
             document.body.innerHTML = `
@@ -911,7 +944,9 @@
         mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
         mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
 
-        userIconButton.addEventListener('click', handleLogout); // On dashboard, user icon is for logout
+        userIconButton.addEventListener('click', () => {
+             window.location.href = 'dashboard.html';
+        }); // On dashboard, user icon could also just be a static indicator
         
         languageSwitcherButton.addEventListener('click', () => {
             const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en';
