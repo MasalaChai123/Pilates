@@ -28,6 +28,8 @@
       .brand-bg { background-color: #c1bcb8; }
       .brand-bg-hover:hover { background-color: #b0a9a4; }
       .brand-border { border-color: #c1bcb8; }
+      .prose { max-width: none; }
+      .prose p { margin-bottom: 1em; line-height: 1.75; }
     </style>
      <style id="auth-modal-styles">
         /* Modal Container */
@@ -280,7 +282,7 @@
     </div>
 
     <!-- Sticky Footer / Purchase Bar -->
-    <div id="sticky-footer" class="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-30 hidden">
+    <div id="sticky-footer" class="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-30 hidden lg:hidden">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center justify-between">
                  <div class="text-left">
@@ -288,7 +290,7 @@
                     <p id="footer-course-price" class="text-2xl font-bold text-stone-800">NT$ 0</p>
                 </div>
                 <div class="flex flex-col items-center space-y-1">
-                    <button id="buy-now-button" class="w-full sm:w-auto px-10 py-3 brand-bg text-white rounded-lg font-semibold brand-bg-hover transition-colors whitespace-nowrap">立即購買</button>
+                    <button id="buy-now-button" class="w-full sm:w-auto px-10 py-3 brand-bg text-white rounded-lg font-semibold brand-bg-hover transition-colors whitespace-nowrap buy-course-btn">立即購買</button>
                     <a href="index.html" id="footer-back-link" class="text-xs text-stone-500 hover:underline">返回課程列表</a>
                 </div>
             </div>
@@ -358,16 +360,23 @@
                 'loading': 'Loading course information...',
                 'promo_banner': '🎉 New Year Special! 15% off all courses. Use code PILATES2025 at checkout. 🎉',
                 'back_to_list': 'Back to course list',
+                'breadcrumb_home': 'Home',
                 'duration': 'Duration',
                 'difficulty': 'Difficulty',
                 'equipment': 'Equipment',
                 'rating': 'Rating',
+                'rating_text': '${rating} / 5.0 Rating',
                 'intro': 'Course Introduction',
                 'instructor': 'Instructor',
                 'footer_price': 'Price',
+                'add_to_cart': 'Add to Cart',
                 'buy_now': 'Buy Now',
                 'course_not_found': 'Course information not found. Please <a href="index.html" class="underline font-semibold">return to the course list</a>.',
                 'invalid_id': 'Invalid course ID. Please <a href="index.html" class="underline font-semibold">return to the course list</a>.',
+                'includes_title': 'This course includes:',
+                'includes_duration': '${duration} on-demand video',
+                'includes_access': 'Full lifetime access',
+                'includes_devices': 'Access on mobile and desktop',
                 // Auth Modal
                 'auth_login_title': 'Member Login',
                 'auth_login_subtitle': 'Log in to begin your Pilates journey',
@@ -427,16 +436,23 @@
                 'loading': '正在載入課程資訊...',
                 'promo_banner': '🎉 新春優惠！全站課程85折，輸入優惠碼 PILATES2025 結帳即可享優惠 🎉',
                 'back_to_list': '返回課程列表',
+                'breadcrumb_home': '首頁',
                 'duration': '課程時長',
                 'difficulty': '難度等級',
                 'equipment': '建議裝備',
                 'rating': '課程評價',
+                'rating_text': '${rating} / 5.0 星評價',
                 'intro': '課程介紹',
                 'instructor': '授課教師',
                 'footer_price': '課程價格',
+                'add_to_cart': '加入購物車',
                 'buy_now': '立即購買',
                 'course_not_found': '找不到課程資訊，請<a href="index.html" class="underline font-semibold">返回所有課程</a>頁面。',
                 'invalid_id': '無效的課程ID，請<a href="index.html" class="underline font-semibold">返回所有課程</a>頁面。',
+                'includes_title': '課程包含：',
+                'includes_duration': '${duration} 課程影片',
+                'includes_access': '永久觀看權限',
+                'includes_devices': '可在電腦與手機上觀看',
                 // Auth Modal
                 'auth_login_title': '會員登入',
                 'auth_login_subtitle': '登入開始您的皮拉提斯之旅',
@@ -506,11 +522,31 @@
           findCourseById(id) {
               for (const section of this.sections) {
                   const found = section.courses.find(course => course.id === id);
-                  if (found) return { ...found, category: section.category };
+                  if (found) return { ...found, category: section.category, categoryId: section.id };
               }
               return null;
           }
         };
+        
+        const mockupCourse = {
+            id: 0,
+            title: {'zh-TW': "示範課程：皮拉提斯入門", 'en': "Mockup Course: Intro to Pilates"},
+            subtitle: {'zh-TW': "體驗課程 | 60 分鐘", 'en': "Experience Session | 60 minutes"},
+            price: 680,
+            image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop",
+            duration: "60 minutes",
+            difficulty: {'zh-TW': "初學者", 'en': "Beginner"},
+            equipment: {'zh-TW': "無需器材", 'en': "No Equipment"},
+            rating: 4.5,
+            instructor: { name: "Yating Wang", image: "https://9spilates.com/wp-content/uploads/2025/02/cropped-LOGO-final7-2.png" },
+            intro: {
+                'zh-TW': "<p>這是一個用於開發和測試的示範課程頁面。這裡的內容是預設的，旨在展示課程詳情頁面的完整佈局和樣式。</p><p>在這個模擬課程中，我們將探索皮拉提斯的基本原則，包括核心參與、呼吸控制和精確運動。無論您是新手還是希望重溫基礎知識，這個示範課程都將為您提供一個完美的起點。</p>",
+                'en': "<p>This is a mockup course page for development and testing purposes. The content here is placeholder text designed to showcase the full layout and styling of a course details page.</p><p>In this mock session, we would explore the fundamental principles of Pilates, including core engagement, breath control, and precise movements. Whether you're a complete beginner or looking to refresh your basics, this sample class would provide the perfect starting point.</p>"
+            },
+            category: {'zh-TW': '示範分類', 'en': 'Mockup Category'},
+            categoryId: 'mockup'
+        };
+
 
         // --- STATE ---
         let cartItems = [];
@@ -541,13 +577,19 @@
         const languageSwitcherButton = document.getElementById('language-switcher-button');
         
         // --- I18N LOGIC ---
-        const t = (key) => translations[currentLanguage][key] || key;
+        const t = (key, params = {}) => {
+            let translation = translations[currentLanguage][key] || key;
+            for (const [param, value] of Object.entries(params)) {
+                translation = translation.replace(`\${${param}}`, value);
+            }
+            return translation;
+        };
         
         let currentCourse = null;
 
         const updateStaticText = () => {
             if (currentCourse) {
-                 document.title = t('page_title_details').replace('${courseTitle}', currentCourse.title[currentLanguage]);
+                 document.title = t('page_title_details', {courseTitle: currentCourse.title[currentLanguage]});
             }
             document.documentElement.lang = currentLanguage;
 
@@ -680,7 +722,7 @@
         };
 
         const renderCourseDetails = (course) => {
-            document.title = t('page_title_details').replace('${courseTitle}', course.title[currentLanguage]);
+            document.title = t('page_title_details', {courseTitle: course.title[currentLanguage]});
             
             const starIcon = (filled) => `<svg class="w-5 h-5 ${filled ? 'text-yellow-400' : 'text-stone-300'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>`;
             
@@ -690,53 +732,70 @@
             }
 
             const content = `
-                <main class="pt-6">
-                    <div class="w-full bg-[#eae5da] text-center py-3 text-stone-800 font-semibold">
+                <main class="pt-2">
+                     <div class="w-full bg-[#eae5da] text-center py-3 text-stone-800 font-semibold mb-6">
                         <p>${t('promo_banner')}</p>
                     </div>
+                    <div class="py-4">
+                        <nav aria-label="breadcrumb">
+                            <ol class="flex items-center space-x-2 text-sm text-stone-500">
+                            <li><a href="index.html" class="hover:text-stone-800 transition-colors">${t('breadcrumb_home')}</a></li>
+                            <li><span class="select-none">/</span></li>
+                            <li><a href="index.html#${course.categoryId}" class="hover:text-stone-800 transition-colors">${course.category[currentLanguage]}</a></li>
+                            <li><span class="select-none">/</span></li>
+                            <li class="font-medium text-stone-700 truncate" aria-current="page">${course.title[currentLanguage]}</li>
+                            </ol>
+                        </nav>
+                    </div>
                     
-                    <div class="py-6">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <a href="index.html" class="inline-flex items-center text-stone-600 hover:text-stone-900">
-                                <i class="fas fa-long-arrow-alt-left w-4 h-4 mr-2"></i>
-                                ${t('back_to_list')}
-                            </a>
-                            <span class="inline-block bg-stone-200 text-stone-700 text-sm font-semibold px-3 py-1 rounded-full">${course.category[currentLanguage]}</span>
-                        </div>
-                        
-                        <h1 class="text-3xl lg:text-4xl font-bold text-stone-900 mb-6">${course.title[currentLanguage]}</h1>
-                        
-                        <img src="${course.image}" alt="${course.title[currentLanguage]}" class="w-full h-auto object-cover rounded-lg border border-stone-200 shadow-sm mb-8">
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center mb-12">
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('duration')}</h3><p class="text-xl font-bold">${course.duration}</p></div>
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('difficulty')}</h3><p class="text-xl font-bold">${course.difficulty[currentLanguage]}</p></div>
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('equipment')}</h3><p class="text-xl font-bold">${course.equipment[currentLanguage]}</p></div>
-                            <div class="bg-[#f9f9f9] p-6 rounded-lg shadow-sm">
-                                <h3 class="font-semibold text-sm text-stone-500 mb-1">${t('rating')}</h3>
-                                <div class="flex items-center justify-center space-x-1">
-                                    ${stars}
-                                    <span class="text-lg font-bold ml-2">(${course.rating})</span>
-                                </div>
+                    <div class="lg:grid lg:grid-cols-3 lg:gap-12">
+                        <div class="lg:col-span-2">
+                            <h1 class="text-3xl lg:text-4xl font-bold font-serif text-stone-900 mb-2">${course.title[currentLanguage]}</h1>
+                            <p class="text-lg text-stone-600 mb-4">${course.subtitle[currentLanguage]}</p>
+                            <div class="flex items-center space-x-4 mb-6">
+                                <div class="flex items-center">${stars}</div>
+                                <span class="text-stone-600 font-medium">${t('rating_text', {rating: course.rating})}</span>
+                            </div>
+                            <img src="${course.image}" alt="${course.title[currentLanguage]}" class="w-full aspect-video object-cover rounded-lg border border-stone-200 shadow-sm mb-8">
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-12">
+                                <div class="bg-[#f9f9f9] p-4 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('duration')}</h3><p class="text-lg font-bold">${course.duration}</p></div>
+                                <div class="bg-[#f9f9f9] p-4 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('difficulty')}</h3><p class="text-lg font-bold">${course.difficulty[currentLanguage]}</p></div>
+                                <div class="bg-[#f9f9f9] p-4 rounded-lg shadow-sm"><h3 class="font-semibold text-sm text-stone-500 mb-1">${t('equipment')}</h3><p class="text-lg font-bold">${course.equipment[currentLanguage]}</p></div>
+                            </div>
+                            
+                            <div class="space-y-12">
+                                <section>
+                                    <h2 class="text-2xl font-bold font-serif mb-4 border-l-4 brand-border pl-4">${t('intro')}</h2>
+                                    <div class="prose text-stone-700 leading-relaxed">${course.intro[currentLanguage]}</div>
+                                </section>
+                                
+                                <section>
+                                    <h2 class="text-2xl font-bold font-serif mb-4 border-l-4 brand-border pl-4">${t('instructor')}</h2>
+                                    <div class="flex items-center space-x-6 bg-stone-100 p-6 rounded-lg">
+                                        <img src="${course.instructor.image}" alt="${course.instructor.name}" class="w-20 h-20 rounded-full object-cover">
+                                        <div>
+                                            <h3 class="text-xl font-bold">${course.instructor.name}</h3>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
                         </div>
-                        
-                        <div class="space-y-12">
-                            <section>
-                                <h2 class="text-2xl font-bold mb-4">${t('intro')}</h2>
-                                <div class="prose max-w-none text-stone-700 leading-relaxed">${course.intro[currentLanguage]}</div>
-                            </section>
-                            
-                            <section>
-                                <h2 class="text-2xl font-bold mb-4">${t('instructor')}</h2>
-                                <div class="flex items-center space-x-6 bg-stone-100 p-6 rounded-lg">
-                                    <img src="${course.instructor.image}" alt="${course.instructor.name}" class="w-24 h-24 rounded-full object-cover">
-                                    <div>
-                                        <h3 class="text-xl font-bold">${course.instructor.name}</h3>
-                                    </div>
+
+                        <aside class="lg:col-span-1 mt-8 lg:mt-0">
+                            <div class="lg:sticky lg:top-28 bg-white p-6 rounded-lg shadow-lg border border-stone-200">
+                                <p class="text-3xl font-bold text-stone-800 mb-4">NT$ ${course.price.toLocaleString()}</p>
+                                <button data-course-id="${course.id}" class="buy-course-btn w-full px-6 py-3 brand-bg text-white rounded-lg text-lg font-semibold brand-bg-hover transition-colors">${t('add_to_cart')}</button>
+                                <div class="mt-6 pt-6 border-t border-stone-200">
+                                    <h3 class="font-semibold mb-3 text-stone-800">${t('includes_title')}</h3>
+                                    <ul class="space-y-3 text-stone-600 text-sm">
+                                        <li class="flex items-center"><i class="fas fa-video w-5 text-center brand-color mr-3"></i><span>${t('includes_duration', {duration: course.duration})}</span></li>
+                                        <li class="flex items-center"><i class="fas fa-infinity w-5 text-center brand-color mr-3"></i><span>${t('includes_access')}</span></li>
+                                        <li class="flex items-center"><i class="fas fa-mobile-alt w-5 text-center brand-color mr-3"></i><span>${t('includes_devices')}</span></li>
+                                    </ul>
                                 </div>
-                            </section>
-                        </div>
+                            </div>
+                        </aside>
                     </div>
                 </main>
             `;
@@ -745,11 +804,11 @@
             
             document.getElementById('footer-price-label').textContent = t('footer_price');
             document.getElementById('footer-course-price').textContent = `NT$ ${course.price.toLocaleString()}`;
-            document.getElementById('buy-now-button').textContent = t('buy_now');
+            document.getElementById('buy-now-button').textContent = t('add_to_cart');
+            document.getElementById('buy-now-button').dataset.courseId = course.id;
             document.getElementById('footer-back-link').textContent = t('back_to_list');
             
             stickyFooter.classList.remove('hidden');
-            document.getElementById('buy-now-button').dataset.courseId = course.id;
         };
 
         const saveCart = () => localStorage.setItem('pilatesCart', JSON.stringify(cartItems));
@@ -762,7 +821,7 @@
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                const courseToAdd = courseData.findCourseById(courseId);
+                const courseToAdd = courseData.findCourseById(courseId) || (courseId === 0 ? mockupCourse : null);
                 if (courseToAdd) cartItems.push({ ...courseToAdd, quantity: 1 });
             }
             saveCart();
@@ -904,28 +963,36 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
+            document.body.addEventListener('click', (e) => {
+                const buyButton = e.target.closest('.buy-course-btn');
+                if (buyButton) {
+                    e.preventDefault();
+                    const id = parseInt(buyButton.dataset.courseId, 10);
+                    if (isNaN(id)) return;
+
+                    if(checkLoginStatus()) {
+                       addToCart(id);
+                    } else {
+                       courseIdToAddAfterLogin = id;
+                       openAuthModal();
+                    }
+                }
+            });
+
             const urlParams = new URLSearchParams(window.location.search);
             const courseId = parseInt(urlParams.get('id'));
+            let courseToRender = null;
+
             if (!isNaN(courseId)) {
-                const course = courseData.findCourseById(courseId);
-                currentCourse = course;
-                if (course) {
-                    renderCourseDetails(course);
-                    document.getElementById('buy-now-button').addEventListener('click', (e) => {
-                        const id = parseInt(e.currentTarget.dataset.courseId);
-                        if(checkLoginStatus()) {
-                           addToCart(id);
-                        } else {
-                           courseIdToAddAfterLogin = id;
-                           openAuthModal();
-                        }
-                    });
-                } else {
-                     loadingPlaceholder.innerHTML = `<div class="py-20 text-center"><p class="text-red-500 text-lg">${t('course_not_found')}</p></div>`;
-                }
-            } else {
-                loadingPlaceholder.innerHTML = `<div class="py-20 text-center"><p class="text-red-500 text-lg">${t('invalid_id')}</p></div>`;
+                courseToRender = courseData.findCourseById(courseId);
             }
+
+            if (!courseToRender) {
+                courseToRender = mockupCourse;
+            }
+            
+            currentCourse = courseToRender;
+            renderCourseDetails(courseToRender);
         };
 
         init();
