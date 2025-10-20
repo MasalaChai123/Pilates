@@ -542,8 +542,6 @@
                 { id: 2, title: {'zh-TW': "核心強化：穩定與力量", 'en': "Core Strengthening: Stability & Power"}, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop", progress: 100, category: {'zh-TW': '單堂體驗', 'en': 'Single Session'}, expiry: '2025/08/01' },
                 { id: 6, title: {'zh-TW': "四周打造緊實翹臀", 'en': "4 Weeks to a Firm, Lifted Glutes"}, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop", progress: 0, category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'}, expiry: '2025/09/20' },
             ]
-            // To test the empty state, use this instead:
-            // courses: []
         };
 
         // --- STATE ---
@@ -599,7 +597,6 @@
                 if (el.placeholder !== undefined) {
                     el.placeholder = translation;
                 } else if (el.tagName === 'INPUT' && el.type === 'submit' || el.tagName === 'BUTTON') {
-                    // For buttons that might contain other elements
                     const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
                     if (textNode) {
                         textNode.textContent = translation + ' ';
@@ -610,7 +607,6 @@
                         el.textContent = translation;
                     }
                 } else if (key === 'auth_terms_agree') {
-                    // Special handling for terms agreement with links
                     const parts = currentLanguage === 'en' ? 
                         ['I agree to the ', ' and ', ''] : 
                         ['我同意 ', ' 與 ', ''];
@@ -623,28 +619,28 @@
                 }
             });
             
-            // Update password toggle text
             document.querySelectorAll('.password-toggle').forEach(btn => {
                 const input = btn.previousElementSibling;
                 btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password');
             });
         };
 
-        const setLanguage = (lang) => {
+        const setLanguage = (lang, shouldRender = true) => {
             currentLanguage = lang;
             localStorage.setItem('pilatesLanguage', lang);
             document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中';
             updateStaticText();
-            // Re-render dynamic dashboard content
-            renderDashboard();
-            renderCart();
+            if (shouldRender) {
+                renderDashboard();
+                renderCart();
+            }
         };
         
         const initLanguage = () => {
             const savedLang = localStorage.getItem('pilatesLanguage');
             const browserLang = navigator.language.startsWith('en') ? 'en' : 'zh-TW';
             const lang = savedLang || browserLang;
-            setLanguage(lang);
+            setLanguage(lang, false);
         };
         
         // --- AUTH LOGIC ---
@@ -666,7 +662,6 @@
              if (confirm(t('logout_confirm'))) {
                 sessionStorage.removeItem('isLoggedIn');
                 checkLoginStatus();
-                // Redirect to home page after logout from dashboard
                 window.location.href = 'index.html';
             }
         };
@@ -905,15 +900,15 @@
             document.getElementById(`${tabName}-content`).classList.add('active');
         };
         
-
         // --- INITIALIZATION ---
         
-        // Protect the page - commented out for development as requested
-        /*
+        initLanguage(); // Sets up language and static text only.
+
+        // Protect the page - now active
         if (!checkLoginStatus()) {
             document.body.innerHTML = `
-                <div class="flex items-center justify-center h-screen text-center">
-                    <div>
+                <div class="flex items-center justify-center h-screen bg-stone-100">
+                    <div class="text-center p-8 bg-white rounded-lg shadow-md">
                         <p class="text-lg text-stone-600 mb-2">${t('unauthorized_access')}</p>
                         <p class="text-sm text-stone-500">${t('redirecting_home')}</p>
                     </div>
@@ -922,11 +917,10 @@
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 3000);
-            return;
+            return; // Stop further execution
         }
-        */
-
-        initLanguage();
+        
+        // If logged in, proceed with page setup
         loadCart();
         renderDashboard();
         renderCart();
@@ -946,7 +940,7 @@
 
         userIconButton.addEventListener('click', () => {
              window.location.href = 'dashboard.html';
-        }); // On dashboard, user icon could also just be a static indicator
+        }); 
         
         languageSwitcherButton.addEventListener('click', () => {
             const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en';

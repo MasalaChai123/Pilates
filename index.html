@@ -211,7 +211,8 @@
             <div id="loginView" class="auth-view active">
                 <div class="auth-header">
                     <h1 class="auth-title" data-translate-key="auth_login_title">會員登入</h1>
-                    <p class="auth-subtitle" data-translate-key="auth_login_subtitle">登入開始您的皮拉提斯之旅</p>
+                    <p id="auth-context-subtitle" class="auth-subtitle" style="display: none; color: #a8a29e; font-weight: 500;"></p>
+                    <p id="auth-default-subtitle" class="auth-subtitle" data-translate-key="auth_login_subtitle">登入開始您的皮拉提斯之旅</p>
                 </div>
                 <form id="loginForm">
                     <div class="form-group">
@@ -340,6 +341,7 @@
                 'logout_confirm': 'Are you sure you want to log out?',
                 'already_logged_in': 'You are already logged in.',
                 // Auth Modal
+                'auth_login_to_add_cart': 'Please log in to add this item to your cart.',
                 'auth_login_title': 'Member Login',
                 'auth_login_subtitle': 'Log in to begin your Pilates journey',
                 'auth_email_label': 'Email',
@@ -400,6 +402,7 @@
                 'logout_confirm': '您確定要登出嗎？',
                 'already_logged_in': '您已經登入。',
                 // Auth Modal
+                'auth_login_to_add_cart': '請先登入以將課程加入購物車。',
                 'auth_login_title': '會員登入',
                 'auth_login_subtitle': '登入開始您的皮拉提斯之旅',
                 'auth_email_label': '電子郵件',
@@ -505,6 +508,8 @@
 
         const authModalBackdrop = document.getElementById('auth-modal-backdrop');
         const authModalContainer = document.getElementById('auth-modal-container');
+        const authDefaultSubtitle = document.getElementById('auth-default-subtitle');
+        const authContextSubtitle = document.getElementById('auth-context-subtitle');
         const authModalCloseBtn = document.getElementById('auth-modal-close-btn');
         const userIconButton = document.getElementById('user-icon-button');
         const footerLoginLink = document.getElementById('footer-login-link');
@@ -595,7 +600,16 @@
             }
         };
 
-        const openAuthModal = (view = 'login') => {
+        const openAuthModal = (view = 'login', context = 'generic') => {
+            if (context === 'addToCart') {
+                authDefaultSubtitle.style.display = 'none';
+                authContextSubtitle.textContent = t('auth_login_to_add_cart');
+                authContextSubtitle.style.display = 'block';
+            } else {
+                authDefaultSubtitle.style.display = 'block';
+                authContextSubtitle.style.display = 'none';
+            }
+            
             document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active'));
             document.getElementById(`${view}View`).classList.add('active');
             authModalBackdrop.classList.add('active');
@@ -605,6 +619,11 @@
         const closeAuthModal = () => {
             authModalBackdrop.classList.remove('active');
             authModalContainer.classList.remove('active');
+            // Reset subtitles on close after transition
+            setTimeout(() => {
+                if (authDefaultSubtitle) authDefaultSubtitle.style.display = 'block';
+                if (authContextSubtitle) authContextSubtitle.style.display = 'none';
+            }, 300);
         };
 
         // --- RENDER FUNCTIONS ---
@@ -826,7 +845,7 @@
                         addToCart(courseId);
                     } else {
                         courseIdToAddAfterLogin = courseId;
-                        openAuthModal();
+                        openAuthModal('login', 'addToCart');
                     }
                 }
             });
