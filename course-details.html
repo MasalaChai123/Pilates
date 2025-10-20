@@ -709,7 +709,7 @@
                     </div>
                     <div class="p-6 border-t border-stone-200">
                         <div class="flex justify-between items-center mb-4"><span class="text-stone-600">${t('cart_subtotal')}</span><span class="text-xl font-semibold text-stone-800">NT$ ${subtotal.toLocaleString()}</span></div>
-                        <button class="w-full py-3 brand-bg text-white rounded-full text-lg font-semibold brand-bg-hover transition-colors">${t('cart_checkout')}</button>
+                        <a href="checkout.html" class="block text-center w-full py-3 brand-bg text-white rounded-full text-lg font-semibold brand-bg-hover transition-colors">${t('cart_checkout')}</a>
                     </div>`;
             }
             updateCartCount();
@@ -955,59 +955,3 @@
                     errorMessage.textContent = t('auth_login_error');
                     errorMessage.style.display = 'block';
                 }
-            });
-
-            cartContent.addEventListener('click', (e) => {
-                const button = e.target.closest('button[data-cart-action]');
-                if (!button) return;
-                const action = button.dataset.cartAction;
-                const courseId = parseInt(button.dataset.courseId, 10);
-                const item = cartItems.find(i => i.id === courseId);
-                if (!item) return;
-                if (action === 'increase') updateQuantity(courseId, item.quantity + 1);
-                else if (action === 'decrease') updateQuantity(courseId, item.quantity - 1);
-                else if (action === 'remove') updateQuantity(courseId, 0);
-            });
-            
-            window.addEventListener('scroll', handleScroll);
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            document.body.addEventListener('click', (e) => {
-                const buyButton = e.target.closest('.buy-course-btn');
-                if (buyButton) {
-                    e.preventDefault();
-                    const id = parseInt(buyButton.dataset.courseId, 10);
-                    if (isNaN(id)) return;
-
-                    if(checkLoginStatus()) {
-                       addToCart(id);
-                    } else {
-                       courseIdToAddAfterLogin = id;
-                       openAuthModal();
-                    }
-                }
-            });
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const courseId = parseInt(urlParams.get('id'));
-            let courseToRender = null;
-
-            if (!isNaN(courseId)) {
-                courseToRender = courseData.findCourseById(courseId);
-            }
-
-            if (!courseToRender) {
-                courseToRender = mockupCourse;
-            }
-            
-            currentCourse = courseToRender;
-            renderCourseDetails(courseToRender);
-        };
-
-        init();
-    });
-    </script>
-</body>
-</html>
