@@ -236,6 +236,7 @@
                         <input type="checkbox" id="remember" class="checkbox">
                         <label for="remember" class="checkbox-label" data-translate-key="auth_remember_me">記住我</label>
                     </div>
+                    <div id="login-error-message" class="text-red-500 text-sm text-center mb-4" style="display: none;"></div>
                     <button type="submit" class="btn btn-primary" data-translate-key="auth_login_button">登入</button>
                     <div class="forgot-password"><a class="auth-view-switch" data-view="forgotPassword" data-translate-key="auth_forgot_password">忘記密碼？</a></div>
                 </form>
@@ -411,6 +412,7 @@
                 'auth_forgot_password_success': 'A password reset link has been sent to your email!',
                 'auth_registered_email_placeholder': 'Enter your registered email',
                 'auth_send_reset_link_button': 'Send Reset Link',
+                'auth_login_error': 'Invalid email or password. Hint: test@example.com / password123',
             },
             'zh-TW': {
                 'page_title_details': "${courseTitle} - 9's Pilates Studio",
@@ -487,6 +489,7 @@
                 'auth_forgot_password_success': '重設密碼連結已發送至您的信箱！',
                 'auth_registered_email_placeholder': '輸入您註冊的電子郵件',
                 'auth_send_reset_link_button': '發送重設連結',
+                'auth_login_error': '電子郵件或密碼錯誤。提示：test@example.com / password123',
             }
         };
 
@@ -930,14 +933,27 @@
 
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                sessionStorage.setItem('isLoggedIn', 'true');
-                checkLoginStatus();
-                closeAuthModal();
-                
-                if (courseIdToAddAfterLogin !== null) {
-                    const id = courseIdToAddAfterLogin;
-                    courseIdToAddAfterLogin = null;
-                    addToCart(id);
+                const emailInput = loginForm.querySelector('input[type="email"]');
+                const passwordInput = loginForm.querySelector('input[type="password"]');
+                const errorMessage = document.getElementById('login-error-message');
+
+                const DUMMY_EMAIL = 'test@example.com';
+                const DUMMY_PASSWORD = 'password123';
+
+                if (emailInput.value === DUMMY_EMAIL && passwordInput.value === DUMMY_PASSWORD) {
+                    errorMessage.style.display = 'none';
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    checkLoginStatus();
+                    closeAuthModal();
+                    
+                    if (courseIdToAddAfterLogin !== null) {
+                        const id = courseIdToAddAfterLogin;
+                        courseIdToAddAfterLogin = null;
+                        addToCart(id);
+                    }
+                } else {
+                    errorMessage.textContent = t('auth_login_error');
+                    errorMessage.style.display = 'block';
                 }
             });
 
