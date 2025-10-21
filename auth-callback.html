@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authenticating...</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f9f9f9; color: #292524; }
+        .spinner { border: 4px solid rgba(0,0,0,.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #c1bcb8; animation: spin 1s ease infinite; }
+        .message { margin-top: 20px; font-size: 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+    <p class="message">Authenticating, please wait...</p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userStr = urlParams.get('user');
+            const error = urlParams.get('error');
+
+            if (error) {
+                console.error('Authentication error from server:', decodeURIComponent(error));
+                // In a real app, you might show this error to the user
+                window.location.href = '/index.html';
+                return;
+            }
+
+            if (userStr) {
+                try {
+                    const user = JSON.parse(decodeURIComponent(userStr));
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('user', JSON.stringify(user));
+
+                    // Check if the user was trying to add a course before logging in
+                    const courseIdToAdd = sessionStorage.getItem('courseIdToAddAfterLogin');
+                    if (courseIdToAdd) {
+                        // Use localStorage to pass this one-time action to the main app
+                        localStorage.setItem('postLoginAction', JSON.stringify({ action: 'addToCart', courseId: courseIdToAdd }));
+                        sessionStorage.removeItem('courseIdToAddAfterLogin');
+                    }
+                    
+                    // Redirect to the dashboard, a central place after login.
+                    // The main app will handle any post-login actions.
+                    window.location.href = '/dashboard.html';
+
+                } catch (e) {
+                    console.error('Failed to process authentication data:', e);
+                    window.location.href = '/index.html';
+                }
+            } else {
+                console.error('Authentication callback is missing user data.');
+                window.location.href = '/index.html';
+            }
+        });
+    </script>
+</body>
+</html>

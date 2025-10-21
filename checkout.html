@@ -44,10 +44,23 @@
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; gap: 8px; width: 100%; }
         .btn-primary { background: linear-gradient(135deg, #c1bcb8, #b0a9a4); color: white; box-shadow: 0 8px 25px rgba(193, 188, 184, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(193, 188, 184, 0.4); }
+        .social-buttons { margin-top: 20px; }
+        .btn-social { background: white; border: 2px solid #e8e8e8; color: #666; margin-bottom: 12px; font-weight: 500; }
+        .btn-social:hover { border-color: #c1bcb8; color: #c1bcb8; background: rgba(193, 188, 184, 0.1); }
+        .btn-social span { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+        .btn-social svg { width: 20px; height: 20px; }
+        .divider { text-align: center; margin: 25px 0; position: relative; color: #999; font-size: 14px; }
+        .divider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #e8e8e8; z-index: 0; }
+        .divider span { background: #fff; padding: 0 15px; position: relative; z-index: 1; }
         .auth-switch { text-align: center; margin-top: 25px; padding-top: 25px; border-top: 1px solid #e8e8e8; color: #666; font-size: 14px; }
         .auth-switch a { color: #c1bcb8; font-weight: 600; text-decoration: none; cursor: pointer; }
+        .forgot-password { text-align: center; margin-top: 15px; }
+        .forgot-password a { color: #c1bcb8; font-size: 14px; text-decoration: none; cursor: pointer; }
         .auth-view { display: none; animation: fadeIn 0.3s ease-out; }
         .auth-view.active { display: block; }
+        .back-link { display: inline-flex; align-items: center; gap: 5px; color: #c1bcb8; font-size: 14px; margin-bottom: 20px; cursor: pointer; }
+        .success-message { background: linear-gradient(135deg, #00b894, #00a085); color: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: 500; display: none; }
+        .success-message.show { display: block; }
         .auth-modal-close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; color: #999; font-size: 24px; line-height: 1; padding: 5px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -94,8 +107,50 @@
     <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform -translate-x-full lg:hidden"><div class="flex flex-col h-full"><div class="flex items-center justify-between p-6 border-b border-stone-200"><h2 class="text-xl font-semibold text-stone-800" data-translate-key="mobile_menu_title">選單</h2><button id="mobile-menu-close" class="text-stone-500 hover:text-stone-800 transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div><nav class="flex-grow p-6"><ul class="space-y-4"><li><a href="index.html#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a></li><li><a href="index.html#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a></li><li><a href="index.html#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a></li><li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li></ul></nav></div></div>
     <div id="cart-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none"></div>
     <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full"><div class="flex flex-col h-full"><div class="flex items-center justify-between p-6 border-b border-stone-200"><h2 class="text-xl font-semibold text-stone-800" data-translate-key="cart_title">購物車</h2><button id="cart-close-button" class="text-stone-500 hover:text-stone-800 transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div><div id="cart-content" class="flex-grow"></div></div></div>
+    
     <div id="auth-modal-backdrop" class="auth-modal-backdrop"></div>
-    <div id="auth-modal-container" class="auth-modal-container"><div class="auth-card"><button id="auth-modal-close-btn" class="auth-modal-close-btn">&times;</button><div id="loginView" class="auth-view active"><div class="auth-header"><h1 class="auth-title" data-translate-key="auth_login_title">會員登入</h1><p class="auth-subtitle" data-translate-key="auth_login_subtitle">登入以完成您的訂單</p></div><form id="loginForm"><div class="form-group"><label class="form-label" data-translate-key="auth_email_label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您的電子郵件" data-translate-key="auth_email_placeholder" required></div><div class="form-group"><label class="form-label" data-translate-key="auth_password_label">密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="輸入您的密碼" data-translate-key="auth_password_placeholder" required><button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button></div></div><div id="login-error-message" class="text-red-500 text-sm text-center mb-4" style="display: none;"></div><button type="submit" class="btn btn-primary" data-translate-key="auth_login_button">登入</button></form><div class="auth-switch" style="margin-top: 20px;"><span data-translate-key="auth_no_account">還沒有帳號？</span> <a href="#" class="auth-view-switch" data-view="signup" data-translate-key="auth_signup_now">立即註冊</a></div></div></div></div>
+    <div id="auth-modal-container" class="auth-modal-container">
+        <div class="auth-card">
+            <button id="auth-modal-close-btn" class="auth-modal-close-btn">&times;</button>
+            <!-- Login View -->
+            <div id="loginView" class="auth-view active">
+                <div class="auth-header">
+                    <h1 class="auth-title" data-translate-key="auth_login_title_checkout">會員登入</h1>
+                    <p class="auth-subtitle" data-translate-key="auth_login_subtitle_checkout">登入以完成您的訂單</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label" data-translate-key="auth_email_label">電子郵件</label>
+                        <input type="email" class="form-control" placeholder="輸入您的電子郵件" data-translate-key="auth_email_placeholder" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-translate-key="auth_password_label">密碼</label>
+                        <div class="password-field">
+                            <input type="password" class="form-control password-input" placeholder="輸入您的密碼" data-translate-key="auth_password_placeholder" required>
+                            <button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button>
+                        </div>
+                    </div>
+                    <div id="login-error-message" class="text-red-500 text-sm text-center mb-4" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary" data-translate-key="auth_login_button">登入</button>
+                </form>
+                <div class="auth-switch" style="margin-top: 20px;"><span data-translate-key="auth_no_account">還沒有帳號？</span> <a class="auth-view-switch" data-view="signup" data-translate-key="auth_signup_now">立即註冊</a></div>
+            </div>
+             <!-- Sign Up View -->
+            <div id="signupView" class="auth-view">
+                <div class="auth-header"><h1 class="auth-title" data-translate-key="auth_signup_title">建立帳號</h1><p class="auth-subtitle" data-translate-key="auth_signup_subtitle">加入 9's Pilates 開始您的健康之旅</p></div>
+                <form id="signupForm">
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_name_label">姓名</label><input type="text" class="form-control" placeholder="輸入您的姓名" data-translate-key="auth_name_placeholder" required></div>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_email_label">電子郵件</label><input type="email" class="form-control" placeholder="輸入您的電子郵件" data-translate-key="auth_email_placeholder" required></div>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_password_label">密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="至少8個字元" data-translate-key="auth_password_placeholder_signup" required><button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button></div></div>
+                    <div class="form-group"><label class="form-label" data-translate-key="auth_confirm_password_label">確認密碼</label><div class="password-field"><input type="password" class="form-control password-input" placeholder="再次輸入密碼" data-translate-key="auth_confirm_password_placeholder" required><button type="button" class="password-toggle" data-translate-key="auth_show_password">顯示</button></div></div>
+                    <div class="checkbox-group"><input type="checkbox" id="terms" class="checkbox" required><label for="terms" class="checkbox-label" data-translate-key="auth_terms_agree">我同意 <a>服務條款</a> 與 <a>隱私政策</a></label></div>
+                    <div id="signup-error-message" class="text-red-500 text-sm text-center mb-4" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary" data-translate-key="auth_create_account_button">建立帳號</button>
+                </form>
+                <div class="auth-switch"><span data-translate-key="auth_already_have_account">已經有帳號？</span> <a class="auth-view-switch" data-view="login" data-translate-key="auth_login_now">立即登入</a></div>
+            </div>
+        </div>
+    </div>
 
     <main id="checkout-page" class="py-12 md:py-20">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -213,7 +268,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- DATA & TRANSLATIONS (Same as index.html) ---
+        // --- TRANSLATIONS ---
         const translations = {
             'en': {
                 'page_title_checkout': "Checkout - 9's Pilates Studio",
@@ -221,9 +276,14 @@
                 'mobile_menu_title': 'Menu', 'cart_title': 'Shopping Cart', 'cart_empty': 'Your cart is empty', 'cart_continue_shopping': 'Continue Shopping',
                 'cart_subtotal': 'Subtotal', 'cart_checkout': 'Checkout', 'footer_all_courses': 'All Courses', 'footer_member_login': 'Member Login', 'footer_contact_email': 'Contact Email',
                 'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved', 'footer_terms': 'Terms of Use', 'footer_privacy': 'Privacy Policy', 'logout_confirm': 'Are you sure you want to log out?', 'already_logged_in': 'You are already logged in.',
-                'auth_login_title': 'Member Login', 'auth_login_subtitle': 'Log in to complete your order', 'auth_email_label': 'Email', 'auth_email_placeholder': 'Enter your email',
+                'auth_login_title': 'Member Login', 'auth_login_subtitle': 'Log in to begin your Pilates journey', 'auth_email_label': 'Email', 'auth_email_placeholder': 'Enter your email',
                 'auth_password_label': 'Password', 'auth_password_placeholder': 'Enter your password', 'auth_show_password': 'Show', 'auth_hide_password': 'Hide',
                 'auth_login_button': 'Log In', 'auth_no_account': 'Don\'t have an account?', 'auth_signup_now': 'Sign up now', 'auth_login_error': 'Invalid email or password. Hint: test@example.com / password123',
+                'auth_signup_title': 'Create Account', 'auth_signup_subtitle': 'Join 9\'s Pilates to start your wellness journey', 'auth_name_label': 'Name',
+                'auth_name_placeholder': 'Enter your name', 'auth_password_placeholder_signup': 'At least 8 characters', 'auth_confirm_password_label': 'Confirm Password',
+                'auth_confirm_password_placeholder': 'Enter password again', 'auth_terms_agree': 'I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>',
+                'auth_create_account_button': 'Create Account', 'auth_already_have_account': 'Already have an account?', 'auth_login_now': 'Log in now',
+                'auth_login_title_checkout': 'Member Login', 'auth_login_subtitle_checkout': 'Log in to complete your order',
                 // Checkout page specific
                 'checkout_title': 'Checkout', 'checkout_subtitle': 'Please confirm your order and complete payment',
                 'empty_cart_title': 'Your Cart is Empty', 'empty_cart_subtitle': 'Explore our courses to start your Pilates journey!', 'browse_courses': 'Browse All Courses',
@@ -240,9 +300,14 @@
                 'mobile_menu_title': '選單', 'cart_title': '購物車', 'cart_empty': '您的購物車是空的', 'cart_continue_shopping': '繼續選購',
                 'cart_subtotal': '小計', 'cart_checkout': '前往結帳', 'footer_all_courses': '所有課程', 'footer_member_login': '會員登入', 'footer_contact_email': '客服信箱',
                 'footer_copyright': '© 2025 9\'s Pilates. 版權所有', 'footer_terms': '使用條款', 'footer_privacy': '隱私政策', 'logout_confirm': '您確定要登出嗎？', 'already_logged_in': '您已經登入。',
-                'auth_login_title': '會員登入', 'auth_login_subtitle': '登入以完成您的訂單', 'auth_email_label': '電子郵件', 'auth_email_placeholder': '輸入您的電子郵件',
+                'auth_login_title': '會員登入', 'auth_login_subtitle': '登入開始您的皮拉提斯之旅', 'auth_email_label': '電子郵件', 'auth_email_placeholder': '輸入您的電子郵件',
                 'auth_password_label': '密碼', 'auth_password_placeholder': '輸入您的密碼', 'auth_show_password': '顯示', 'auth_hide_password': '隱藏',
                 'auth_login_button': '登入', 'auth_no_account': '還沒有帳號？', 'auth_signup_now': '立即註冊', 'auth_login_error': '電子郵件或密碼錯誤。提示：test@example.com / password123',
+                'auth_signup_title': '建立帳號', 'auth_signup_subtitle': '加入 9\'s Pilates 開始您的健康之旅', 'auth_name_label': '姓名',
+                'auth_name_placeholder': '輸入您的姓名', 'auth_password_placeholder_signup': '至少8個字元', 'auth_confirm_password_label': '確認密碼',
+                'auth_confirm_password_placeholder': '再次輸入密碼', 'auth_terms_agree': '我同意 <a>服務條款</a> 與 <a>隱私政策</a>',
+                'auth_create_account_button': '建立帳號', 'auth_already_have_account': '已經有帳號？', 'auth_login_now': '立即登入',
+                'auth_login_title_checkout': '會員登入', 'auth_login_subtitle_checkout': '登入以完成您的訂單',
                 // Checkout page specific
                 'checkout_title': '結帳', 'checkout_subtitle': '請確認您的訂單並完成付款',
                 'empty_cart_title': '您的購物車是空的', 'empty_cart_subtitle': '立即探索我們的課程，開始您的皮拉提斯之旅吧！', 'browse_courses': '瀏覽所有課程',
@@ -254,7 +319,6 @@
                 'order_success_title': '感謝您的購買！', 'order_success_subtitle': '您的課程已加入帳戶中，馬上開始您的健康之旅吧！', 'back_to_dashboard': '前往我的課程'
             }
         };
-        const courseData = { sections: [ { id: 'single-session', category: {'zh-TW': '單堂課程', 'en': 'Single Session'}, courses: [ { id: 1, title: {'zh-TW': "久坐上班族：全⾝活化⽪拉提斯", 'en': "Desk Worker's Relief: Full Body Activation"}, price: 800, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop" }, { id: 2, title: {'zh-TW': "核心強化：穩定與力量", 'en': "Core Strengthening: Stability & Power"}, price: 850, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop" }, { id: 3, title: {'zh-TW': "美體雕塑：曲線與伸展", 'en': "Body Sculpting: Curves & Stretches"}, price: 850, image: "https://images.unsplash.com/photo-1549576490-9426cf64ab4a?q=80&w=1470&auto=format&fit=crop" }, { id: 4, title: {'zh-TW': "孕婦皮拉提斯：溫和與支持", 'en': "Prenatal Pilates: Gentle & Supportive"}, price: 900, image: "https://images.unsplash.com/photo-1588533639019-215264b3697e?q=80&w=1323&auto=format&fit=crop" }, ] }, { id: 'thematic-unit', category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'}, courses: [ { id: 5, title: {'zh-TW': "四周告別圓肩駝背", 'en': "4 Weeks to Fix Rounded Shoulders"}, price: 3200, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop" }, { id: 6, title: {'zh-TW': "四周打造緊實翹臀", 'en': "4 Weeks to a Firm, Lifted Glutes"}, price: 3400, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop" }, ] }, { id: 'sculpting-plan', category: {'zh-TW': '體態雕塑', 'en': 'Body Sculpting'}, courses: [ { id: 7, title: {'zh-TW': "8週完美體態重塑", 'en': "8-Week Perfect Posture Transformation"}, price: 7800, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop" }, ] } ], findCourseById(id) { for (const section of this.sections) { const found = section.courses.find(course => course.id === id); if (found) return { ...found, category: section.category }; } return null; } };
 
         // --- STATE ---
         let cartItems = [];
@@ -262,6 +326,7 @@
         let discountPercent = 0;
 
         // --- DOM ELEMENTS ---
+        const cartButton = document.getElementById('cart-button'), cartPanel = document.getElementById('cart-panel'), cartBackdrop = document.getElementById('cart-backdrop'), cartCloseButton = document.getElementById('cart-close-button'), cartContent = document.getElementById('cart-content'), cartItemCountBadge = document.getElementById('cart-item-count'), menuButton = document.getElementById('menu-button'), mobileMenuPanel = document.getElementById('mobile-menu-panel'), mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop'), mobileMenuCloseButton = document.getElementById('mobile-menu-close'), authModalBackdrop = document.getElementById('auth-modal-backdrop'), authModalContainer = document.getElementById('auth-modal-container'), authModalCloseBtn = document.getElementById('auth-modal-close-btn'), userIconButton = document.getElementById('user-icon-button'), footerLoginLink = document.getElementById('footer-login-link'), loginForm = document.getElementById('loginForm'), signupForm = document.getElementById('signupForm'), languageSwitcherButton = document.getElementById('language-switcher-button');
         const emptyCartView = document.getElementById('empty-cart-view');
         const checkoutView = document.getElementById('checkout-view');
         const orderSuccessView = document.getElementById('order-success-view');
@@ -274,96 +339,47 @@
         const applyCouponBtn = document.getElementById('apply-coupon-btn');
         const couponInput = document.getElementById('coupon-code');
         const couponStatus = document.getElementById('coupon-status');
-
-        // --- All other common elements (header, cart, auth modal) ---
-        const cartButton = document.getElementById('cart-button'), cartPanel = document.getElementById('cart-panel'), cartBackdrop = document.getElementById('cart-backdrop'), cartCloseButton = document.getElementById('cart-close-button'), cartContent = document.getElementById('cart-content'), cartItemCountBadge = document.getElementById('cart-item-count'), menuButton = document.getElementById('menu-button'), mobileMenuPanel = document.getElementById('mobile-menu-panel'), mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop'), mobileMenuCloseButton = document.getElementById('mobile-menu-close'), authModalBackdrop = document.getElementById('auth-modal-backdrop'), authModalContainer = document.getElementById('auth-modal-container'), authModalCloseBtn = document.getElementById('auth-modal-close-btn'), userIconButton = document.getElementById('user-icon-button'), footerLoginLink = document.getElementById('footer-login-link'), loginForm = document.getElementById('loginForm'), languageSwitcherButton = document.getElementById('language-switcher-button');
         
         // --- I18N LOGIC ---
         const t = (key) => translations[currentLanguage][key] || key;
-        const updateStaticText = () => { document.title = t('page_title_checkout'); document.documentElement.lang = currentLanguage; document.querySelectorAll('[data-translate-key]').forEach(el => { const key = el.dataset.translateKey; const translation = t(key); if (el.placeholder !== undefined) el.placeholder = translation; else el.textContent = translation; }); document.querySelectorAll('.password-toggle').forEach(btn => { const input = btn.previousElementSibling; btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password'); });};
+        const updateStaticText = () => { document.title = t('page_title_checkout'); document.documentElement.lang = currentLanguage; document.querySelectorAll('[data-translate-key]').forEach(el => { const key = el.dataset.translateKey; const translation = t(key); if (el.placeholder !== undefined) { el.placeholder = translation; } else if (key === 'auth_terms_agree') { const parts = currentLanguage === 'en' ? ['I agree to the ', ' and ', ''] : ['我同意 ', ' 與 ', '']; const termsLink = `<a href="terms.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Terms of Service' : '服務條款')}</a>`; const privacyLink = `<a href="privacy.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策')}</a>`; el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`; } else { el.textContent = translation; } }); document.querySelectorAll('.password-toggle').forEach(btn => { const input = btn.previousElementSibling; btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password'); });};
         const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; updateStaticText(); renderPage(); };
         const initLanguage = () => { const savedLang = localStorage.getItem('pilatesLanguage'); const lang = savedLang || (navigator.language.startsWith('en') ? 'en' : 'zh-TW'); setLanguage(lang); };
 
         // --- AUTH & UI LOGIC ---
         const checkLoginStatus = () => sessionStorage.getItem('isLoggedIn') === 'true';
-        const updateAuthUI = (isLoggedIn) => { userIconButton.classList.toggle('text-[#c1bcb8]', isLoggedIn); loginPrompt.classList.toggle('hidden', isLoggedIn); paymentFormContainer.style.opacity = isLoggedIn ? '1' : '0.5'; paymentFormContainer.style.pointerEvents = isLoggedIn ? 'auto' : 'none'; };
-        const openAuthModal = () => { authModalBackdrop.classList.add('active'); authModalContainer.classList.add('active'); };
-        const closeAuthModal = () => { authModalBackdrop.classList.remove('active'); authModalContainer.classList.remove('active'); };
+        const openAuthModal = (view = 'login') => { document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); authModalBackdrop.classList.add('active'); authModalContainer.classList.add('active'); };
+        const closeAuthModal = () => { authModalBackdrop.classList.remove('active'); authModalContainer.classList.remove('active'); const loginError = document.getElementById('login-error-message'); const signupError = document.getElementById('signup-error-message'); if(loginError) loginError.style.display = 'none'; if(signupError) signupError.style.display = 'none';};
+        const updateAuthUI = (isLoggedIn) => { 
+            userIconButton.classList.toggle('text-[#c1bcb8]', isLoggedIn); 
+            if(loginPrompt) loginPrompt.classList.toggle('hidden', isLoggedIn);
+            if(paymentFormContainer) {
+                paymentFormContainer.style.opacity = isLoggedIn ? '1' : '0.5';
+                paymentFormContainer.style.pointerEvents = isLoggedIn ? 'auto' : 'none';
+            }
+            if(isLoggedIn) {
+                const user = JSON.parse(sessionStorage.getItem('user'));
+                if(user) {
+                    document.getElementById('name').value = user.name;
+                    document.getElementById('email').value = user.email;
+                }
+            }
+        };
+        const performLogin = (user) => { sessionStorage.setItem('isLoggedIn', 'true'); sessionStorage.setItem('user', JSON.stringify(user)); closeAuthModal(); updateAuthUI(true); };
 
         // --- CART & RENDER LOGIC ---
         const loadCart = () => { cartItems = JSON.parse(localStorage.getItem('pilatesCart') || '[]'); };
-        const calculateTotals = () => {
-            const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            const discountAmount = subtotal * discountPercent;
-            const total = subtotal - discountAmount;
-            return { subtotal, discountAmount, total };
-        };
-
-        const renderPriceSummary = () => {
-            const { subtotal, discountAmount, total } = calculateTotals();
-            priceSummaryContainer.innerHTML = `
-                <div class="flex justify-between text-stone-600"><p>${t('subtotal')}</p><p>NT$ ${subtotal.toLocaleString()}</p></div>
-                <div class="flex justify-between text-red-500"><p>${t('discount')}</p><p>- NT$ ${discountAmount.toLocaleString()}</p></div>
-                <hr class="my-2 border-dashed">
-                <div class="flex justify-between text-stone-800 font-bold text-lg"><p>${t('total_amount')}</p><p>NT$ ${Math.round(total).toLocaleString()}</p></div>
-            `;
-        };
-
-        const renderOrderSummary = () => {
-            orderSummaryItems.innerHTML = cartItems.map(item => `
-                <div class="flex items-center space-x-4">
-                    <img src="${item.image}" alt="${item.title[currentLanguage]}" class="w-16 h-16 object-cover rounded-md flex-shrink-0">
-                    <div class="flex-grow">
-                        <p class="font-semibold text-sm">${item.title[currentLanguage]}</p>
-                        <p class="text-xs text-stone-500">${item.quantity} x NT$ ${item.price.toLocaleString()}</p>
-                    </div>
-                    <p class="font-semibold text-sm">NT$ ${(item.quantity * item.price).toLocaleString()}</p>
-                </div>
-            `).join('');
-        };
-        
-        const renderPage = () => {
-            loadCart();
-            if (cartItems.length === 0 && !orderSuccessView.classList.contains('block')) {
-                checkoutView.classList.add('hidden');
-                emptyCartView.classList.remove('hidden');
-                emptyCartView.classList.add('block');
-            } else {
-                emptyCartView.classList.add('hidden');
-                checkoutView.classList.remove('hidden');
-                renderOrderSummary();
-                renderPriceSummary();
-                updateAuthUI(checkLoginStatus());
-            }
-        };
+        const calculateTotals = () => { const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0); const discountAmount = subtotal * discountPercent; const total = subtotal - discountAmount; return { subtotal, discountAmount, total }; };
+        const renderPriceSummary = () => { const { subtotal, discountAmount, total } = calculateTotals(); priceSummaryContainer.innerHTML = `<div class="flex justify-between text-stone-600"><p>${t('subtotal')}</p><p>NT$ ${subtotal.toLocaleString()}</p></div><div class="flex justify-between text-red-500"><p>${t('discount')}</p><p>- NT$ ${Math.round(discountAmount).toLocaleString()}</p></div><hr class="my-2 border-dashed"><div class="flex justify-between text-stone-800 font-bold text-lg"><p>${t('total_amount')}</p><p>NT$ ${Math.round(total).toLocaleString()}</p></div>`; };
+        const renderOrderSummary = () => { orderSummaryItems.innerHTML = cartItems.map(item => `<div class="flex items-center space-x-4"><img src="${item.image}" alt="${item.title[currentLanguage]}" class="w-16 h-16 object-cover rounded-md flex-shrink-0"><div class="flex-grow"><p class="font-semibold text-sm">${item.title[currentLanguage]}</p><p class="text-xs text-stone-500">${item.quantity} x NT$ ${item.price.toLocaleString()}</p></div><p class="font-semibold text-sm">NT$ ${(item.quantity * item.price).toLocaleString()}</p></div>`).join(''); };
+        const renderPage = () => { loadCart(); if (cartItems.length === 0 && !orderSuccessView.classList.contains('block')) { checkoutView.classList.add('hidden'); emptyCartView.classList.remove('hidden'); } else if (!orderSuccessView.classList.contains('block')) { emptyCartView.classList.add('hidden'); checkoutView.classList.remove('hidden'); renderOrderSummary(); renderPriceSummary(); updateAuthUI(checkLoginStatus()); } };
         
         // --- EVENT LISTENERS ---
-        checkoutLoginBtn.addEventListener('click', openAuthModal);
-        applyCouponBtn.addEventListener('click', () => {
-            const code = couponInput.value.trim().toUpperCase();
-            if (code === 'PILATES2025') {
-                discountPercent = 0.15;
-                couponStatus.textContent = t('coupon_applied');
-                couponStatus.className = 'text-xs text-center h-4 text-green-600';
-            } else {
-                discountPercent = 0;
-                couponStatus.textContent = t('invalid_coupon');
-                couponStatus.className = 'text-xs text-center h-4 text-red-500';
-            }
-            renderPriceSummary();
-        });
-
-        paymentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            checkoutView.classList.add('hidden');
-            orderSuccessView.classList.remove('hidden');
-            orderSuccessView.classList.add('block');
-            localStorage.removeItem('pilatesCart');
-            updateCartCount(); // From common logic
-            window.scrollTo(0, 0);
-        });
-
-        // --- Common Listeners (Copied from other pages) ---
+        checkoutLoginBtn.addEventListener('click', () => openAuthModal('login'));
+        applyCouponBtn.addEventListener('click', () => { const code = couponInput.value.trim().toUpperCase(); if (code === 'PILATES2025') { discountPercent = 0.15; couponStatus.textContent = t('coupon_applied'); couponStatus.className = 'text-xs text-center h-4 text-green-600'; } else { discountPercent = 0; couponStatus.textContent = t('invalid_coupon'); couponStatus.className = 'text-xs text-center h-4 text-red-500'; } renderPriceSummary(); });
+        paymentForm.addEventListener('submit', (e) => { e.preventDefault(); checkoutView.classList.add('hidden'); orderSuccessView.classList.remove('hidden'); localStorage.removeItem('pilatesCart'); updateCartCount(); window.scrollTo(0, 0); });
+        
+        // --- Common Listeners ---
         const openCart = () => { cartPanel.classList.remove('translate-x-full'); cartBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeCart = () => { cartPanel.classList.add('translate-x-full'); cartBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
         const updateCartCount = () => { const c = JSON.parse(localStorage.getItem('pilatesCart')||'[]'); const t = c.reduce((s, i) => s + i.quantity, 0); cartItemCountBadge.textContent = t; cartItemCountBadge.classList.toggle('hidden', t === 0); };
@@ -374,11 +390,12 @@
         userIconButton.addEventListener('click', () => { if(checkLoginStatus()) window.location.href = 'dashboard.html'; else openAuthModal(); });
         footerLoginLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) alert(t('already_logged_in')); else openAuthModal(); });
         authModalBackdrop.addEventListener('click', closeAuthModal); authModalCloseBtn.addEventListener('click', closeAuthModal);
-        loginForm.addEventListener('submit', (e) => { e.preventDefault(); const email = loginForm.querySelector('input[type="email"]').value; const password = loginForm.querySelector('input[type="password"]').value; const err = document.getElementById('login-error-message'); if (email === 'test@example.com' && password === 'password123') { err.style.display = 'none'; sessionStorage.setItem('isLoggedIn', 'true'); updateAuthUI(true); closeAuthModal(); } else { err.textContent = t('auth_login_error'); err.style.display = 'block'; } });
+        loginForm.addEventListener('submit', (e) => { e.preventDefault(); const email = loginForm.querySelector('input[type="email"]').value; const password = loginForm.querySelector('input[type="password"]').value; const err = document.getElementById('login-error-message'); if (email === 'test@example.com' && password === 'password123') { err.style.display = 'none'; performLogin({ name: '測試使用者', email: 'test@example.com' }); } else { err.textContent = t('auth_login_error'); err.style.display = 'block'; } });
+        signupForm.addEventListener('submit', (e) => { e.preventDefault(); const name = signupForm.querySelector('input[type="text"]').value; const email = signupForm.querySelector('input[type="email"]').value; performLogin({ name, email }); });
         languageSwitcherButton.addEventListener('click', () => setLanguage(currentLanguage === 'en' ? 'zh-TW' : 'en'));
 
         // --- INITIALIZATION ---
-        initLanguage(); // This calls renderPage()
+        initLanguage();
         updateCartCount();
     });
     </script>
