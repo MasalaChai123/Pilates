@@ -202,7 +202,7 @@
                 </div>
             </div>
             <a href="pilates-classroom.html" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_classroom">皮拉提斯小教室</a>
-            <a href="#" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a>
+            <a href="faq.html" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a>
           </nav>
           <div class="flex items-center space-x-4">
             <button id="language-switcher-button" class="text-stone-600 hover:text-[#c1bcb8] transition-colors flex items-center space-x-1" aria-label="Switch language">
@@ -291,7 +291,7 @@
                 <ul class="space-y-4">
                     <li><a href="courses.html" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_all_courses">全部課程</a></li>
                     <li><a href="pilates-classroom.html" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_classroom">皮拉提斯小教室</a></li>
-                    <li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li>
+                    <li><a href="faq.html" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li>
                 </ul>
             </nav>
             <div class="border-t border-stone-200 mt-auto p-6">
@@ -425,7 +425,7 @@
             <img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" />
             <div class="flex justify-center space-x-6 my-6">
                 <a href="courses.html" class="hover:text-white transition-colors" data-translate-key="footer_all_courses">所有課程</a>
-                <a href="#" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a>
+                <a href="faq.html" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a>
                 <a href="#" id="footer-login-link" class="hover:text-white transition-colors" data-translate-key="footer_member_login">會員登入</a>
             </div>
              <p class="my-4">
@@ -539,6 +539,7 @@
         const announcementModal = document.getElementById('announcement-modal'), announcementBackdrop = document.getElementById('announcement-backdrop'), closeAnnouncementBtn = document.getElementById('close-announcement-btn');
 
         const t = (key) => translations[currentLanguage][key] || key;
+
         const updateStaticText = () => {
             document.title = t('page_title_terms');
             document.documentElement.lang = currentLanguage;
@@ -547,17 +548,60 @@
                 const translation = t(key);
                 if (key.endsWith('_html')) {
                     el.innerHTML = translation;
-                } else if (el.placeholder !== undefined) { el.placeholder = translation; }
-                else if (el.tagName === 'INPUT' && el.type === 'submit' || el.tagName === 'BUTTON') { const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE); if (textNode) { textNode.textContent = translation + ' '; } else if (el.querySelector('span')) { el.querySelector('span').textContent = translation; } else { el.textContent = translation; } }
-                else if (key === 'auth_terms_agree') { const parts = currentLanguage === 'en' ? ['I agree to the ', ' and ', ''] : ['我同意 ', ' 與 ', '']; const termsLink = `<a href="terms.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Terms of Service' : '服務條款')}</a>`; const privacyLink = `<a href="privacy.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策')}</a>`; el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`; }
-                else { el.innerHTML = translation; }
+                } else if (el.placeholder !== undefined) {
+                    el.placeholder = translation;
+                } else if (el.tagName === 'INPUT' && el.type === 'submit' || el.tagName === 'BUTTON') {
+                    const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textNode) {
+                        textNode.textContent = translation + ' ';
+                    } else if (el.querySelector('span')) {
+                        el.querySelector('span').textContent = translation;
+                    } else {
+                        el.textContent = translation;
+                    }
+                } else if (key === 'auth_terms_agree') {
+                    const parts = currentLanguage === 'en' ? ['I agree to the ', ' and ', ''] : ['我同意 ', ' 與 ', ''];
+                    const termsLink = `<a href="terms.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Terms of Service' : '服務條款')}</a>`;
+                    const privacyLink = `<a href="privacy.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策')}</a>`;
+                    el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`;
+                } else {
+                    el.innerHTML = translation;
+                }
             });
-            document.querySelectorAll('.password-toggle').forEach(btn => { const input = btn.previousElementSibling; btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password'); });
+             document.querySelectorAll('.password-toggle').forEach(btn => {
+                const input = btn.previousElementSibling;
+                btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password');
+            });
         };
-        const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; updateStaticText(); renderCart(); renderNotifications(); };
-        const initLanguage = () => { const savedLang = localStorage.getItem('pilatesLanguage') || (navigator.language.startsWith('en') ? 'en' : 'zh-TW'); setLanguage(savedLang); };
-        const checkLoginStatus = () => { const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true'; updateAuthUI(isLoggedIn); return isLoggedIn; };
-        const handleLogout = () => { if (confirm(t('logout_confirm'))) { sessionStorage.removeItem('isLoggedIn'); sessionStorage.removeItem('user'); window.location.href = 'index.html'; }};
+
+        const setLanguage = (lang) => {
+            currentLanguage = lang;
+            localStorage.setItem('pilatesLanguage', lang);
+            document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中';
+            updateStaticText();
+            renderCart();
+            renderNotifications();
+        };
+
+        const initLanguage = () => {
+            const savedLang = localStorage.getItem('pilatesLanguage') || (navigator.language.startsWith('en') ? 'en' : 'zh-TW');
+            setLanguage(savedLang);
+        };
+
+        const checkLoginStatus = () => {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            updateAuthUI(isLoggedIn);
+            return isLoggedIn;
+        };
+
+        const handleLogout = () => {
+            if (confirm(t('logout_confirm'))) {
+                sessionStorage.removeItem('isLoggedIn');
+                sessionStorage.removeItem('user');
+                window.location.href = 'index.html';
+            }
+        };
+
         const updateAuthUI = (isLoggedIn) => {
             userIconButton.classList.toggle('text-[#c1bcb8]', isLoggedIn);
             loginLogoutButton.textContent = isLoggedIn ? t('logout') : t('login');
@@ -565,8 +609,23 @@
         };
         const performLogin = (user) => { sessionStorage.setItem('isLoggedIn', 'true'); sessionStorage.setItem('user', JSON.stringify(user)); checkLoginStatus(); closeAuthModal(); };
         const handleUserIconClick = () => { if (checkLoginStatus()) { window.location.href = 'dashboard.html'; } else { openAuthModal(); } };
-        const openAuthModal = (view = 'login') => { document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); authModalBackdrop.classList.add('active'); authModalContainer.classList.add('active'); };
-        const closeAuthModal = () => { authModalBackdrop.classList.remove('active'); authModalContainer.classList.remove('active'); setTimeout(() => { const loginError = document.getElementById('login-error-message'); const signupError = document.getElementById('signup-error-message'); if (loginError) loginError.style.display = 'none'; if (signupError) signupError.style.display = 'none'; }, 300); };
+        const openAuthModal = (view = 'login') => {
+            document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`${view}View`).classList.add('active');
+            authModalBackdrop.classList.add('active');
+            authModalContainer.classList.add('active');
+        };
+        const closeAuthModal = () => {
+            authModalBackdrop.classList.remove('active');
+            authModalContainer.classList.remove('active');
+            setTimeout(() => {
+                const loginError = document.getElementById('login-error-message');
+                const signupError = document.getElementById('signup-error-message');
+                if (loginError) loginError.style.display = 'none';
+                if (signupError) signupError.style.display = 'none';
+            }, 300);
+        };
+
         const renderNotifications = () => {
             const singleItemHTML = (n) => `
                 <a href="#" class="notification-item ${n.unread ? 'unread' : ''}">
@@ -578,27 +637,38 @@
                     <time>${n.time[currentLanguage]}</time>
                 </a>
             `;
+
             const announcementsContainer = document.getElementById('latest-announcement-container');
             if (announcementsContainer) {
                 const allAnnouncements = dummyNotifications.announcements;
                 document.getElementById('announcements-count').textContent = allAnnouncements.length;
-                if (allAnnouncements.length > 0) { announcementsContainer.innerHTML = singleItemHTML(allAnnouncements[0]); } 
-                else { announcementsContainer.innerHTML = `<div class="text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`; }
+                if (allAnnouncements.length > 0) {
+                    announcementsContainer.innerHTML = singleItemHTML(allAnnouncements[0]);
+                } else {
+                    announcementsContainer.innerHTML = `<div class="text-center text-sm text-stone-500 p-4">${t('notifications_no_items')}</div>`;
+                }
             }
+            
             const personalList = document.getElementById('personal-notifications-list');
             if (personalList) {
                  const allPersonal = dummyNotifications.personal;
                 const visibleItems = allPersonal.slice(0, visiblePersonalNotifications);
-                if (visibleItems.length > 0) { personalList.innerHTML = visibleItems.map(singleItemHTML).join(''); } 
-                else { personalList.innerHTML = `<div class="text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`; }
+
+                if (visibleItems.length > 0) {
+                    personalList.innerHTML = visibleItems.map(singleItemHTML).join('');
+                } else {
+                    personalList.innerHTML = `<div class="text-center text-sm text-stone-500 p-4">${t('notifications_no_items')}</div>`;
+                }
                 const loadMoreBtn = document.getElementById('load-more-notifications');
                 if(loadMoreBtn) loadMoreBtn.classList.toggle('hidden', allPersonal.length <= visiblePersonalNotifications);
             }
+
             if (notificationDot) {
                 const hasUnread = [...dummyNotifications.announcements, ...dummyNotifications.personal].some(n => n.unread);
                 notificationDot.classList.toggle('hidden', !hasUnread);
             }
         };
+
         const renderCart = () => {
             if (cartItems.length === 0) {
                 cartContent.innerHTML = `<div class="flex-grow flex flex-col items-center justify-center text-center p-6 h-full"><p class="text-stone-500">${t('cart_empty')}</p><button id="cart-continue-shopping" class="mt-4 px-6 py-2 bg-[#c1bcb8] text-white rounded-full hover:bg-[#b0a9a4] transition-colors">${t('cart_continue_shopping')}</button></div>`;
@@ -611,18 +681,31 @@
             updateCartCount();
         };
 
-        const updateCartCount = () => { const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0); if (totalItems > 0) { cartItemCountBadge.textContent = totalItems; cartItemCountBadge.classList.remove('hidden'); } else { cartItemCountBadge.classList.add('hidden'); } };
+        const updateCartCount = () => {
+            const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            if (totalItems > 0) {
+                cartItemCountBadge.textContent = totalItems;
+                cartItemCountBadge.classList.remove('hidden');
+            } else {
+                cartItemCountBadge.classList.add('hidden');
+            }
+        };
         const loadCart = () => { const savedCart = localStorage.getItem('pilatesCart'); if (savedCart) { cartItems = JSON.parse(savedCart); } else { cartItems = []; } };
         const openCart = () => { cartPanel.classList.remove('translate-x-full'); cartBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeCart = () => { cartPanel.classList.add('translate-x-full'); cartBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
         const openMobileMenu = () => { mobileMenuPanel.classList.remove('-translate-x-full'); mobileMenuBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeMobileMenu = () => { mobileMenuPanel.classList.add('-translate-x-full'); mobileMenuBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
         
-        cartButton.addEventListener('click', openCart); cartCloseButton.addEventListener('click', closeCart); cartBackdrop.addEventListener('click', closeCart);
-        menuButton.addEventListener('click', openMobileMenu); mobileMenuCloseButton.addEventListener('click', closeMobileMenu); mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+        cartButton.addEventListener('click', openCart);
+        cartCloseButton.addEventListener('click', closeCart);
+        cartBackdrop.addEventListener('click', closeCart);
+        menuButton.addEventListener('click', openMobileMenu);
+        mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
+        mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
         userIconButton.addEventListener('click', handleUserIconClick);
         footerLoginLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { alert(t('already_logged_in')); } else { openAuthModal(); } });
-        authModalBackdrop.addEventListener('click', closeAuthModal); authModalCloseBtn.addEventListener('click', closeAuthModal);
+        authModalBackdrop.addEventListener('click', closeAuthModal);
+        authModalCloseBtn.addEventListener('click', closeAuthModal);
         document.querySelectorAll('.auth-view-switch').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(e.target.closest('[data-view]').dataset.view); }); });
         document.querySelectorAll('.password-toggle').forEach(button => { button.addEventListener('click', () => { const passwordInput = button.previousElementSibling; if (passwordInput.type === 'password') { passwordInput.type = 'text'; button.textContent = t('auth_hide_password'); } else { passwordInput.type = 'password'; button.textContent = t('auth_show_password'); } }); });
         loginForm.addEventListener('submit', (e) => { e.preventDefault(); const emailInput = loginForm.querySelector('input[type="email"]'); const passwordInput = loginForm.querySelector('input[type="password"]'); const errorMessage = document.getElementById('login-error-message'); if (emailInput.value === 'test@example.com' && passwordInput.value === 'password123') { errorMessage.style.display = 'none'; performLogin({ name: '測試使用者', email: 'test@example.com' }); } else { errorMessage.textContent = t('auth_login_error'); errorMessage.style.display = 'block'; } });
@@ -630,6 +713,7 @@
         languageSwitcherButton.addEventListener('click', () => { const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en'; setLanguage(newLang); });
         loginLogoutButton.addEventListener('click', () => { if (checkLoginStatus()) { handleLogout(); } else { openAuthModal(); }});
         mobileLoginLogoutLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { handleLogout(); } else { closeMobileMenu(); openAuthModal(); }});
+        
         notificationButton.addEventListener('click', (e) => { e.stopPropagation(); notificationPanel.classList.toggle('hidden'); });
         document.addEventListener('click', (e) => { if (notificationPanel && !notificationPanel.contains(e.target) && !notificationButton.contains(e.target)) { notificationPanel.classList.add('hidden'); }});
         
