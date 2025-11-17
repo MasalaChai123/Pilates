@@ -146,36 +146,12 @@
                 <p class="mt-4 text-lg text-stone-600 max-w-2xl mx-auto" data-translate-key="classroom_subtitle">探索皮拉提斯的奧秘，從知識到實踐，我們為您提供全方位的指南。</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Blog Post 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col group transform hover:-translate-y-1 transition-transform">
-                    <img src="https://images.pexels.com/photos/4057737/pexels-photo-4057737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Pilates at home" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold font-serif text-stone-800" data-translate-key="post1_title">在家也能做的5個基礎皮拉提斯動作</h3>
-                        <p class="text-stone-600 mt-2 flex-grow" data-translate-key="post1_excerpt">不需要複雜的器材，只要一張瑜珈墊，就能開始您的皮拉提斯練習。本文將介紹五個經典動作，幫助您強化核心、改善體態。</p>
-                        <a href="#" class="mt-4 text-sm font-semibold text-[#c1bcb8] group-hover:text-[#a09a95] transition-colors" data-translate-key="read_more">閱讀更多 &rarr;</a>
-                    </div>
-                </div>
+            <div id="classroom-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog posts will be injected here by JavaScript -->
+            </div>
 
-                <!-- Blog Post 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col group transform hover:-translate-y-1 transition-transform">
-                    <img src="https://images.pexels.com/photos/7031705/pexels-photo-7031705.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Beginner's guide" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold font-serif text-stone-800" data-translate-key="post2_title">皮拉提斯新手指南：你需要知道的一切</h3>
-                        <p class="text-stone-600 mt-2 flex-grow" data-translate-key="post2_excerpt">什麼是皮拉提斯？它跟瑜珈有什麼不同？我該如何開始？這篇文章將為您解答所有關於皮拉提斯的常見問題。</p>
-                        <a href="#" class="mt-4 text-sm font-semibold text-[#c1bcb8] group-hover:text-[#a09a95] transition-colors" data-translate-key="read_more">閱讀更多 &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Blog Post 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col group transform hover:-translate-y-1 transition-transform">
-                    <img src="https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Pilates equipment" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold font-serif text-stone-800" data-translate-key="post3_title">解析皮拉提斯器械：核心床 vs. 穩定椅</h3>
-                        <p class="text-stone-600 mt-2 flex-grow" data-translate-key="post3_excerpt">皮拉提斯器械看起來很複雜？別擔心！我們將為您介紹最常見的核心床（Reformer）與穩定椅（Stability Chair）的功能與訓練效益。</p>
-                        <a href="#" class="mt-4 text-sm font-semibold text-[#c1bcb8] group-hover:text-[#a09a95] transition-colors" data-translate-key="read_more">閱讀更多 &rarr;</a>
-                    </div>
-                </div>
+            <div id="pagination-container" class="flex justify-center mt-12">
+                <!-- Pagination controls will be injected here -->
             </div>
         </div>
     </main>
@@ -198,7 +174,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- TRANSLATIONS ---
+        // --- TRANSLATIONS & DATA ---
         const translations = {
             'en': {
                 'page_title_classroom': "Pilates Classroom - 9's Pilates Studio",
@@ -218,11 +194,7 @@
                 'auth_name_label': 'Name', 'auth_name_placeholder': 'Enter your name', 'auth_password_placeholder_signup': 'At least 8 characters', 'auth_confirm_password_label': 'Confirm Password',
                 'auth_confirm_password_placeholder': 'Enter password again', 'auth_terms_agree': 'I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>', 'auth_create_account_button': 'Create Account',
                 'auth_already_have_account': 'Already have an account?', 'auth_login_now': 'Log in now', 'auth_passwords_no_match': 'Passwords do not match.', 'auth_signup_error': 'An error occurred. Please try again.',
-                 'classroom_title': 'Pilates Classroom', 'classroom_subtitle': 'Explore the world of Pilates. From knowledge to practice, we provide a comprehensive guide.',
-                'post1_title': '5 Basic Pilates Moves You Can Do at Home', 'post1_excerpt': 'No complex equipment needed. With just a yoga mat, you can start your Pilates practice. This article introduces five classic moves to help you strengthen your core and improve posture.',
-                'post2_title': "A Beginner's Guide to Pilates: Everything You Need to Know", 'post2_excerpt': 'What is Pilates? How is it different from yoga? How do I start? This article will answer all your common questions about Pilates.',
-                'post3_title': 'Decoding Pilates Equipment: Reformer vs. Stability Chair', 'post3_excerpt': 'Does Pilates equipment look complicated? Don\'t worry! We will introduce the functions and training benefits of the most common equipment: the Reformer and the Stability Chair.',
-                'read_more': 'Read More →',
+                 'classroom_title': 'Pilates Classroom', 'classroom_subtitle': 'Explore the world of Pilates. From knowledge to practice, we provide a comprehensive guide.', 'read_more': 'Read More →',
             },
             'zh-TW': {
                 'page_title_classroom': "皮拉提斯小教室 - 9's Pilates Studio",
@@ -243,29 +215,40 @@
                 'auth_confirm_password_label': '確認密碼', 'auth_confirm_password_placeholder': '再次輸入密碼', 'auth_terms_agree': '我同意 <a>服務條款</a> 與 <a>隱私政策</a>',
                 'auth_create_account_button': '建立帳號', 'auth_already_have_account': '已經有帳號？', 'auth_login_now': '立即登入',
                 'auth_passwords_no_match': '兩次輸入的密碼不一致。', 'auth_signup_error': '註冊時發生錯誤，請稍後再試。',
-                'classroom_title': '皮拉提斯小教室', 'classroom_subtitle': '探索皮拉提斯的奧秘，從知識到實踐，我們為您提供全方位的指南。',
-                'post1_title': '在家也能做的5個基礎皮拉提斯動作', 'post1_excerpt': '不需要複雜的器材，只要一張瑜珈墊，就能開始您的皮拉提斯練習。本文將介紹五個經典動作，幫助您強化核心、改善體態。',
-                'post2_title': '皮拉提斯新手指南：你需要知道的一切', 'post2_excerpt': '什麼是皮拉提斯？它跟瑜珈有什麼不同？我該如何開始？這篇文章將為您解答所有關於皮拉提斯的常見問題。',
-                'post3_title': '解析皮拉提斯器械：核心床 vs. 穩定椅', 'post3_excerpt': '皮拉提斯器械看起來很複雜？別擔心！我們將為您介紹最常見的核心床（Reformer）與穩定椅（Stability Chair）的功能與訓練效益。',
-                'read_more': '閱讀更多 &rarr;',
+                'classroom_title': '皮拉提斯小教室', 'classroom_subtitle': '探索皮拉提斯的奧秘，從知識到實踐，我們為您提供全方位的指南。', 'read_more': '閱讀更多 &rarr;',
             }
         };
-        // Dummy data, same as other pages
         const dummyNotifications = { announcements: [{ id: 1, title: {'zh-TW': '系統維護公告', 'en': 'System Maintenance'}, content: {'zh-TW': '我們將於 08/15 凌晨 02:00-04:00 進行系統維護。', 'en': 'System maintenance will be performed on 08/15 from 02:00-04:00.'}, time: {'zh-TW': '2天前', 'en': '2 days ago'}, unread: true }, { id: 2, title: {'zh-TW': '新功能上線', 'en': 'New Feature Live'}, content: {'zh-TW': '課程進度追蹤功能已更新！', 'en': 'Course progress tracking has been updated!'}, time: {'zh-TW': '5天前', 'en': '5 days ago'}, unread: false }], personal: [{ id: 3, title: {'zh-TW': '課程到期提醒', 'en': 'Course Expiration Reminder'}, content: {'zh-TW': '您的「8週完美體態重塑」課程將於 10 天後到期。', 'en': 'Your "8-Week Transformation" course expires in 10 days.'}, time: {'zh-TW': '1小時前', 'en': '1 hour ago'}, unread: true }, { id: 4, title: {'zh-TW': '我們想您了！', 'en': 'We Miss You!'}, content: {'zh-TW': '您已經一週沒有上課囉，記得回來動一動！', 'en': "You haven't taken a class in a week. Time to get moving!"}, time: {'zh-TW': '3天前', 'en': '3 days ago'}, unread: false }]};
+        const classroomPosts = [
+            { image: 'https://images.pexels.com/photos/4057737/pexels-photo-4057737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '在家也能做的5個基礎皮拉提斯動作', 'en': '5 Basic Pilates Moves You Can Do at Home'}, excerpt: {'zh-TW': '不需要複雜的器材，只要一張瑜珈墊，就能開始您的皮拉提斯練習。本文將介紹五個經典動作，幫助您強化核心、改善體態。', 'en': 'No complex equipment needed. With just a yoga mat, you can start your Pilates practice. This article introduces five classic moves to help you strengthen your core and improve posture.'} },
+            { image: 'https://images.pexels.com/photos/7031705/pexels-photo-7031705.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '皮拉提斯新手指南：你需要知道的一切', 'en': "A Beginner's Guide to Pilates: Everything You Need to Know"}, excerpt: {'zh-TW': '什麼是皮拉提斯？它跟瑜珈有什麼不同？我該如何開始？這篇文章將為您解答所有關於皮拉提斯的常見問題。', 'en': 'What is Pilates? How is it different from yoga? How do I start? This article will answer all your common questions about Pilates.'} },
+            { image: 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '解析皮拉提斯器械：核心床 vs. 穩定椅', 'en': 'Decoding Pilates Equipment: Reformer vs. Stability Chair'}, excerpt: {'zh-TW': '皮拉提斯器械看起來很複雜？別擔心！我們將為您介紹最常見的核心床（Reformer）與穩定椅（Stability Chair）的功能與訓練效益。', 'en': 'Does Pilates equipment look complicated? Don\'t worry! We will introduce the functions and training benefits of the most common equipment: the Reformer and the Stability Chair.'} },
+            { image: 'https://images.pexels.com/photos/3822187/pexels-photo-3822187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '呼吸的藝術：皮拉提斯中的橫膈膜呼吸法', 'en': 'The Art of Breathing: Diaphragmatic Breathing in Pilates'}, excerpt: {'zh-TW': '正確的呼吸是皮拉提斯的靈魂。學習如何運用橫膈膜呼吸，不僅能加深核心的啟動，更能幫助您在運動中找到穩定與流暢。', 'en': 'Proper breathing is the soul of Pilates. Learn how to use diaphragmatic breathing to deepen core activation and find stability and flow in your movements.'} },
+            { image: 'https://images.pexels.com/photos/4056535/pexels-photo-4056535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '告別腰酸背痛：皮拉提斯如何改善你的姿勢', 'en': 'Say Goodbye to Back Pain: How Pilates Improves Your Posture'}, excerpt: {'zh-TW': '長期姿勢不良是現代人腰背疼痛的主要原因之一。了解皮拉提斯如何透過強化核心、平衡肌力，從根本改善您的體態問題。', 'en': 'Poor posture is a leading cause of back pain. Understand how Pilates fundamentally improves your posture by strengthening your core and balancing muscle groups.'} },
+            { image: 'https://images.pexels.com/photos/4057760/pexels-photo-4057760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '墊上 vs. 器械：我該選擇哪種皮拉提斯？', 'en': 'Mat vs. Equipment: Which Type of Pilates Should I Choose?'}, excerpt: {'zh-TW': '墊上課程和器械課程有什麼不同？哪一個更適合我？本文為您分析兩者的優缺點，幫助您做出最佳選擇。', 'en': 'What are the differences between mat and equipment classes? Which one is better for you? This article analyzes the pros and cons of both to help you make the best choice.'} },
+            { image: 'https://images.pexels.com/photos/5038890/pexels-photo-5038890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '皮拉提斯的六大原則：不只是運動，更是哲學', 'en': 'The Six Principles of Pilates: More Than Just Exercise'}, excerpt: {'zh-TW': '專注、核心、控制、精確、呼吸、流暢。深入了解由約瑟夫·皮拉提斯創立的六大原則，以及它們如何應用於您的每一次練習中。', 'en': 'Concentration, Center, Control, Precision, Breath, and Flow. Delve into the six principles established by Joseph Pilates and how they apply to every exercise you perform.'} },
+            { image: 'https://images.pexels.com/photos/3823076/pexels-photo-3823076.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', title: {'zh-TW': '運動後吃什麼？皮拉提斯練習者的營養建議', 'en': 'What to Eat After a Workout? Nutrition Tips for Pilates Practitioners'}, excerpt: {'zh-TW': '運動後的營養補充同樣重要。我們提供了一些簡單的飲食建議，幫助您修復肌肉、補充能量，讓您的訓練效果事半功倍。', 'en': 'Post-workout nutrition is crucial. We provide simple dietary suggestions to help you repair muscles, replenish energy, and maximize your training results.'} },
+        ];
         
+        // --- STATE ---
         let cartItems = [];
         let currentLanguage = 'zh-TW';
         let visiblePersonalNotifications = 5;
+        let classroomCurrentPage = 1;
+        const postsPerPage = 3;
 
         // --- DOM Elements ---
         const allElements = {
             cartButton: document.getElementById('cart-button'), cartPanel: document.getElementById('cart-panel'), cartBackdrop: document.getElementById('cart-backdrop'), cartCloseButton: document.getElementById('cart-close-button'), cartContent: document.getElementById('cart-content'), cartItemCountBadge: document.getElementById('cart-item-count'), menuButton: document.getElementById('menu-button'), mobileMenuPanel: document.getElementById('mobile-menu-panel'), mobileMenuBackdrop: document.getElementById('mobile-menu-backdrop'), mobileMenuCloseButton: document.getElementById('mobile-menu-close'), authModalBackdrop: document.getElementById('auth-modal-backdrop'), authModalContainer: document.getElementById('auth-modal-container'), authModalCloseBtn: document.getElementById('auth-modal-close-btn'), userIconButton: document.getElementById('user-icon-button'), footerLoginLink: document.getElementById('footer-login-link'), loginForm: document.getElementById('loginForm'), signupForm: document.getElementById('signupForm'), languageSwitcherButton: document.getElementById('language-switcher-button'),
             notificationButton: document.getElementById('notification-button'), notificationPanel: document.getElementById('notification-panel'), notificationDot: document.getElementById('notification-dot'), loginLogoutButton: document.getElementById('login-logout-button'), mobileLoginLogoutLink: document.getElementById('mobile-login-logout-link'),
             announcementModal: document.getElementById('announcement-modal'), announcementBackdrop: document.getElementById('announcement-backdrop'), closeAnnouncementBtn: document.getElementById('close-announcement-btn'),
+            postsContainer: document.getElementById('classroom-posts-container'),
+            paginationContainer: document.getElementById('pagination-container'),
         };
         
         const t = (key) => translations[currentLanguage][key] || key;
 
+        // --- RENDER & LOGIC FUNCTIONS ---
         const updateStaticText = () => {
             document.title = t('page_title_classroom');
             document.documentElement.lang = currentLanguage;
@@ -279,7 +262,7 @@
              document.querySelectorAll('.password-toggle').forEach(btn => { const input = btn.previousElementSibling; btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password'); });
         };
         
-        const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; updateStaticText(); renderCart(); renderNotifications(); };
+        const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; updateStaticText(); renderCart(); renderNotifications(); renderClassroomPage(classroomCurrentPage); };
         const initLanguage = () => { const savedLang = localStorage.getItem('pilatesLanguage') || (navigator.language.startsWith('en') ? 'en' : 'zh-TW'); setLanguage(savedLang); };
 
         const checkLoginStatus = () => { const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true'; updateAuthUI(isLoggedIn); return isLoggedIn; };
@@ -294,7 +277,7 @@
         const openAuthModal = (view = 'login') => { allElements.authModalBackdrop.classList.add('active'); allElements.authModalContainer.classList.add('active'); };
         const closeAuthModal = () => { allElements.authModalBackdrop.classList.remove('active'); allElements.authModalContainer.classList.remove('active'); };
 
-        // --- Render Functions ---
+        // --- RENDER Functions (Notifications, Cart, etc.) ---
         const renderNotifications = () => {
             const singleItemHTML = (n) => `<a href="#" class="notification-item ${n.unread ? 'unread' : ''}"><p><strong class="font-semibold text-stone-800">${n.title[currentLanguage]}</strong><br>${n.content[currentLanguage]}</p><time>${n.time[currentLanguage]}</time></a>`;
             const announcementsContainer = document.getElementById('latest-announcement-container');
@@ -336,6 +319,57 @@
         const openMobileMenu = () => { allElements.mobileMenuPanel.classList.remove('-translate-x-full'); allElements.mobileMenuBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeMobileMenu = () => { allElements.mobileMenuPanel.classList.add('-translate-x-full'); allElements.mobileMenuBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
         
+        // --- PAGINATION LOGIC ---
+        const renderPagination = (totalPages, currentPage, container, onPageClick) => {
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+            let paginationHTML = '<nav class="flex items-center space-x-2">';
+            paginationHTML += `<button data-page="${currentPage - 1}" class="px-3 py-1 rounded-md ${currentPage === 1 ? 'bg-stone-200 text-stone-400 cursor-not-allowed' : 'bg-white hover:bg-stone-100 text-stone-600 shadow-sm'}">&laquo;</button>`;
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<button data-page="${i}" class="px-3 py-1 rounded-md ${i === currentPage ? 'bg-[#c1bcb8] text-white shadow-md' : 'bg-white hover:bg-stone-100 text-stone-600 shadow-sm'}">${i}</button>`;
+            }
+            paginationHTML += `<button data-page="${currentPage + 1}" class="px-3 py-1 rounded-md ${currentPage === totalPages ? 'bg-stone-200 text-stone-400 cursor-not-allowed' : 'bg-white hover:bg-stone-100 text-stone-600 shadow-sm'}">&raquo;</button>`;
+            paginationHTML += '</nav>';
+            container.innerHTML = paginationHTML;
+
+            container.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const page = parseInt(e.currentTarget.dataset.page);
+                    if (page >= 1 && page <= totalPages && page !== currentPage) {
+                        onPageClick(page);
+                    }
+                });
+            });
+        };
+
+        const renderClassroomPage = (page) => {
+            classroomCurrentPage = page;
+            const start = (page - 1) * postsPerPage;
+            const end = start + postsPerPage;
+            const paginatedPosts = classroomPosts.slice(start, end);
+
+            allElements.postsContainer.innerHTML = paginatedPosts.map(post => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col group transform hover:-translate-y-1 transition-transform">
+                    <img src="${post.image}" alt="${post.title[currentLanguage]}" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold font-serif text-stone-800">${post.title[currentLanguage]}</h3>
+                        <p class="text-stone-600 mt-2 flex-grow">${post.excerpt[currentLanguage]}</p>
+                        <a href="#" class="mt-4 text-sm font-semibold text-[#c1bcb8] group-hover:text-[#a09a95] transition-colors">${t('read_more')}</a>
+                    </div>
+                </div>
+            `).join('');
+
+            const totalPages = Math.ceil(classroomPosts.length / postsPerPage);
+            renderPagination(totalPages, page, allElements.paginationContainer, renderClassroomPage);
+            
+            // Scroll to the top of the content for better UX
+            const mainContent = document.querySelector('main');
+            if(mainContent) mainContent.scrollIntoView({ behavior: 'smooth' });
+        };
+
+
         // --- Event Listeners ---
         Object.values(allElements).forEach(el => { if (!el) console.error("An element is missing from the DOM"); });
         allElements.cartButton.addEventListener('click', openCart);
