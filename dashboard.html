@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -311,8 +312,8 @@
                 </form>
                 <div class="divider"><span data-translate-key="auth_or">或</span></div>
                 <div class="social-buttons">
-                    <button type="button" class="btn btn-social" data-social-provider="google"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-translate-key="auth_google_login">使用 Google 登入</span></span></button>
-                    <button type="button" class="btn btn-social" data-social-provider="line"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span data-translate-key="auth_line_login">使用 LINE 登入</span></span></button>
+                    <a href="/auth/google/redirect" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-translate-key="auth_google_login">使用 Google 登入</span></span></a>
+                    <a href="/auth/line/redirect" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span data-translate-key="auth_line_login">使用 LINE 登入</span></span></a>
                 </div>
                 <div class="auth-switch"><span data-translate-key="auth_no_account">還沒有帳號？</span> <a class="auth-view-switch" data-view="signup" data-translate-key="auth_signup_now">立即註冊</a></div>
             </div>
@@ -427,7 +428,7 @@
                 'mobile_menu_title': 'Menu', 'cart_title': 'Shopping Cart', 'cart_empty': 'Your cart is empty', 'cart_continue_shopping': 'Continue Shopping',
                 'cart_subtotal': 'Subtotal', 'cart_checkout': 'Checkout', 'footer_all_courses': 'All Courses', 'footer_member_login': 'Member Login',
                 'footer_contact_email': 'Contact Email', 'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved', 'footer_terms': 'Terms of Use',
-                'footer_privacy': 'Privacy Policy', 'already_logged_in': 'You are already logged in.', 'login': 'Log In', 'logout': 'Log Out',
+                'footer_privacy': 'Privacy Policy', 'already_logged_in': 'You are already logged in.', 'login': 'Log In', 'logout': 'Log Out', 'logout_confirm': 'Are you sure you want to log out?',
                 'notifications_announcements': 'Announcements', 'notifications_personal': 'Notifications', 'notifications_no_items': 'No items to show',
                 'notifications_view_all': 'View All', 'notifications_load_more': 'Load More',
                 // Dashboard
@@ -441,7 +442,7 @@
                 'empty_favorites_subtitle': 'Add courses to your favorites for easy access.', 'empty_history_title': 'No Watch History',
                 'empty_history_subtitle': 'Your recently watched courses will appear here.', 'browse_courses': 'Browse All Courses',
                 'settings_title': 'Account Information', 'settings_name': 'Name', 'settings_email': 'Email', 'settings_password': 'Password',
-                'settings_change_password': 'Change Password', 'settings_save': 'Save Changes', 'settings_logout': 'Log Out', 'settings_logout_confirm': 'Are you sure you want to log out?',
+                'settings_change_password': 'Change Password', 'settings_save': 'Save Changes', 'settings_logout': 'Log Out',
                 'settings_saved_success': 'Your changes have been saved.', 'unauthorized_access': 'You must be logged in to view this page.',
                 'redirecting_home': 'Redirecting to homepage...',
                 // Auth Modal
@@ -466,7 +467,7 @@
                 'mobile_menu_title': '選單', 'cart_title': '購物車', 'cart_empty': '您的購物車是空的', 'cart_continue_shopping': '繼續選購',
                 'cart_subtotal': '小計', 'cart_checkout': '前往結帳', 'footer_all_courses': '所有課程', 'footer_member_login': '會員登入',
                 'footer_contact_email': '客服信箱', 'footer_copyright': '© 2025 9\'s Pilates. 版權所有', 'footer_terms': '使用條款',
-                'footer_privacy': '隱私政策', 'already_logged_in': '您已經登入。', 'login': '登入', 'logout': '登出',
+                'footer_privacy': '隱私政策', 'already_logged_in': '您已經登入。', 'login': '登入', 'logout': '登出', 'logout_confirm': '您確定要登出嗎？',
                 'notifications_announcements': '公告', 'notifications_personal': '通知', 'notifications_no_items': '目前沒有任何項目',
                 'notifications_view_all': '查看全部', 'notifications_load_more': '載入更多',
                 // Dashboard
@@ -479,7 +480,7 @@
                 'empty_history_title': '尚無觀看紀錄', 'empty_history_subtitle': '您最近觀看的課程將會顯示在這裡。',
                 'browse_courses': '瀏覽所有課程', 'settings_title': '帳戶資訊', 'settings_name': '姓名', 'settings_email': '電子郵件',
                 'settings_password': '密碼', 'settings_change_password': '更改密碼', 'settings_save': '儲存變更', 'settings_logout': '登出帳號',
-                'settings_logout_confirm': '您確定要登出嗎？', 'settings_saved_success': '您的變更已成功儲存。', 'unauthorized_access': '您必須登入才能查看此頁面。',
+                'settings_saved_success': '您的變更已成功儲存。', 'unauthorized_access': '您必須登入才能查看此頁面。',
                 'redirecting_home': '正在將您導回首頁...',
                 // Auth Modal
                 'auth_login_title': '會員登入', 'auth_login_subtitle': '登入開始您的皮拉提斯之旅', 'auth_email_label': '電子郵件',
@@ -509,6 +510,9 @@
                 { id: 10, content: {'zh-TW': '「核心強化」課程有新的學習資料。', 'en': 'New material available for "Core Strengthening" course.'}, time: {'zh-TW': '4天前', 'en': '4 days ago'}, unread: false },
                 { id: 11, content: {'zh-TW': '您的密碼已成功更新。', 'en': 'Your password was successfully updated.'}, time: {'zh-TW': '5天前', 'en': '5 days ago'}, unread: false },
                 { id: 12, content: {'zh-TW': '歡迎加入 9\'s Pilates Studio！', 'en': 'Welcome to 9\'s Pilates Studio!'}, time: {'zh-TW': '1週前', 'en': '1 week ago'}, unread: false },
+                { id: 13, content: {'zh-TW': '您的訂單 #20240815-001 已完成。', 'en': 'Your order #20240815-001 is complete.'}, time: {'zh-TW': '2週前', 'en': '2 weeks ago'}, unread: false },
+                { id: 14, content: {'zh-TW': '提醒：明天早上 10:00 有預約課程。', 'en': 'Reminder: You have a scheduled class tomorrow at 10:00 AM.'}, time: {'zh-TW': '2週前', 'en': '2 weeks ago'}, unread: false },
+                { id: 15, content: {'zh-TW': '朋友 Yating W. 也加入了「美體雕塑」課程。', 'en': 'Your friend Yating W. also joined "Body Sculpting".'}, time: {'zh-TW': '3週前', 'en': '3 weeks ago'}, unread: false },
             ]
         };
         
@@ -562,7 +566,7 @@
             return isLoggedIn;
         };
 
-        const handleLogout = () => { if (confirm(t('settings_logout_confirm'))) { sessionStorage.removeItem('isLoggedIn'); sessionStorage.removeItem('user'); window.location.href = 'index.html'; } };
+        const handleLogout = () => { if (confirm(t('logout_confirm'))) { sessionStorage.removeItem('isLoggedIn'); sessionStorage.removeItem('user'); window.location.href = 'index.html'; } };
         const updateAuthUI = (isLoggedIn) => {
             userIconButton.classList.toggle('text-[#c1bcb8]', isLoggedIn);
             loginLogoutButton.textContent = isLoggedIn ? t('logout') : t('login');
@@ -743,4 +747,65 @@
             initLanguage();
             loadCart();
             cartButton.addEventListener('click', openCart); cartCloseButton.addEventListener('click', closeCart); cartBackdrop.addEventListener('click', closeCart);
-            menuButton.addEventListener('click', openMobileMenu);
+            menuButton.addEventListener('click', openMobileMenu);--- START OF FILE checkout.html ---
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>結帳 - 9's Pilates Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      body {
+        font-family: 'Noto Sans TC', sans-serif;
+        background-color: #efefef;
+        color: #292524; /* text-stone-800 */
+      }
+      .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      .transform { transition: transform 0.3s ease-in-out; }
+      .opacity-transition { transition: opacity 0.3s ease-in-out; }
+        .notification-item {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+            display: block;
+            text-decoration: none;
+        }
+        .notification-item:hover {
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        .notification-item.unread {
+            background-color: #f7f5f2; /* A lighter version of brand color */
+        }
+        .notification-item p {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #44403c; /* stone-700 */
+            margin-bottom: 0;
+        }
+        .notification-item time {
+            font-size: 0.75rem;
+            line-height: 1rem;
+            color: #a8a29e; /* stone-400 */
+            margin-top: 0.25rem;
+            display: block;
+        }
+        #personal-notifications-list::-webkit-scrollbar { width: 6px; }
+        #personal-notifications-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px;}
+        #personal-notifications-list::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px;}
+        #personal-notifications-list::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+    </style>
+     <style id="auth-modal-styles">
+        .auth-modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 1000; opacity: 0; transition: opacity 0.3s ease-out; pointer-events: none; }
+        .auth-modal-backdrop.active { opacity: 1; pointer-events: auto; }
+        .auth-modal-container { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); z-index: 1001; opacity: 0; transition: opacity 0.3s ease-out, transform 0.3s ease-out; pointer-events: none; width: 100%; max-width: 450px; padding: 20px; max-height: 95vh; overflow-y: auto; }
+        .auth-modal-container.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+        .auth-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); width: 100%; position: relative; overflow: hidden; }
+        .auth
