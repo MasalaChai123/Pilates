@@ -20,6 +20,36 @@
       }
       .transform { transition: transform 0.3s ease-in-out; }
       .opacity-transition { transition: opacity 0.3s ease-in-out; }
+        .notification-item {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+            display: block;
+            text-decoration: none;
+        }
+        .notification-item:hover {
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        .notification-item.unread {
+            background-color: #f7f5f2; /* A lighter version of brand color */
+        }
+        .notification-item p {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #44403c; /* stone-700 */
+            margin-bottom: 0;
+        }
+        .notification-item time {
+            font-size: 0.75rem;
+            line-height: 1rem;
+            color: #a8a29e; /* stone-400 */
+            margin-top: 0.25rem;
+            display: block;
+        }
+        #personal-notifications-list::-webkit-scrollbar { width: 6px; }
+        #personal-notifications-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px;}
+        #personal-notifications-list::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px;}
+        #personal-notifications-list::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
     </style>
      <style id="auth-modal-styles">
         .auth-modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 1000; opacity: 0; transition: opacity 0.3s ease-out; pointer-events: none; }
@@ -68,7 +98,7 @@
 <body class="bg-stone-50 text-stone-800">
 
     <!-- Header -->
-    <header class="sticky top-0 bg-[#f9f9f9]/80 backdrop-blur-md z-40 shadow-sm">
+    <header class="sticky top-0 bg-[#e3dfdc]/80 backdrop-blur-md z-40 shadow-sm">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           <div class="flex-shrink-0">
@@ -77,9 +107,9 @@
             </a>
           </div>
           <nav class="hidden lg:flex lg:items-center lg:space-x-8">
-            <a href="index.html#single-session" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a>
-            <a href="index.html#thematic-unit" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a>
-            <a href="index.html#sculpting-plan" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a>
+            <a href="courses.html#single-session" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a>
+            <a href="courses.html#thematic-unit" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a>
+            <a href="courses.html#sculpting-plan" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a>
             <a href="#" class="text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a>
           </nav>
           <div class="flex items-center space-x-4">
@@ -90,10 +120,20 @@
              <button id="user-icon-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="User account">
                 <i aria-hidden="true" class="fas fa-user text-xl"></i> 
              </button>
+             <div class="relative">
+                <button id="notification-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open notifications">
+                    <i aria-hidden="true" class="fas fa-bell text-xl"></i>
+                    <span id="notification-dot" class="absolute -top-1 -right-1 flex h-3 w-3 items-center justify-center hidden">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                </button>
+            </div>
             <button id="cart-button" class="relative text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open shopping cart">
               <i aria-hidden="true" class="fas fa-shopping-cart text-xl"></i>
               <span id="cart-item-count" class="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#c1bcb8] text-xs font-medium text-white hidden">0</span>
             </button>
+            <button id="login-logout-button" class="hidden lg:block text-stone-600 hover:text-[#c1bcb8] transition-colors font-medium text-sm px-3 py-2 rounded-md"></button>
             <button id="menu-button" class="lg:hidden text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open menu">
               <i aria-hidden="true" class="fas fa-bars text-xl"></i>
             </button>
@@ -102,9 +142,36 @@
       </div>
     </header>
 
+    <!-- Notification Panel -->
+    <div id="notification-panel" class="hidden fixed top-20 right-4 sm:right-6 lg:right-8 w-80 max-w-sm bg-white rounded-lg shadow-2xl border border-stone-200 z-50 flex flex-col max-h-[500px]">
+        <!-- Announcements Section -->
+        <div class="p-3 border-b border-stone-200 flex-shrink-0">
+            <div class="flex justify-between items-center mb-1">
+                <h3 class="font-semibold text-stone-700" data-translate-key="notifications_announcements">公告</h3>
+                <a href="#" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
+                    <span data-translate-key="notifications_view_all">查看全部</span> (<span id="announcements-count">0</span>)
+                    <i class="fas fa-chevron-right text-xs ml-1"></i>
+                </a>
+            </div>
+            <div id="latest-announcement-container">
+                <!-- Latest announcement item here -->
+            </div>
+        </div>
+        <!-- Personal Notifications Section -->
+        <div class="p-3 flex flex-col flex-grow min-h-0">
+            <h3 class="font-semibold text-stone-700 mb-2 flex-shrink-0" data-translate-key="notifications_personal">通知</h3>
+            <div id="personal-notifications-list" class="flex-grow overflow-y-auto pr-2 space-y-1">
+                <!-- Personal notification items here -->
+            </div>
+            <div class="text-center mt-2 flex-shrink-0">
+                <button id="load-more-notifications" class="hidden text-sm font-semibold text-[#c1bcb8] hover:underline" data-translate-key="notifications_load_more">載入更多</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Mobile Menu, Cart Panel, Auth Modal (copied for consistency) -->
     <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none lg:hidden"></div>
-    <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform -translate-x-full lg:hidden"><div class="flex flex-col h-full"><div class="flex items-center justify-between p-6 border-b border-stone-200"><h2 class="text-xl font-semibold text-stone-800" data-translate-key="mobile_menu_title">選單</h2><button id="mobile-menu-close" class="text-stone-500 hover:text-stone-800 transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div><nav class="flex-grow p-6"><ul class="space-y-4"><li><a href="index.html#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a></li><li><a href="index.html#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a></li><li><a href="index.html#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a></li><li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li></ul></nav></div></div>
+    <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform -translate-x-full lg:hidden"><div class="flex flex-col h-full"><div class="flex items-center justify-between p-6 border-b border-stone-200"><h2 class="text-xl font-semibold text-stone-800" data-translate-key="mobile_menu_title">選單</h2><button id="mobile-menu-close" class="text-stone-500 hover:text-stone-800 transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div><nav class="flex-grow p-6"><ul class="space-y-4"><li><a href="courses.html#single-session" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_single_session">單堂體驗</a></li><li><a href="courses.html#thematic-unit" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_thematic_unit">主題單元</a></li><li><a href="courses.html#sculpting-plan" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_sculpting_plan">體態雕塑</a></li><li><a href="#" class="mobile-menu-link block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors" data-translate-key="nav_faq">常見問題</a></li></ul></nav><div class="border-t border-stone-200 mt-auto p-6"><a href="#" id="mobile-login-logout-link" class="block py-2 text-lg text-stone-600 hover:text-[#c1bcb8] transition-colors"></a></div></div></div>
     <div id="cart-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-transition opacity-0 pointer-events-none"></div>
     <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full"><div class="flex flex-col h-full"><div class="flex items-center justify-between p-6 border-b border-stone-200"><h2 class="text-xl font-semibold text-stone-800" data-translate-key="cart_title">購物車</h2><button id="cart-close-button" class="text-stone-500 hover:text-stone-800 transition-colors"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div><div id="cart-content" class="flex-grow"></div></div></div>
     
@@ -160,7 +227,7 @@
                 <div class="text-6xl text-stone-300 mb-4">🛒</div>
                 <h2 class="text-2xl font-bold font-serif text-stone-800 mb-2" data-translate-key="empty_cart_title">您的購物車是空的</h2>
                 <p class="text-stone-500 mb-6" data-translate-key="empty_cart_subtitle">立即探索我們的課程，開始您的皮拉提斯之旅吧！</p>
-                <a href="index.html" class="inline-block px-8 py-3 bg-[#c1bcb8] text-white rounded-full font-semibold hover:bg-[#b0a9a4] transition-colors" data-translate-key="browse_courses">
+                <a href="courses.html" class="inline-block px-8 py-3 bg-[#c1bcb8] text-white rounded-full font-semibold hover:bg-[#b0a9a4] transition-colors" data-translate-key="browse_courses">
                     瀏覽所有課程
                 </a>
             </div>
@@ -263,7 +330,7 @@
     
     <!-- Footer -->
     <footer class="bg-stone-800 text-stone-300 mt-16">
-        <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center"><img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" /><div class="flex justify-center space-x-6 my-6"><a href="index.html" class="hover:text-white transition-colors" data-translate-key="footer_all_courses">所有課程</a><a href="#" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a><a href="#" id="footer-login-link" class="hover:text-white transition-colors" data-translate-key="footer_member_login">會員登入</a></div><p class="my-4"><a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors"><span data-translate-key="footer_contact_email">客服信箱</span>：9spilates@gmail.com</a></p><div class="flex justify-center space-x-6 my-6"><a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-2xl"></i></a><a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Line"><i class="fab fa-line text-2xl"></i></a></div><p class="text-sm text-stone-400" data-translate-key="footer_copyright">© 2025 9's Pilates. 版權所有</p><div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500"><a href="terms.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a><span>|</span><a href="privacy.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a></div></div>
+        <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center"><img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" /><div class="flex justify-center space-x-6 my-6"><a href="courses.html" class="hover:text-white transition-colors" data-translate-key="footer_all_courses">所有課程</a><a href="#" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a><a href="#" id="footer-login-link" class="hover:text-white transition-colors" data-translate-key="footer_member_login">會員登入</a></div><p class="my-4"><a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors"><span data-translate-key="footer_contact_email">客服信箱</span>：9spilates@gmail.com</a></p><div class="flex justify-center space-x-6 my-6"><a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-2xl"></i></a><a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Line"><i class="fab fa-line text-2xl"></i></a></div><p class="text-sm text-stone-400" data-translate-key="footer_copyright">© 2025 9's Pilates. 版權所有</p><div class="flex justify-center space-x-4 mt-2 text-xs text-stone-500"><a href="terms.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_terms">使用條款</a><span>|</span><a href="privacy.html" class="hover:text-stone-300 transition-colors" data-translate-key="footer_privacy">隱私政策</a></div></div>
     </footer>
 
     <script>
@@ -276,6 +343,9 @@
                 'mobile_menu_title': 'Menu', 'cart_title': 'Shopping Cart', 'cart_empty': 'Your cart is empty', 'cart_continue_shopping': 'Continue Shopping',
                 'cart_subtotal': 'Subtotal', 'cart_checkout': 'Checkout', 'footer_all_courses': 'All Courses', 'footer_member_login': 'Member Login', 'footer_contact_email': 'Contact Email',
                 'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved', 'footer_terms': 'Terms of Use', 'footer_privacy': 'Privacy Policy', 'logout_confirm': 'Are you sure you want to log out?', 'already_logged_in': 'You are already logged in.',
+                'login': 'Log In', 'logout': 'Log Out',
+                'notifications_announcements': 'Announcements', 'notifications_personal': 'Notifications', 'notifications_no_items': 'No items to show',
+                'notifications_view_all': 'View All', 'notifications_load_more': 'Load More',
                 'auth_login_title': 'Member Login', 'auth_login_subtitle': 'Log in to begin your Pilates journey', 'auth_email_label': 'Email', 'auth_email_placeholder': 'Enter your email',
                 'auth_password_label': 'Password', 'auth_password_placeholder': 'Enter your password', 'auth_show_password': 'Show', 'auth_hide_password': 'Hide',
                 'auth_login_button': 'Log In', 'auth_no_account': 'Don\'t have an account?', 'auth_signup_now': 'Sign up now', 'auth_login_error': 'Invalid email or password. Hint: test@example.com / password123',
@@ -300,6 +370,9 @@
                 'mobile_menu_title': '選單', 'cart_title': '購物車', 'cart_empty': '您的購物車是空的', 'cart_continue_shopping': '繼續選購',
                 'cart_subtotal': '小計', 'cart_checkout': '前往結帳', 'footer_all_courses': '所有課程', 'footer_member_login': '會員登入', 'footer_contact_email': '客服信箱',
                 'footer_copyright': '© 2025 9\'s Pilates. 版權所有', 'footer_terms': '使用條款', 'footer_privacy': '隱私政策', 'logout_confirm': '您確定要登出嗎？', 'already_logged_in': '您已經登入。',
+                'login': '登入', 'logout': '登出',
+                'notifications_announcements': '公告', 'notifications_personal': '通知', 'notifications_no_items': '目前沒有任何項目',
+                'notifications_view_all': '查看全部', 'notifications_load_more': '載入更多',
                 'auth_login_title': '會員登入', 'auth_login_subtitle': '登入開始您的皮拉提斯之旅', 'auth_email_label': '電子郵件', 'auth_email_placeholder': '輸入您的電子郵件',
                 'auth_password_label': '密碼', 'auth_password_placeholder': '輸入您的密碼', 'auth_show_password': '顯示', 'auth_hide_password': '隱藏',
                 'auth_login_button': '登入', 'auth_no_account': '還沒有帳號？', 'auth_signup_now': '立即註冊', 'auth_login_error': '電子郵件或密碼錯誤。提示：test@example.com / password123',
@@ -320,10 +393,25 @@
             }
         };
 
+        const dummyNotifications = {
+            announcements: [
+                { id: 1, content: {'zh-TW': '系統將於 08/15 凌晨 02:00-04:00 進行維護。', 'en': 'System maintenance will be performed on 08/15 from 02:00-04:00.'}, time: {'zh-TW': '2天前', 'en': '2 days ago'}, unread: true },
+                { id: 2, content: {'zh-TW': '新功能上線：課程進度追蹤已更新！', 'en': 'New Feature: Course progress tracking has been updated!'}, time: {'zh-TW': '5天前', 'en': '5 days ago'}, unread: false },
+            ],
+            personal: [
+                { id: 3, content: {'zh-TW': '您的「8週完美體態重塑」課程將於 10 天後到期。', 'en': 'Your "8-Week Transformation" course expires in 10 days.'}, time: {'zh-TW': '1小時前', 'en': '1 hour ago'}, unread: true },
+                { id: 4, content: {'zh-TW': '您已經一週沒有上課囉，記得回來動一動！', 'en': "You haven't taken a class in a week. Time to get moving!"}, time: {'zh-TW': '3天前', 'en': '3 days ago'}, unread: false },
+                { id: 10, content: {'zh-TW': '「核心強化」課程有新的學習資料。', 'en': 'New material available for "Core Strengthening" course.'}, time: {'zh-TW': '4天前', 'en': '4 days ago'}, unread: false },
+                { id: 11, content: {'zh-TW': '您的密碼已成功更新。', 'en': 'Your password was successfully updated.'}, time: {'zh-TW': '5天前', 'en': '5 days ago'}, unread: false },
+                { id: 12, content: {'zh-TW': '歡迎加入 9\'s Pilates Studio！', 'en': 'Welcome to 9\'s Pilates Studio!'}, time: {'zh-TW': '1週前', 'en': '1 week ago'}, unread: false },
+            ]
+        };
+
         // --- STATE ---
         let cartItems = [];
         let currentLanguage = 'zh-TW';
         let discountPercent = 0;
+        let visiblePersonalNotifications = 5;
 
         // --- DOM ELEMENTS ---
         const cartButton = document.getElementById('cart-button'), cartPanel = document.getElementById('cart-panel'), cartBackdrop = document.getElementById('cart-backdrop'), cartCloseButton = document.getElementById('cart-close-button'), cartContent = document.getElementById('cart-content'), cartItemCountBadge = document.getElementById('cart-item-count'), menuButton = document.getElementById('menu-button'), mobileMenuPanel = document.getElementById('mobile-menu-panel'), mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop'), mobileMenuCloseButton = document.getElementById('mobile-menu-close'), authModalBackdrop = document.getElementById('auth-modal-backdrop'), authModalContainer = document.getElementById('auth-modal-container'), authModalCloseBtn = document.getElementById('auth-modal-close-btn'), userIconButton = document.getElementById('user-icon-button'), footerLoginLink = document.getElementById('footer-login-link'), loginForm = document.getElementById('loginForm'), signupForm = document.getElementById('signupForm'), languageSwitcherButton = document.getElementById('language-switcher-button');
@@ -339,11 +427,12 @@
         const applyCouponBtn = document.getElementById('apply-coupon-btn');
         const couponInput = document.getElementById('coupon-code');
         const couponStatus = document.getElementById('coupon-status');
+        const notificationButton = document.getElementById('notification-button'), notificationPanel = document.getElementById('notification-panel'), notificationDot = document.getElementById('notification-dot'), loginLogoutButton = document.getElementById('login-logout-button'), mobileLoginLogoutLink = document.getElementById('mobile-login-logout-link');
         
         // --- I18N LOGIC ---
         const t = (key) => translations[currentLanguage][key] || key;
         const updateStaticText = () => { document.title = t('page_title_checkout'); document.documentElement.lang = currentLanguage; document.querySelectorAll('[data-translate-key]').forEach(el => { const key = el.dataset.translateKey; const translation = t(key); if (el.placeholder !== undefined) { el.placeholder = translation; } else if (key === 'auth_terms_agree') { const parts = currentLanguage === 'en' ? ['I agree to the ', ' and ', ''] : ['我同意 ', ' 與 ', '']; const termsLink = `<a href="terms.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Terms of Service' : '服務條款')}</a>`; const privacyLink = `<a href="privacy.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策')}</a>`; el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`; } else { el.textContent = translation; } }); document.querySelectorAll('.password-toggle').forEach(btn => { const input = btn.previousElementSibling; btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password'); });};
-        const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; updateStaticText(); renderPage(); };
+        const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; updateStaticText(); renderPage(); renderNotifications();};
         const initLanguage = () => { const savedLang = localStorage.getItem('pilatesLanguage'); const lang = savedLang || (navigator.language.startsWith('en') ? 'en' : 'zh-TW'); setLanguage(lang); };
 
         // --- AUTH & UI LOGIC ---
@@ -359,12 +448,15 @@
             }
             if(isLoggedIn) {
                 const user = JSON.parse(sessionStorage.getItem('user'));
-                if(user) {
+                if(user && document.getElementById('name')) {
                     document.getElementById('name').value = user.name;
                     document.getElementById('email').value = user.email;
                 }
             }
+            loginLogoutButton.textContent = isLoggedIn ? t('logout') : t('login');
+            mobileLoginLogoutLink.textContent = isLoggedIn ? t('logout') : t('login');
         };
+        const handleLogout = () => { if (confirm(t('logout_confirm'))) { sessionStorage.removeItem('isLoggedIn'); sessionStorage.removeItem('user'); window.location.href = 'index.html'; }};
         const performLogin = (user) => { sessionStorage.setItem('isLoggedIn', 'true'); sessionStorage.setItem('user', JSON.stringify(user)); closeAuthModal(); updateAuthUI(true); };
 
         // --- CART & RENDER LOGIC ---
@@ -374,15 +466,52 @@
         const renderOrderSummary = () => { orderSummaryItems.innerHTML = cartItems.map(item => `<div class="flex items-center space-x-4"><img src="${item.image}" alt="${item.title[currentLanguage]}" class="w-16 h-16 object-cover rounded-md flex-shrink-0"><div class="flex-grow"><p class="font-semibold text-sm">${item.title[currentLanguage]}</p><p class="text-xs text-stone-500">${item.quantity} x NT$ ${item.price.toLocaleString()}</p></div><p class="font-semibold text-sm">NT$ ${(item.quantity * item.price).toLocaleString()}</p></div>`).join(''); };
         const renderPage = () => { loadCart(); if (cartItems.length === 0 && !orderSuccessView.classList.contains('block')) { checkoutView.classList.add('hidden'); emptyCartView.classList.remove('hidden'); } else if (!orderSuccessView.classList.contains('block')) { emptyCartView.classList.add('hidden'); checkoutView.classList.remove('hidden'); renderOrderSummary(); renderPriceSummary(); updateAuthUI(checkLoginStatus()); } };
         
+        // --- Notification Logic ---
+        const renderNotifications = () => {
+            const singleItemHTML = (n) => `
+                <a href="#" class="notification-item ${n.unread ? 'unread' : ''}">
+                    <p>${n.content[currentLanguage]}</p>
+                    <time>${n.time[currentLanguage]}</time>
+                </a>
+            `;
+            // Announcements
+            const announcementsContainer = document.getElementById('latest-announcement-container');
+            const allAnnouncements = dummyNotifications.announcements;
+            document.getElementById('announcements-count').textContent = allAnnouncements.length;
+            if (allAnnouncements.length > 0) {
+                announcementsContainer.innerHTML = singleItemHTML(allAnnouncements[0]);
+            } else {
+                announcementsContainer.innerHTML = `<div class="p-4 text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`;
+            }
+            // Personal Notifications
+            const personalList = document.getElementById('personal-notifications-list');
+            const loadMoreBtn = document.getElementById('load-more-notifications');
+            const allPersonal = dummyNotifications.personal;
+            const visibleItems = allPersonal.slice(0, visiblePersonalNotifications);
+            if (visibleItems.length > 0) {
+                personalList.innerHTML = visibleItems.map(singleItemHTML).join('');
+            } else {
+                personalList.innerHTML = `<div class="p-4 text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`;
+            }
+            if (allPersonal.length > visiblePersonalNotifications) {
+                loadMoreBtn.classList.remove('hidden');
+            } else {
+                loadMoreBtn.classList.add('hidden');
+            }
+            // Unread dot
+            const hasUnread = [...allAnnouncements, ...allPersonal].some(n => n.unread);
+            notificationDot.classList.toggle('hidden', !hasUnread);
+        };
+
         // --- EVENT LISTENERS ---
         checkoutLoginBtn.addEventListener('click', () => openAuthModal('login'));
         applyCouponBtn.addEventListener('click', () => { const code = couponInput.value.trim().toUpperCase(); if (code === 'PILATES2025') { discountPercent = 0.15; couponStatus.textContent = t('coupon_applied'); couponStatus.className = 'text-xs text-center h-4 text-green-600'; } else { discountPercent = 0; couponStatus.textContent = t('invalid_coupon'); couponStatus.className = 'text-xs text-center h-4 text-red-500'; } renderPriceSummary(); });
-        paymentForm.addEventListener('submit', (e) => { e.preventDefault(); checkoutView.classList.add('hidden'); orderSuccessView.classList.remove('hidden'); localStorage.removeItem('pilatesCart'); updateCartCount(); window.scrollTo(0, 0); });
+        if(paymentForm) paymentForm.addEventListener('submit', (e) => { e.preventDefault(); checkoutView.classList.add('hidden'); orderSuccessView.classList.remove('hidden'); document.getElementById('checkout-page').scrollIntoView(); localStorage.removeItem('pilatesCart'); updateCartCount(); window.scrollTo(0, 0); });
         
         // --- Common Listeners ---
         const openCart = () => { cartPanel.classList.remove('translate-x-full'); cartBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeCart = () => { cartPanel.classList.add('translate-x-full'); cartBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
-        const updateCartCount = () => { const c = JSON.parse(localStorage.getItem('pilatesCart')||'[]'); const t = c.reduce((s, i) => s + i.quantity, 0); cartItemCountBadge.textContent = t; cartItemCountBadge.classList.toggle('hidden', t === 0); };
+        const updateCartCount = () => { const c = JSON.parse(localStorage.getItem('pilatesCart')||'[]'); const t = c.reduce((s, i) => s + (i.quantity || 1), 0); cartItemCountBadge.textContent = t; cartItemCountBadge.classList.toggle('hidden', t === 0); };
         cartButton.addEventListener('click', openCart); cartCloseButton.addEventListener('click', closeCart); cartBackdrop.addEventListener('click', closeCart);
         const openMobileMenu = () => { mobileMenuPanel.classList.remove('-translate-x-full'); mobileMenuBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeMobileMenu = () => { mobileMenuPanel.classList.add('-translate-x-full'); mobileMenuBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
@@ -390,13 +519,24 @@
         userIconButton.addEventListener('click', () => { if(checkLoginStatus()) window.location.href = 'dashboard.html'; else openAuthModal(); });
         footerLoginLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) alert(t('already_logged_in')); else openAuthModal(); });
         authModalBackdrop.addEventListener('click', closeAuthModal); authModalCloseBtn.addEventListener('click', closeAuthModal);
+        document.querySelectorAll('.auth-view-switch').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(e.target.closest('[data-view]').dataset.view); }); });
         loginForm.addEventListener('submit', (e) => { e.preventDefault(); const email = loginForm.querySelector('input[type="email"]').value; const password = loginForm.querySelector('input[type="password"]').value; const err = document.getElementById('login-error-message'); if (email === 'test@example.com' && password === 'password123') { err.style.display = 'none'; performLogin({ name: '測試使用者', email: 'test@example.com' }); } else { err.textContent = t('auth_login_error'); err.style.display = 'block'; } });
         signupForm.addEventListener('submit', (e) => { e.preventDefault(); const name = signupForm.querySelector('input[type="text"]').value; const email = signupForm.querySelector('input[type="email"]').value; performLogin({ name, email }); });
         languageSwitcherButton.addEventListener('click', () => setLanguage(currentLanguage === 'en' ? 'zh-TW' : 'en'));
+        loginLogoutButton.addEventListener('click', () => { if (checkLoginStatus()) { handleLogout(); } else { openAuthModal(); }});
+        mobileLoginLogoutLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { handleLogout(); } else { closeMobileMenu(); openAuthModal(); }});
+
+        notificationButton.addEventListener('click', (e) => { e.stopPropagation(); notificationPanel.classList.toggle('hidden'); });
+        document.addEventListener('click', (e) => { if (!notificationPanel.contains(e.target) && !notificationButton.contains(e.target)) { notificationPanel.classList.add('hidden'); }});
+        document.getElementById('load-more-notifications').addEventListener('click', () => {
+            visiblePersonalNotifications += 5;
+            renderNotifications();
+        });
 
         // --- INITIALIZATION ---
         initLanguage();
         updateCartCount();
+
     });
     </script>
 </body>
