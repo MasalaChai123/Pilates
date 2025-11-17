@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9's Pilates Studio - 所有課程</title>
+    <title>所有公告 - 9's Pilates Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
       body {
         font-family: 'Noto Sans TC', sans-serif;
         background-color: #efefef;
@@ -22,9 +19,9 @@
       .font-serif {
         font-family: 'Playfair Display', serif;
       }
-      .transform { transition: transform 0.3s ease-in-out; }
       .opacity-transition { transition: opacity 0.3s ease-in-out; }
-        .notification-item {
+      .transform { transition: transform 0.3s ease-in-out; }
+      .notification-item {
             padding: 0.75rem;
             border-radius: 0.5rem;
             transition: background-color 0.2s;
@@ -54,8 +51,24 @@
         #personal-notifications-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px;}
         #personal-notifications-list::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px;}
         #personal-notifications-list::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        
+        .announcement-card {
+            background-color: #fff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid #eae5da; /* A neutral border */
+        }
+        .announcement-card.unread {
+            border-left-color: #c1bcb8; /* Brand color for unread */
+        }
+        .announcement-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
     </style>
-    <style id="auth-modal-styles">
+     <style id="auth-modal-styles">
         /* Modal Container */
         .auth-modal-backdrop {
             position: fixed;
@@ -129,6 +142,7 @@
         .checkbox { width: 18px; height: 18px; accent-color: #c1bcb8; }
         .checkbox-label { font-size: 14px; color: #666; flex: 1; }
         .checkbox-label a { color: #c1bcb8; text-decoration: underline; }
+        .checkbox-label a:hover { color: #b0a9a4; }
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; gap: 8px; width: 100%; }
         .btn-primary { background: linear-gradient(135deg, #c1bcb8, #b0a9a4); color: white; box-shadow: 0 8px 25px rgba(193, 188, 184, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(193, 188, 184, 0.4); }
@@ -149,11 +163,16 @@
         .back-link { display: inline-flex; align-items: center; gap: 5px; color: #c1bcb8; font-size: 14px; margin-bottom: 20px; cursor: pointer; }
         .success-message { background: linear-gradient(135deg, #00b894, #00a085); color: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: 500; display: none; }
         .success-message.show { display: block; }
-        .auth-modal-close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; color: #999; font-size: 24px; line-height: 1; padding: 5px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .auth-modal-close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; color: #999; font-size: 24px; line-height: 1; padding: 5px; }
+        .auth-modal-close-btn:hover { color: #333; }
+        @media (max-width: 480px) {
+            .auth-card { padding: 25px 20px; }
+            .auth-title { font-size: 22px; }
+        }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-800">
+<body class="bg-[#efefef] text-stone-800">
 
     <!-- Header -->
     <header class="sticky top-0 bg-[#e3dfdc]/80 backdrop-blur-md z-40 shadow-sm">
@@ -191,7 +210,7 @@
               <i aria-hidden="true" class="fas fa-shopping-cart text-xl"></i>
               <span id="cart-item-count" class="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#c1bcb8] text-xs font-medium text-white hidden">0</span>
             </button>
-            <button id="login-logout-button" class="hidden lg:block text-stone-600 hover:text-[#c1bcb8] transition-colors font-medium text-sm px-3 py-2 rounded-md"></button>
+             <button id="login-logout-button" class="hidden lg:block text-stone-600 hover:text-[#c1bcb8] transition-colors font-medium text-sm px-3 py-2 rounded-md"></button>
             <button id="menu-button" class="lg:hidden text-stone-600 hover:text-[#c1bcb8] transition-colors" aria-label="Open menu">
               <i aria-hidden="true" class="fas fa-bars text-xl"></i>
             </button>
@@ -266,7 +285,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Auth Modal -->
     <div id="auth-modal-backdrop" class="auth-modal-backdrop"></div>
     <div id="auth-modal-container" class="auth-modal-container">
@@ -276,8 +295,7 @@
             <div id="loginView" class="auth-view active">
                 <div class="auth-header">
                     <h1 class="auth-title" data-translate-key="auth_login_title">會員登入</h1>
-                    <p id="auth-context-subtitle" class="auth-subtitle" style="display: none; color: #a8a29e; font-weight: 500;"></p>
-                    <p id="auth-default-subtitle" class="auth-subtitle" data-translate-key="auth_login_subtitle">登入開始您的皮拉提斯之旅</p>
+                    <p class="auth-subtitle" data-translate-key="auth_login_subtitle">登入開始您的皮拉提斯之旅</p>
                 </div>
                 <form id="loginForm">
                     <div class="form-group">
@@ -301,8 +319,8 @@
                 </form>
                 <div class="divider"><span data-translate-key="auth_or">或</span></div>
                 <div class="social-buttons">
-                    <a href="/auth/google/redirect" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-translate-key="auth_google_login">使用 Google 登入</span></span></a>
-                    <a href="/auth/line/redirect" class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span data-translate-key="auth_line_login">使用 LINE 登入</span></span></a>
+                    <button class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-translate-key="auth_google_login">使用 Google 登入</span></span></button>
+                    <button class="btn btn-social"><span><svg viewBox="0 0 24 24" fill="#666"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg><span data-translate-key="auth_line_login">使用 LINE 登入</span></span></button>
                 </div>
                 <div class="auth-switch"><span data-translate-key="auth_no_account">還沒有帳號？</span> <a class="auth-view-switch" data-view="signup" data-translate-key="auth_signup_now">立即註冊</a></div>
             </div>
@@ -334,31 +352,28 @@
     </div>
 
 
-    <main>
-        <!-- Courses Hero Section -->
-        <section class="bg-stone-200 py-16 md:py-24 text-center" style="background-image: url('https://images.pexels.com/photos/4057737/pexels-photo-4057737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); background-size: cover; background-position: center;">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 bg-black/20 py-12 rounded-xl">
-                <h1 class="text-4xl sm:text-5xl font-serif font-bold text-white tracking-tight" data-translate-key="courses_hero_title">所有課程</h1>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-100" data-translate-key="courses_hero_subtitle">探索我們精心設計的課程，找到最適合您身心需求的皮拉提斯旅程。</p>
+    <main class="py-12 md:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-serif font-bold text-stone-800 tracking-tight" data-translate-key="announcements_title">所有公告</h1>
+                <p class="mt-4 text-lg text-stone-600" data-translate-key="announcements_subtitle">查看所有系統維護、更新與活動資訊。</p>
             </div>
-        </section>
-
-        <div id="course-sections-container">
-            <!-- Course sections will be injected by JavaScript -->
+            <div id="announcements-list" class="max-w-3xl mx-auto space-y-6">
+                <!-- Announcements will be injected here by JavaScript -->
+            </div>
         </div>
-
     </main>
-
-    <!-- Footer -->
+    
+    <!-- Main Footer -->
     <footer class="bg-stone-800 text-stone-300">
-        <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+         <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
             <img class="h-12 w-auto mx-auto mb-4" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNzgiIHZpZXdCb3g9IjAgMCAzMDAgNzgiPjxzdHlsZT4ud2VpZ2h0LTkwMCB7IGZvbnQtd2VpZ2h0OiA5MDA7IH0gLmN1cnNpdmUgeyBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXksIHNlcmlmJzsgZm9udC1zdHlsZTogaXRhbGljOyB9IC5zZXJpZiB7IGZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyB9PC9zdHlsZT48dGV4dCB4PSIxMCIgeT0iNzAiIGZvbnQtZmFtaWx5PSJQbGF5ZmFpciBEaXNwbGF5LCBzZXJpZiIgZm9udC1zaXplPSI5MCIgZmlsbD0iI2ZmZiI+PXRzcGFuIHg9IjEwIiBkeT0iMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiPkY8L3RzcGFuPjx0c3BhbiB4PSI0OCIgZHk9IjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj5GOy90c3Bhbj48L3RleHQ+PHRleHQgeD0iMTA1IiB5PSI1MiIgc3R5bGU9ImZvbnQtZmFtaWx5OiAnUGxheWZhaXIgRGlzcGxheScsIHNlcmlmOyBmb250LXNpemU6IDI4cHc7IGxldHRlci1zcGFjaW5nOiAycHg7IGZpbGw6ICNmZmY7Ij48dHNwYW4geD0iMTA1IiBkeT0iMCIgY2xhc3M9ImN1cnNpdmUiPjwnczwvdHNwYW4+PHRzcGFuIHg9IjE0MCIgZHk9IiI+IFBJTFRFUzwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="9's Pilates" />
             <div class="flex justify-center space-x-6 my-6">
                 <a href="courses.html" class="hover:text-white transition-colors" data-translate-key="footer_all_courses">所有課程</a>
                 <a href="#" class="hover:text-white transition-colors" data-translate-key="nav_faq">常見問題</a>
                 <a href="#" id="footer-login-link" class="hover:text-white transition-colors" data-translate-key="footer_member_login">會員登入</a>
             </div>
-            <p class="my-4">
+             <p class="my-4">
                 <a href="mailto:9spilates@gmail.com" class="hover:text-white transition-colors"><span data-translate-key="footer_contact_email">客服信箱</span>：9spilates@gmail.com</a>
             </p>
             <div class="flex justify-center space-x-6 my-6">
@@ -378,22 +393,22 @@
         </div>
     </footer>
 
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         // --- TRANSLATIONS ---
         const translations = {
             'en': {
-                'page_title_courses': "All Courses - 9's Pilates Studio",
+                'page_title_announcements': "All Announcements - 9's Pilates Studio",
                 'nav_single_session': 'Single Session', 'nav_thematic_unit': 'Thematic Unit', 'nav_sculpting_plan': 'Body Sculpting', 'nav_faq': 'FAQ',
                 'mobile_menu_title': 'Menu', 'cart_title': 'Shopping Cart', 'cart_empty': 'Your cart is empty', 'cart_continue_shopping': 'Continue Shopping',
                 'cart_subtotal': 'Subtotal', 'cart_checkout': 'Checkout', 'footer_all_courses': 'All Courses', 'footer_member_login': 'Member Login',
-                'footer_contact_email': 'Contact Email', 'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved', 'footer_terms': 'Terms of Use',
-                'footer_privacy': 'Privacy Policy', 'already_logged_in': 'You are already logged in.', 'login': 'Log In', 'logout': 'Log Out', 'logout_confirm': 'Are you sure you want to log out?',
+                'footer_contact_email': 'Contact Email', 'footer_copyright': '© 2025 9\'s Pilates. All Rights Reserved', 'footer_terms': 'Terms of Use', 'footer_privacy': 'Privacy Policy',
+                'already_logged_in': 'You are already logged in.', 'login': 'Log In', 'logout': 'Log Out', 'logout_confirm': 'Are you sure you want to log out?',
                 'notifications_announcements': 'Announcements', 'notifications_personal': 'Notifications', 'notifications_no_items': 'No items to show',
                 'notifications_view_all': 'View All', 'notifications_load_more': 'Load More',
-                'courses_hero_title': 'All Courses', 'courses_hero_subtitle': 'Explore our thoughtfully designed courses and find the perfect Pilates journey for your mind and body.',
-                'add_to_cart': 'Add to Cart', 'view_details': 'Details',
-                'auth_login_to_add_cart': 'Please log in to add this item to your cart.',
+                'announcements_title': 'All Announcements',
+                'announcements_subtitle': 'View all system maintenance, updates, and event information.',
                 'auth_login_title': 'Member Login', 'auth_login_subtitle': 'Log in to begin your Pilates journey',
                 'auth_email_label': 'Email', 'auth_email_placeholder': 'Enter your email', 'auth_password_label': 'Password', 'auth_password_placeholder': 'Enter your password',
                 'auth_show_password': 'Show', 'auth_hide_password': 'Hide', 'auth_remember_me': 'Remember me', 'auth_login_button': 'Log In',
@@ -410,7 +425,7 @@
                 'auth_signup_error': 'An error occurred. Please try again.',
             },
             'zh-TW': {
-                'page_title_courses': "9's Pilates Studio - 所有課程",
+                'page_title_announcements': "所有公告 - 9's Pilates Studio",
                 'nav_single_session': '單堂體驗', 'nav_thematic_unit': '主題單元', 'nav_sculpting_plan': '體態雕塑', 'nav_faq': '常見問題',
                 'mobile_menu_title': '選單', 'cart_title': '購物車', 'cart_empty': '您的購物車是空的', 'cart_continue_shopping': '繼續選購',
                 'cart_subtotal': '小計', 'cart_checkout': '前往結帳', 'footer_all_courses': '所有課程', 'footer_member_login': '會員登入',
@@ -418,9 +433,8 @@
                 'footer_privacy': '隱私政策', 'already_logged_in': '您已經登入。', 'login': '登入', 'logout': '登出', 'logout_confirm': '您確定要登出嗎？',
                 'notifications_announcements': '公告', 'notifications_personal': '通知', 'notifications_no_items': '目前沒有任何項目',
                 'notifications_view_all': '查看全部', 'notifications_load_more': '載入更多',
-                'courses_hero_title': '所有課程', 'courses_hero_subtitle': '探索我們精心設計的課程，找到最適合您身心需求的皮拉提斯旅程。',
-                'add_to_cart': '加入購物車', 'view_details': '查看',
-                'auth_login_to_add_cart': '請先登入以將課程加入購物車。',
+                'announcements_title': '所有公告',
+                'announcements_subtitle': '查看所有系統維護、更新與活動資訊。',
                 'auth_login_title': '會員登入', 'auth_login_subtitle': '登入開始您的皮拉提斯之旅', 'auth_email_label': '電子郵件',
                 'auth_email_placeholder': '輸入您的電子郵件', 'auth_password_label': '密碼', 'auth_password_placeholder': '輸入您的密碼',
                 'auth_show_password': '顯示', 'auth_hide_password': '隱藏', 'auth_remember_me': '記住我', 'auth_login_button': '登入',
@@ -432,8 +446,7 @@
                 'auth_already_have_account': '已經有帳號？', 'auth_login_now': '立即登入', 'auth_back_to_login': '返回登入',
                 'auth_forgot_password_title': '忘記密碼', 'auth_forgot_password_subtitle': '輸入您的電子郵件，我們會發送密碼重設連結給您',
                 'auth_forgot_password_success': '重設密碼連結已發送至您的信箱！', 'auth_registered_email_placeholder': '輸入您註冊的電子郵件',
-                'auth_send_reset_link_button': '發送重設連結',
-                'auth_login_error': '電子郵件或密碼錯誤。提示：test@example.com / password123',
+                'auth_send_reset_link_button': '發送重設連結', 'auth_login_error': '電子郵件或密碼錯誤。提示：test@example.com / password123',
                 'auth_passwords_no_match': '兩次輸入的密碼不一致。', 'auth_signup_error': '註冊時發生錯誤，請稍後再試。',
             }
         };
@@ -453,40 +466,8 @@
                 { id: 15, content: {'zh-TW': '朋友 Yating W. 也加入了「美體雕塑」課程。', 'en': 'Your friend Yating W. also joined "Body Sculpting".'}, time: {'zh-TW': '3週前', 'en': '3 weeks ago'}, unread: false }
             ]
         };
-        const courseData = {
-          sections: [
-            {
-              id: 'single-session', 
-              category: {'zh-TW': '單堂課程', 'en': 'Single Session'}, 
-              courses: [
-                { id: 1, title: {'zh-TW': "久坐上班族：全⾝活化⽪拉提斯", 'en': "Desk Worker's Relief: Full Body Activation"}, subtitle: {'zh-TW': "單堂上上看 | 60 minutes", 'en': "Single Session | 60 minutes"}, price: 800, image: "https://images.unsplash.com/photo-1599447462856-c74143780775?q=80&w=1287&auto=format&fit=crop" },
-                { id: 2, title: {'zh-TW': "核心強化：穩定與力量", 'en': "Core Strengthening: Stability & Power"}, subtitle: {'zh-TW': "核心挑戰 | 60 minutes", 'en': "Core Challenge | 60 minutes"}, price: 850, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop" },
-                { id: 3, title: {'zh-TW': "美體雕塑：曲線與伸展", 'en': "Body Sculpting: Curves & Stretches"}, subtitle: {'zh-TW': "優雅體態 | 60 minutes", 'en': "Elegant Posture | 60 minutes"}, price: 850, image: "https://images.unsplash.com/photo-1549576490-9426cf64ab4a?q=80&w=1470&auto=format&fit=crop" },
-                { id: 4, title: {'zh-TW': "孕婦皮拉提斯：溫和與支持", 'en': "Prenatal Pilates: Gentle & Supportive"}, subtitle: {'zh-TW': "孕期呵護 | 60 minutes", 'en': "Pregnancy Care | 60 minutes"}, price: 900, image: "https://images.unsplash.com/photo-1588533639019-215264b3697e?q=80&w=1323&auto=format&fit=crop" },
-              ]
-            },
-             {
-              id: 'thematic-unit', 
-              category: {'zh-TW': '主題單元', 'en': 'Thematic Unit'}, 
-              courses: [
-                { id: 5, title: {'zh-TW': "四周告別圓肩駝背", 'en': "4 Weeks to Fix Rounded Shoulders"}, subtitle: {'zh-TW': "挺拔姿態 | 4堂課", 'en': "Upright Posture | 4 Classes"}, price: 3200, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1470&auto=format&fit=crop" },
-                { id: 6, title: {'zh-TW': "四周打造緊實翹臀", 'en': "4 Weeks to a Firm, Lifted Glutes"}, subtitle: {'zh-TW': "蜜桃臀計畫 | 4堂課", 'en': "Peach Glute Plan | 4 Classes"}, price: 3400, image: "https://images.unsplash.com/photo-1603511422340-9a99b61d5b3c?q=80&w=1287&auto=format&fit=crop" },
-              ]
-            },
-            {
-              id: 'sculpting-plan', 
-              category: {'zh-TW': '體態雕塑', 'en': 'Body Sculpting'}, 
-              courses: [
-                { id: 7, title: {'zh-TW': "8週完美體態重塑", 'en': "8-Week Perfect Posture Transformation"}, subtitle: {'zh-TW': "煥然一新 | 8堂課", 'en': "Total Makeover | 8 Classes"}, price: 7800, image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1287&auto=format&fit=crop" },
-                { id: 8, title: {'zh-TW': "12週進階核心與流動", 'en': "12-Week Advanced Core & Flow"}, subtitle: {'zh-TW': "巔峰挑戰 | 12堂課", 'en': "Peak Challenge | 12 Classes"}, price: 12800, image: "https://images.unsplash.com/photo-1575052814086-c384b2235f04?q=80&w=1287&auto=format&fit=crop" },
-              ]
-            }
-          ],
-          findCourseById(id) { for (const section of this.sections) { const found = section.courses.find(course => course.id === id); if (found) return { ...found, category: section.category }; } return null; }
-        };
-
+        
         let cartItems = [];
-        let courseIdToAddAfterLogin = null;
         let currentLanguage = 'zh-TW';
         let visiblePersonalNotifications = 5;
 
@@ -496,19 +477,28 @@
         const t = (key) => translations[currentLanguage][key] || key;
 
         const updateStaticText = () => {
-            document.title = t('page_title_courses');
+            document.title = t('page_title_announcements');
             document.documentElement.lang = currentLanguage;
             document.querySelectorAll('[data-translate-key]').forEach(el => {
                 const key = el.dataset.translateKey;
                 const translation = t(key);
-                if (el.placeholder !== undefined) { el.placeholder = translation; } 
+                if (el.placeholder !== undefined) { el.placeholder = translation; }
                 else if (el.tagName === 'INPUT' && el.type === 'submit' || el.tagName === 'BUTTON') { const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE); if (textNode) { textNode.textContent = translation + ' '; } else if (el.querySelector('span')) { el.querySelector('span').textContent = translation; } else { el.textContent = translation; } }
                 else if (key === 'auth_terms_agree') { const parts = currentLanguage === 'en' ? ['I agree to the ', ' and ', ''] : ['我同意 ', ' 與 ', '']; const termsLink = `<a href="terms.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Terms of Service' : '服務條款')}</a>`; const privacyLink = `<a href="privacy.html" target="_blank" class="underline hover:text-[#b0a9a4]">${(currentLanguage === 'en' ? 'Privacy Policy' : '隱私政策')}</a>`; el.innerHTML = `${parts[0]}${termsLink}${parts[1]}${privacyLink}${parts[2]}`; }
                 else { el.innerHTML = translation; }
             });
             document.querySelectorAll('.password-toggle').forEach(btn => { const input = btn.previousElementSibling; btn.textContent = t(input.type === 'password' ? 'auth_show_password' : 'auth_hide_password'); });
         };
-        const setLanguage = (lang) => { currentLanguage = lang; localStorage.setItem('pilatesLanguage', lang); document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; renderPage(); };
+        
+        const setLanguage = (lang) => { 
+            currentLanguage = lang; 
+            localStorage.setItem('pilatesLanguage', lang); 
+            document.getElementById('current-lang-text').textContent = lang === 'en' ? 'EN' : '繁中'; 
+            updateStaticText(); 
+            renderCart(); 
+            renderNotifications(); 
+            renderAllAnnouncements();
+        };
         const initLanguage = () => { const savedLang = localStorage.getItem('pilatesLanguage') || (navigator.language.startsWith('en') ? 'en' : 'zh-TW'); setLanguage(savedLang); };
 
         const checkLoginStatus = () => { const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true'; updateAuthUI(isLoggedIn); return isLoggedIn; };
@@ -518,66 +508,72 @@
             loginLogoutButton.textContent = isLoggedIn ? t('logout') : t('login');
             mobileLoginLogoutLink.textContent = isLoggedIn ? t('logout') : t('login');
         };
-        const performLogin = (user) => { sessionStorage.setItem('isLoggedIn', 'true'); sessionStorage.setItem('user', JSON.stringify(user)); checkLoginStatus(); closeAuthModal(); if (courseIdToAddAfterLogin) { addToCart(courseIdToAddAfterLogin); courseIdToAddAfterLogin = null; }};
+        const performLogin = (user) => { sessionStorage.setItem('isLoggedIn', 'true'); sessionStorage.setItem('user', JSON.stringify(user)); checkLoginStatus(); closeAuthModal(); };
         const handleUserIconClick = () => { if (checkLoginStatus()) { window.location.href = 'dashboard.html'; } else { openAuthModal(); } };
-        const openAuthModal = (view = 'login', context = 'generic') => { document.getElementById('auth-default-subtitle').style.display = context === 'addToCart' ? 'none' : 'block'; document.getElementById('auth-context-subtitle').style.display = context === 'addToCart' ? 'block' : 'none'; document.getElementById('auth-context-subtitle').textContent = t('auth_login_to_add_cart'); document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); authModalBackdrop.classList.add('active'); authModalContainer.classList.add('active'); };
-        const closeAuthModal = () => { authModalBackdrop.classList.remove('active'); authModalContainer.classList.remove('active'); setTimeout(() => { if (document.getElementById('auth-default-subtitle')) document.getElementById('auth-default-subtitle').style.display = 'block'; if (document.getElementById('auth-context-subtitle')) document.getElementById('auth-context-subtitle').style.display = 'none'; const loginError = document.getElementById('login-error-message'); const signupError = document.getElementById('signup-error-message'); if (loginError) loginError.style.display = 'none'; if (signupError) signupError.style.display = 'none'; }, 300); };
+        const openAuthModal = (view = 'login', context = 'generic') => { 
+            const authContextSubtitle = document.getElementById('auth-context-subtitle');
+            const authDefaultSubtitle = document.getElementById('auth-default-subtitle');
+            if(authDefaultSubtitle) authDefaultSubtitle.style.display = 'block';
+            if(authContextSubtitle) authContextSubtitle.style.display = 'none';
+
+            document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); authModalBackdrop.classList.add('active'); authModalContainer.classList.add('active'); 
+        };
+        const closeAuthModal = () => { 
+            authModalBackdrop.classList.remove('active'); authModalContainer.classList.remove('active'); 
+            setTimeout(() => { 
+                const loginError = document.getElementById('login-error-message'); const signupError = document.getElementById('signup-error-message'); 
+                if (loginError) loginError.style.display = 'none'; if (signupError) signupError.style.display = 'none'; 
+            }, 300); 
+        };
 
         const renderNotifications = () => {
-            const singleItemHTML = (n) => `<a href="#" class="notification-item ${n.unread ? 'unread' : ''}"><p>${n.content[currentLanguage]}</p><time>${n.time[currentLanguage]}</time></a>`;
+            const singleItemHTML = (n) => `
+                <a href="#" class="notification-item ${n.unread ? 'unread' : ''}">
+                    <p>${n.content[currentLanguage]}</p>
+                    <time>${n.time[currentLanguage]}</time>
+                </a>
+            `;
             const announcementsContainer = document.getElementById('latest-announcement-container');
             const allAnnouncements = dummyNotifications.announcements;
-            document.getElementById('announcements-count').textContent = allAnnouncements.length;
-            if (allAnnouncements.length > 0) { announcementsContainer.innerHTML = singleItemHTML(allAnnouncements[0]); } else { announcementsContainer.innerHTML = `<div class="p-4 text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`; }
+            if (announcementsContainer) {
+                document.getElementById('announcements-count').textContent = allAnnouncements.length;
+                if (allAnnouncements.length > 0) { announcementsContainer.innerHTML = singleItemHTML(allAnnouncements[0]); } 
+                else { announcementsContainer.innerHTML = `<div class="text-center text-sm text-stone-500 p-4">${t('notifications_no_items')}</div>`; }
+            }
             const personalList = document.getElementById('personal-notifications-list');
             const loadMoreBtn = document.getElementById('load-more-notifications');
-            const allPersonal = dummyNotifications.personal;
-            const visibleItems = allPersonal.slice(0, visiblePersonalNotifications);
-            if (visibleItems.length > 0) { personalList.innerHTML = visibleItems.map(singleItemHTML).join(''); } else { personalList.innerHTML = `<div class="p-4 text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`; }
-            loadMoreBtn.classList.toggle('hidden', allPersonal.length <= visiblePersonalNotifications);
-            const hasUnread = [...allAnnouncements, ...allPersonal].some(n => n.unread);
-            notificationDot.classList.toggle('hidden', !hasUnread);
+            if (personalList) {
+                const allPersonal = dummyNotifications.personal;
+                const visibleItems = allPersonal.slice(0, visiblePersonalNotifications);
+                if (visibleItems.length > 0) { personalList.innerHTML = visibleItems.map(singleItemHTML).join(''); } 
+                else { personalList.innerHTML = `<div class="text-center text-sm text-stone-500 p-4">${t('notifications_no_items')}</div>`; }
+                if (loadMoreBtn) {
+                    if (allPersonal.length > visiblePersonalNotifications) { loadMoreBtn.classList.remove('hidden');} 
+                    else { loadMoreBtn.classList.add('hidden'); }
+                }
+            }
+            if (notificationDot) {
+                const hasUnread = [...dummyNotifications.announcements, ...dummyNotifications.personal].some(n => n.unread);
+                notificationDot.classList.toggle('hidden', !hasUnread);
+            }
         };
 
-        const renderCourseSections = () => {
-            const container = document.getElementById('course-sections-container');
-            let content = '';
-            courseData.sections.forEach((section, index) => {
-                const bgClass = index % 2 === 0 ? 'bg-stone-50' : 'bg-white';
-                content += `
-                    <section id="${section.id}" class="py-16 md:py-20 ${bgClass}">
-                        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                            <h2 class="text-3xl lg:text-4xl font-serif font-bold text-stone-800 text-center mb-10">${section.category[currentLanguage]}</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                                ${section.courses.map(course => `
-                                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                                        <a href="course-details.html?id=${course.id}" class="block">
-                                            <div class="relative">
-                                                <img src="${course.image}" alt="${course.title[currentLanguage]}" class="w-full h-48 object-cover">
-                                                <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                                    <span class="text-white border-2 border-white rounded-full px-4 py-2 text-sm font-semibold">${t('view_details')}</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="p-6 flex flex-col flex-grow">
-                                            <h3 class="text-lg font-bold text-stone-800 flex-grow">${course.title[currentLanguage]}</h3>
-                                            <p class="text-sm text-stone-500 mt-1">${course.subtitle[currentLanguage]}</p>
-                                            <div class="mt-4 flex justify-between items-center">
-                                                <p class="text-xl font-semibold text-[#c1bcb8]">NT$ ${course.price.toLocaleString()}</p>
-                                                <button class="add-to-cart-btn text-sm text-stone-600 hover:text-stone-900 border border-stone-300 rounded-full px-4 py-2 transition-all" data-course-id="${course.id}">${t('add_to_cart')}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </section>
-                `;
-            });
-            container.innerHTML = content;
+        const renderAllAnnouncements = () => {
+            const container = document.getElementById('announcements-list');
+            if (!container) return;
+            const allAnnouncements = dummyNotifications.announcements;
+            if (allAnnouncements.length > 0) {
+                container.innerHTML = allAnnouncements.map(n => `
+                    <div class="announcement-card ${n.unread ? 'unread' : ''}">
+                        <p class="text-stone-700">${n.content[currentLanguage]}</p>
+                        <time class="text-sm text-stone-400 mt-2 block">${n.time[currentLanguage]}</time>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = `<div class="text-center py-16 px-6 bg-white rounded-lg shadow-md"><p>${t('notifications_no_items')}</p></div>`;
+            }
         };
 
-        const renderPage = () => { updateStaticText(); renderCart(); renderNotifications(); renderCourseSections(); setupAddToCartListeners(); };
         const renderCart = () => {
             if (cartItems.length === 0) {
                 cartContent.innerHTML = `<div class="flex-grow flex flex-col items-center justify-center text-center p-6 h-full"><p class="text-stone-500">${t('cart_empty')}</p><button id="cart-continue-shopping" class="mt-4 px-6 py-2 bg-[#c1bcb8] text-white rounded-full hover:bg-[#b0a9a4] transition-colors">${t('cart_continue_shopping')}</button></div>`;
@@ -591,16 +587,12 @@
         };
 
         const updateCartCount = () => { const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0); if (totalItems > 0) { cartItemCountBadge.textContent = totalItems; cartItemCountBadge.classList.remove('hidden'); } else { cartItemCountBadge.classList.add('hidden'); } };
-        const saveCart = () => localStorage.setItem('pilatesCart', JSON.stringify(cartItems));
-        const loadCart = () => { cartItems = JSON.parse(localStorage.getItem('pilatesCart') || '[]'); };
-        const addToCart = (courseId) => { if (!checkLoginStatus()) { courseIdToAddAfterLogin = courseId; openAuthModal('login', 'addToCart'); return; } const existingItem = cartItems.find(item => item.id === courseId); if (existingItem) { existingItem.quantity++; } else { const courseToAdd = courseData.findCourseById(courseId); if (courseToAdd) { cartItems.push({ ...courseToAdd, quantity: 1 }); } } saveCart(); renderCart(); openCart(); };
+        const loadCart = () => { const savedCart = localStorage.getItem('pilatesCart'); if (savedCart) { cartItems = JSON.parse(savedCart); } else { cartItems = []; } };
         const openCart = () => { cartPanel.classList.remove('translate-x-full'); cartBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeCart = () => { cartPanel.classList.add('translate-x-full'); cartBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
         const openMobileMenu = () => { mobileMenuPanel.classList.remove('-translate-x-full'); mobileMenuBackdrop.classList.remove('opacity-0', 'pointer-events-none'); };
         const closeMobileMenu = () => { mobileMenuPanel.classList.add('-translate-x-full'); mobileMenuBackdrop.classList.add('opacity-0', 'pointer-events-none'); };
         
-        const setupAddToCartListeners = () => { document.querySelectorAll('.add-to-cart-btn').forEach(button => { button.addEventListener('click', (e) => { const courseId = parseInt(e.target.dataset.courseId); addToCart(courseId); }); }); };
-
         cartButton.addEventListener('click', openCart); cartCloseButton.addEventListener('click', closeCart); cartBackdrop.addEventListener('click', closeCart);
         menuButton.addEventListener('click', openMobileMenu); mobileMenuCloseButton.addEventListener('click', closeMobileMenu); mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
         userIconButton.addEventListener('click', handleUserIconClick);
@@ -611,13 +603,21 @@
         loginForm.addEventListener('submit', (e) => { e.preventDefault(); const emailInput = loginForm.querySelector('input[type="email"]'); const passwordInput = loginForm.querySelector('input[type="password"]'); const errorMessage = document.getElementById('login-error-message'); if (emailInput.value === 'test@example.com' && passwordInput.value === 'password123') { errorMessage.style.display = 'none'; performLogin({ name: '測試使用者', email: 'test@example.com' }); } else { errorMessage.textContent = t('auth_login_error'); errorMessage.style.display = 'block'; } });
         signupForm.addEventListener('submit', (e) => { e.preventDefault(); const nameInput = signupForm.querySelector('input[type="text"]'); const emailInput = signupForm.querySelector('input[type="email"]'); const passwordInput = signupForm.querySelectorAll('input[type="password"]')[0]; const confirmPasswordInput = signupForm.querySelectorAll('input[type="password"]')[1]; const errorMessage = document.getElementById('signup-error-message'); if (passwordInput.value !== confirmPasswordInput.value) { errorMessage.textContent = t('auth_passwords_no_match'); errorMessage.style.display = 'block'; return; } errorMessage.style.display = 'none'; performLogin({ name: nameInput.value, email: emailInput.value }); });
         languageSwitcherButton.addEventListener('click', () => { const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en'; setLanguage(newLang); });
+        
         loginLogoutButton.addEventListener('click', () => { if (checkLoginStatus()) { handleLogout(); } else { openAuthModal(); }});
         mobileLoginLogoutLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { handleLogout(); } else { closeMobileMenu(); openAuthModal(); }});
         notificationButton.addEventListener('click', (e) => { e.stopPropagation(); notificationPanel.classList.toggle('hidden'); });
         document.addEventListener('click', (e) => { if (!notificationPanel.contains(e.target) && !notificationButton.contains(e.target)) { notificationPanel.classList.add('hidden'); }});
-        document.getElementById('load-more-notifications').addEventListener('click', () => { visiblePersonalNotifications += 5; renderNotifications(); });
-        
-        const init = () => { checkLoginStatus(); loadCart(); initLanguage(); };
+        document.getElementById('load-more-notifications').addEventListener('click', () => {
+            visiblePersonalNotifications += 5;
+            renderNotifications();
+        });
+
+        const init = () => { 
+            checkLoginStatus(); 
+            loadCart(); 
+            initLanguage(); 
+        };
         init();
     });
     </script>

@@ -218,7 +218,7 @@
         <div class="p-3 border-b border-stone-200 flex-shrink-0">
             <div class="flex justify-between items-center mb-1">
                 <h3 class="font-semibold text-stone-700" data-translate-key="notifications_announcements">公告</h3>
-                <a href="#" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
+                <a href="announcements.html" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
                     <span data-translate-key="notifications_view_all">查看全部</span> (<span id="announcements-count">0</span>)
                     <i class="fas fa-chevron-right text-xs ml-1"></i>
                 </a>
@@ -666,7 +666,7 @@
                     <div class="mt-16 text-center bg-white p-8 rounded-lg shadow-md">
                         <h3 class="text-2xl font-serif font-bold text-stone-800">${t('more_courses_title')}</h3>
                         <p class="mt-2 text-stone-500 max-w-lg mx-auto">${t('more_courses_subtitle')}</p>
-                        <a href="courses.html" class="mt-6 inline-block px-8 py-3 bg-[#c1bcb8] text-white rounded-full font-semibold hover:bg-[#b0a9a4] transition-colors">${t('browse_courses')}</a>
+                        <a href="courses.html" class="inline-block px-8 py-3 bg-[#c1bcb8] text-white rounded-full font-semibold hover:bg-[#b0a9a4] transition-colors">${t('browse_courses')}</a>
                     </div>
                 `;
             } else {
@@ -747,65 +747,30 @@
             initLanguage();
             loadCart();
             cartButton.addEventListener('click', openCart); cartCloseButton.addEventListener('click', closeCart); cartBackdrop.addEventListener('click', closeCart);
-            menuButton.addEventListener('click', openMobileMenu);--- START OF FILE checkout.html ---
+            menuButton.addEventListener('click', openMobileMenu);
+            mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
+            mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+            userIconButton.addEventListener('click', handleUserIconClick);
+            footerLoginLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { alert(t('already_logged_in')); } else { openAuthModal(); } });
+            authModalBackdrop.addEventListener('click', closeAuthModal);
+            authModalCloseBtn.addEventListener('click', closeAuthModal);
+            document.querySelectorAll('.auth-view-switch').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(e.target.closest('[data-view]').dataset.view); }); });
+            document.querySelectorAll('.password-toggle').forEach(button => { button.addEventListener('click', () => { const passwordInput = button.previousElementSibling; if (passwordInput.type === 'password') { passwordInput.type = 'text'; button.textContent = t('auth_hide_password'); } else { passwordInput.type = 'password'; button.textContent = t('auth_show_password'); } }); });
+            loginForm.addEventListener('submit', (e) => { e.preventDefault(); const emailInput = loginForm.querySelector('input[type="email"]'); const passwordInput = loginForm.querySelector('input[type="password"]'); const errorMessage = document.getElementById('login-error-message'); if (emailInput.value === 'test@example.com' && passwordInput.value === 'password123') { errorMessage.style.display = 'none'; performLogin({ name: '測試使用者', email: 'test@example.com' }); } else { errorMessage.textContent = t('auth_login_error'); errorMessage.style.display = 'block'; } });
+            signupForm.addEventListener('submit', (e) => { e.preventDefault(); const nameInput = signupForm.querySelector('input[type="text"]'); const emailInput = signupForm.querySelector('input[type="email"]'); const passwordInput = signupForm.querySelectorAll('input[type="password"]')[0]; const confirmPasswordInput = signupForm.querySelectorAll('input[type="password"]')[1]; const errorMessage = document.getElementById('signup-error-message'); if (passwordInput.value !== confirmPasswordInput.value) { errorMessage.textContent = t('auth_passwords_no_match'); errorMessage.style.display = 'block'; return; } errorMessage.style.display = 'none'; performLogin({ name: nameInput.value, email: emailInput.value }); });
+            languageSwitcherButton.addEventListener('click', () => { const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en'; setLanguage(newLang); });
+            loginLogoutButton.addEventListener('click', () => { if (checkLoginStatus()) { handleLogout(); } else { openAuthModal(); }});
+            mobileLoginLogoutLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { handleLogout(); } else { closeMobileMenu(); openAuthModal(); }});
+            notificationButton.addEventListener('click', (e) => { e.stopPropagation(); notificationPanel.classList.toggle('hidden'); });
+            document.addEventListener('click', (e) => { if (!notificationPanel.contains(e.target) && !notificationButton.contains(e.target)) { notificationPanel.classList.add('hidden'); }});
+            document.getElementById('load-more-notifications').addEventListener('click', () => {
+                visiblePersonalNotifications += 5;
+                renderNotifications();
+            });
+        };
 
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>結帳 - 9's Pilates Studio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-      body {
-        font-family: 'Noto Sans TC', sans-serif;
-        background-color: #efefef;
-        color: #292524; /* text-stone-800 */
-      }
-      .font-serif {
-        font-family: 'Playfair Display', serif;
-      }
-      .transform { transition: transform 0.3s ease-in-out; }
-      .opacity-transition { transition: opacity 0.3s ease-in-out; }
-        .notification-item {
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.2s;
-            display: block;
-            text-decoration: none;
-        }
-        .notification-item:hover {
-            background-color: #f5f5f4; /* stone-100 */
-        }
-        .notification-item.unread {
-            background-color: #f7f5f2; /* A lighter version of brand color */
-        }
-        .notification-item p {
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            color: #44403c; /* stone-700 */
-            margin-bottom: 0;
-        }
-        .notification-item time {
-            font-size: 0.75rem;
-            line-height: 1rem;
-            color: #a8a29e; /* stone-400 */
-            margin-top: 0.25rem;
-            display: block;
-        }
-        #personal-notifications-list::-webkit-scrollbar { width: 6px; }
-        #personal-notifications-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px;}
-        #personal-notifications-list::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px;}
-        #personal-notifications-list::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
-    </style>
-     <style id="auth-modal-styles">
-        .auth-modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 1000; opacity: 0; transition: opacity 0.3s ease-out; pointer-events: none; }
-        .auth-modal-backdrop.active { opacity: 1; pointer-events: auto; }
-        .auth-modal-container { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); z-index: 1001; opacity: 0; transition: opacity 0.3s ease-out, transform 0.3s ease-out; pointer-events: none; width: 100%; max-width: 450px; padding: 20px; max-height: 95vh; overflow-y: auto; }
-        .auth-modal-container.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
-        .auth-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); width: 100%; position: relative; overflow: hidden; }
-        .auth
+        init();
+    });
+    </script>
+</body>
+</html>

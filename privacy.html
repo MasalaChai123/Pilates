@@ -13,7 +13,7 @@
     <style>
       body {
         font-family: 'Noto Sans TC', sans-serif;
-        background-color: #f9f9f9;
+        background-color: #efefef;
         color: #292524; /* text-stone-800 */
       }
       .font-serif {
@@ -232,7 +232,7 @@
         <div class="p-3 border-b border-stone-200 flex-shrink-0">
             <div class="flex justify-between items-center mb-1">
                 <h3 class="font-semibold text-stone-700" data-translate-key="notifications_announcements">公告</h3>
-                <a href="#" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
+                <a href="announcements.html" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
                     <span data-translate-key="notifications_view_all">查看全部</span> (<span id="announcements-count">0</span>)
                     <i class="fas fa-chevron-right text-xs ml-1"></i>
                 </a>
@@ -364,7 +364,39 @@
              <h1 class="text-4xl font-serif mb-4" data-translate-key="privacy_title">隱私政策</h1>
              <p class="text-stone-500" data-translate-key="privacy_last_updated">最後更新日期：2025年1月1日</p>
              <div data-translate-key="privacy_content_html">
-                 <!-- Content injected by JS -->
+                <p>本隱私政策描述了 9's Pilates Studio（「我們」、「我們的」）如何收集、使用和揭露您的個人資訊。當您使用我們的服務時，即表示您同意本政策中所述的資訊收集與使用方式。</p>
+                <h2 class="text-2xl">1. 我們收集的資訊</h2>
+                <p>我們可能收集以下類型的資訊：</p>
+                <ul>
+                    <li><strong>個人識別資訊：</strong>例如您的姓名、電子郵件地址、電話號碼，當您註冊帳戶或購買課程時提供。</li>
+                    <li><strong>付款資訊：</strong>當您進行購買時，我們的第三方支付處理商會收集您的信用卡資訊。我們不會儲存您的完整信用卡號碼。</li>
+                    <li><strong>使用數據：</strong>關於您如何與我們的服務互動的資訊，例如您觀看的課程、瀏覽的頁面和登入時間。</li>
+                </ul>
+                <h2 class="text-2xl">2. 我們如何使用您的資訊</h2>
+                <p>我們將收集到的資訊用於：</p>
+                <ul>
+                    <li>提供、維護和改善我們的服務。</li>
+                    <li>處理您的交易並向您發送相關資訊，包括購買確認和收據。</li>
+                    <li>向您發送技術通知、更新、安全警報以及支援和管理訊息。</li>
+                    <li>回應您的評論、問題和請求，並提供客戶服務。</li>
+                    <li>與您溝通有關我們提供的產品、服務、優惠和活動，並提供我們認為您會感興趣的新聞和資訊。</li>
+                </ul>
+                <h2 class="text-2xl">3. 資訊分享</h2>
+                <p>我們不會與第三方分享您的個人資訊，除非：</p>
+                <ul>
+                    <li>經您同意。</li>
+                    <li>與需要存取這些資訊以代表我們執行工作的可信賴服務提供商（例如支付處理商）分享。</li>
+                    <li>為了遵守法律或回應有效的法律程序。</li>
+                    <li>為了保護我們、我們的客戶或公眾的權利、財產或安全。</li>
+                </ul>
+                <h2 class="text-2xl">4. 您的權利與選擇</h2>
+                <p>您可以隨時存取和更新您的帳戶資訊。您也可以選擇退出接收我們的行銷電子郵件，方法是按照這些電子郵件中的指示操作。</p>
+                <h2 class="text-2xl">5. 數據安全</h2>
+                <p>我們採取合理的措施來保護您的個人資訊，防止遺失、盜竊、濫用以及未經授權的存取、揭露、更改和銷毀。</p>
+                <h2 class="text-2xl">6. 政策變更</h2>
+                <p>我們可能會不時更新本隱私政策。如果我們做出變更，我們將透過修改政策頂部的日期來通知您，在某些情況下，我們可能會提供額外的通知。</p>
+                <h2 class="text-2xl">7. 聯絡我們</h2>
+                <p>如果您對本隱私政策有任何疑問，請透過電子郵件與我們聯繫：9spilates@gmail.com。</p>
             </div>
         </div>
     </main>
@@ -427,9 +459,10 @@
                 'auth_registered_email_placeholder': 'Enter your registered email', 'auth_send_reset_link_button': 'Send Reset Link',
                 'auth_login_error': 'Invalid email or password. Hint: test@example.com / password123', 'auth_passwords_no_match': 'Passwords do not match.',
                 'auth_signup_error': 'An error occurred. Please try again.',
+                // Privacy Page
                 'privacy_title': 'Privacy Policy',
                 'privacy_last_updated': 'Last Updated: January 1, 2025',
-                'privacy_content_html': `<p>9's Pilates Studio ("us", "we", or "our") operates the website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p><h2 class="text-2xl">1. Information Collection and Use</h2><p>We collect several different types of information for various purposes to provide and improve our Service to you. This may include, but is not limited to: Email address, First name and last name, Cookies and Usage Data.</p><h2 class="text-2xl">2. Use of Data</h2><p>9's Pilates Studio uses the collected data for various purposes: to provide and maintain the Service, to notify you about changes to our Service, to allow you to participate in interactive features of our Service when you choose to do so, to provide customer care and support, and to monitor the usage of the Service.</p><h2 class="text-2xl">3. Data Security</h2><p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p><h2 class="text-2xl">4. Cookies Policy</h2><p>We use cookies and similar tracking technologies to track the activity on our Service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.</p><h2 class="text-2xl">5. Your Data Protection Rights</h2><p>You have certain data protection rights. 9's Pilates Studio aims to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data. If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please contact us.</p><h2 class="text-2xl">6. Changes to This Privacy Policy</h2><p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p><h2 class="text-2xl">7. Contact Us</h2><p>If you have any questions about this Privacy Policy, please contact us by email: 9spilates@gmail.com.</p>`
+                'privacy_content_html': `<p>This Privacy Policy describes how 9's Pilates Studio ("we", "us", or "our") collects, uses, and discloses your personal information. By using our Service, you agree to the collection and use of information in accordance with this policy.</p><h2 class="text-2xl">1. Information We Collect</h2><p>We may collect the following types of information:</p><ul><li><strong>Personal Identification Information:</strong> such as your name, email address, phone number, which you provide when you register for an account or purchase a course.</li><li><strong>Payment Information:</strong> When you make a purchase, your credit card information is collected by our third-party payment processor. We do not store your full credit card number.</li><li><strong>Usage Data:</strong> Information on how you interact with our Service, such as the courses you view, pages you visit, and login times.</li></ul><h2 class="text-2xl">2. How We Use Your Information</h2><p>We use the information we collect to:</p><ul><li>Provide, maintain, and improve our Service.</li><li>Process your transactions and send you related information, including purchase confirmations and receipts.</li><li>Send you technical notices, updates, security alerts, and support and administrative messages.</li><li>Respond to your comments, questions, and requests and provide customer service.</li><li>Communicate with you about products, services, offers, and events offered by us and provide news and information we think will be of interest to you.</li></ul><h2 class="text-2xl">3. Sharing of Information</h2><p>We do not share your personal information with third parties except:</p><ul><li>With your consent.</li><li>With trusted service providers who need access to such information to carry out work on our behalf (e.g., payment processors).</li><li>To comply with laws or to respond to lawful requests and legal process.</li><li>To protect the rights and property of us, our agents, customers, and others.</li></ul><h2 class="text-2xl">4. Your Rights and Choices</h2><p>You may access and update your account information at any time. You may also opt out of receiving promotional emails from us by following the instructions in those emails.</p><h2 class="text-2xl">5. Data Security</h2><p>We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction.</p><h2 class="text-2xl">6. Changes to This Policy</h2><p>We may update this privacy policy from time to time. If we make changes, we will notify you by revising the date at the top of the policy and, in some cases, we may provide you with additional notice.</p><h2 class="text-2xl">7. Contact Us</h2><p>If you have any questions about this Privacy Policy, please contact us at: 9spilates@gmail.com.</p>`
             },
             'zh-TW': {
                 'page_title_privacy': "隱私政策 - 9's Pilates Studio",
@@ -454,9 +487,10 @@
                 'auth_forgot_password_success': '重設密碼連結已發送至您的信箱！', 'auth_registered_email_placeholder': '輸入您註冊的電子郵件',
                 'auth_send_reset_link_button': '發送重設連結', 'auth_login_error': '電子郵件或密碼錯誤。提示：test@example.com / password123',
                 'auth_passwords_no_match': '兩次輸入的密碼不一致。', 'auth_signup_error': '註冊時發生錯誤，請稍後再試。',
+                // Privacy Page
                 'privacy_title': '隱私政策',
                 'privacy_last_updated': '最後更新日期：2025年1月1日',
-                'privacy_content_html': `<p>9's Pilates Studio（「我們」）運營本網站（「服務」）。本頁告知您有關我們在使用我們的服務時收集、使用和披露個人資料的政策，以及您與該資料相關的選擇。</p><h2 class="text-2xl">1. 資訊的收集與使用</h2><p>為了提供和改善我們的服務，我們收集多種類型的資訊。這可能包括但不限於：電子郵件地址、姓名、Cookies 和使用數據。</p><h2 class="text-2xl">2. 資料的使用</h2><p>9's Pilates Studio 將收集的資料用於各種目的：提供和維護服務、通知您有關我們服務的變更、讓您能夠在選擇時參與我們服務的互動功能、提供客戶服務與支援、以及監控服務的使用情況。</p><h2 class="text-2xl">3. 資料安全</h2><p>您的資料安全對我們很重要，但請記住，任何透過網際網路傳輸或電子儲存的方法都不是 100% 安全的。雖然我們努力使用商業上可接受的方式來保護您的個人資料，但我們不能保證其絕對安全。</p><h2 class="text-2xl">4. Cookies 政策</h2><p>我們使用 cookie 和類似的追蹤技術來追蹤我們服務上的活動並持有某些資訊。您可以指示您的瀏覽器拒絕所有 cookie 或在發送 cookie 時進行提示。但是，如果您不接受 cookie，您可能無法使用我們服務的某些部分。</p><h2 class="text-2xl">5. 您的資料保護權利</h2><p>您擁有特定的資料保護權利。9's Pilates Studio 旨在採取合理步驟，允許您更正、修改、刪除或限制您的個人資料的使用。如果您希望了解我們持有您的哪些個人資料，並希望將其從我們的系統中刪除，請與我們聯繫。</p><h2 class="text-2xl">6. 隱私政策的變更</h2><p>我們可能會不時更新我們的隱私政策。我們將通过在此頁面上發布新的隱私政策來通知您任何變更。建議您定期查看本隱私政策以了解任何變更。</p><h2 class="text-2xl">7. 聯絡我們</h2><p>如果您對本隱私政策有任何疑問，請透過電子郵件與我們聯繫：9spilates@gmail.com。</p>`
+                'privacy_content_html': `<p>本隱私政策描述了 9's Pilates Studio（「我們」、「我們的」）如何收集、使用和揭露您的個人資訊。當您使用我們的服務時，即表示您同意本政策中所述的資訊收集與使用方式。</p><h2 class="text-2xl">1. 我們收集的資訊</h2><p>我們可能收集以下類型的資訊：</p><ul><li><strong>個人識別資訊：</strong>例如您的姓名、電子郵件地址、電話號碼，當您註冊帳戶或購買課程時提供。</li><li><strong>付款資訊：</strong>當您進行購買時，我們的第三方支付處理商會收集您的信用卡資訊。我們不會儲存您的完整信用卡號碼。</li><li><strong>使用數據：</strong>關於您如何與我們的服務互動的資訊，例如您觀看的課程、瀏覽的頁面和登入時間。</li></ul><h2 class="text-2xl">2. 我們如何使用您的資訊</h2><p>我們將收集到的資訊用於：</p><ul><li>提供、維護和改善我們的服務。</li><li>處理您的交易並向您發送相關資訊，包括購買確認和收據。</li><li>向您發送技術通知、更新、安全警報以及支援和管理訊息。</li><li>回應您的評論、問題和請求，並提供客戶服務。</li><li>與您溝通有關我們提供的產品、服務、優惠和活動，並提供我們認為您會感興趣的新聞和資訊。</li></ul><h2 class="text-2xl">3. 資訊分享</h2><p>我們不會與第三方分享您的個人資訊，除非：</p><ul><li>經您同意。</li><li>與需要存取這些資訊以代表我們執行工作的可信賴服務提供商（例如支付處理商）分享。</li><li>為了遵守法律或回應有效的法律程序。</li><li>為了保護我們、我們的客戶或公眾的權利、財產或安全。</li></ul><h2 class="text-2xl">4. 您的權利與選擇</h2><p>您可以隨時存取和更新您的帳戶資訊。您也可以選擇退出接收我們的行銷電子郵件，方法是按照這些電子郵件中的指示操作。</p><h2 class="text-2xl">5. 數據安全</h2><p>我們採取合理的措施來保護您的個人資訊，防止遺失、盜竊、濫用以及未經授權的存取、揭露、更改和銷毀。</p><h2 class="text-2xl">6. 政策變更</h2><p>我們可能會不時更新本隱私政策。如果我們做出變更，我們將透過修改政策頂部的日期來通知您，在某些情況下，我們可能會提供額外的通知。</p><h2 class="text-2xl">7. 聯絡我們</h2><p>如果您對本隱私政策有任何疑問，請透過電子郵件與我們聯繫：9spilates@gmail.com。</p>`
             }
         };
         const dummyNotifications = {
@@ -518,6 +552,7 @@
             const authDefaultSubtitle = document.getElementById('auth-default-subtitle');
             if(authDefaultSubtitle) authDefaultSubtitle.style.display = 'block';
             if(authContextSubtitle) authContextSubtitle.style.display = 'none';
+
             document.querySelectorAll('.auth-view').forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); authModalBackdrop.classList.add('active'); authModalContainer.classList.add('active'); 
         };
         const closeAuthModal = () => { 
@@ -540,7 +575,7 @@
             if (announcementsContainer) {
                 document.getElementById('announcements-count').textContent = allAnnouncements.length;
                 if (allAnnouncements.length > 0) { announcementsContainer.innerHTML = singleItemHTML(allAnnouncements[0]); } 
-                else { announcementsContainer.innerHTML = `<div class="text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`; }
+                else { announcementsContainer.innerHTML = `<div class="text-center text-sm text-stone-500 p-4">${t('notifications_no_items')}</div>`; }
             }
             const personalList = document.getElementById('personal-notifications-list');
             const loadMoreBtn = document.getElementById('load-more-notifications');
@@ -548,7 +583,7 @@
                 const allPersonal = dummyNotifications.personal;
                 const visibleItems = allPersonal.slice(0, visiblePersonalNotifications);
                 if (visibleItems.length > 0) { personalList.innerHTML = visibleItems.map(singleItemHTML).join(''); } 
-                else { personalList.innerHTML = `<div class="text-center text-sm text-stone-500">${t('notifications_no_items')}</div>`; }
+                else { personalList.innerHTML = `<div class="text-center text-sm text-stone-500 p-4">${t('notifications_no_items')}</div>`; }
                 if (loadMoreBtn) {
                     if (allPersonal.length > visiblePersonalNotifications) { loadMoreBtn.classList.remove('hidden');} 
                     else { loadMoreBtn.classList.add('hidden'); }

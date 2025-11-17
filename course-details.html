@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -218,7 +219,7 @@
         <div class="p-3 border-b border-stone-200 flex-shrink-0">
             <div class="flex justify-between items-center mb-1">
                 <h3 class="font-semibold text-stone-700" data-translate-key="notifications_announcements">公告</h3>
-                <a href="#" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
+                <a href="announcements.html" id="view-all-announcements" class="text-sm text-[#c1bcb8] hover:underline flex items-center">
                     <span data-translate-key="notifications_view_all">查看全部</span> (<span id="announcements-count">0</span>)
                     <i class="fas fa-chevron-right text-xs ml-1"></i>
                 </a>
@@ -666,22 +667,8 @@
             const savedLang = localStorage.getItem('pilatesLanguage') || (navigator.language.startsWith('en') ? 'en' : 'zh-TW');
             setLanguage(savedLang);
             
-            checkLoginStatus(); loadCart(); renderCart();
+            checkLoginStatus(); loadCart(); renderPage();
             
-            document.getElementById('course-details-container').addEventListener('click', (e) => {
-                if (e.target.matches('.add-to-cart-btn')) {
-                    const courseId = parseInt(e.target.dataset.courseId, 10);
-                    addToCart(courseId);
-                } else if (e.target.matches('.buy-course-btn')) {
-                    const courseId = parseInt(document.querySelector('.add-to-cart-btn').dataset.courseId, 10);
-                    addToCart(courseId);
-                    setTimeout(() => { window.location.href = 'checkout.html'; }, 300); // Go to checkout after adding
-                }
-            });
-            const backToTopButton = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => { if (window.pageYOffset > 300) { backToTopButton.classList.remove('opacity-0'); } else { backToTopButton.classList.add('opacity-0'); } });
-            backToTopButton.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
             cartButton.addEventListener('click', openCart);
             cartCloseButton.addEventListener('click', closeCart);
             cartBackdrop.addEventListener('click', closeCart);
