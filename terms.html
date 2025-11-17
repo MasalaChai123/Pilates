@@ -182,7 +182,7 @@
 <body class="bg-[#efefef] text-stone-800">
 
     <!-- Header -->
-    <header class="sticky top-0 bg-[#e3dfdc]/80 backdrop-blur-md z-40 shadow-sm">
+    <header class="sticky top-0 bg-[#e3dfdc] z-40 shadow-sm">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           <div class="flex-shrink-0">
@@ -617,25 +617,4 @@
         document.querySelectorAll('.auth-view-switch').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); openAuthModal(e.target.closest('[data-view]').dataset.view); }); });
         document.querySelectorAll('.password-toggle').forEach(button => { button.addEventListener('click', () => { const passwordInput = button.previousElementSibling; if (passwordInput.type === 'password') { passwordInput.type = 'text'; button.textContent = t('auth_hide_password'); } else { passwordInput.type = 'password'; button.textContent = t('auth_show_password'); } }); });
         loginForm.addEventListener('submit', (e) => { e.preventDefault(); const emailInput = loginForm.querySelector('input[type="email"]'); const passwordInput = loginForm.querySelector('input[type="password"]'); const errorMessage = document.getElementById('login-error-message'); if (emailInput.value === 'test@example.com' && passwordInput.value === 'password123') { errorMessage.style.display = 'none'; performLogin({ name: '測試使用者', email: 'test@example.com' }); } else { errorMessage.textContent = t('auth_login_error'); errorMessage.style.display = 'block'; } });
-        signupForm.addEventListener('submit', (e) => { e.preventDefault(); const nameInput = signupForm.querySelector('input[type="text"]'); const emailInput = signupForm.querySelector('input[type="email"]'); const passwordInput = signupForm.querySelectorAll('input[type="password"]')[0]; const confirmPasswordInput = signupForm.querySelectorAll('input[type="password"]')[1]; const errorMessage = document.getElementById('signup-error-message'); if (passwordInput.value !== confirmPasswordInput.value) { errorMessage.textContent = t('auth_passwords_no_match'); errorMessage.style.display = 'block'; return; } errorMessage.style.display = 'none'; performLogin({ name: nameInput.value, email: emailInput.value }); });
-        languageSwitcherButton.addEventListener('click', () => { const newLang = currentLanguage === 'en' ? 'zh-TW' : 'en'; setLanguage(newLang); });
-        
-        loginLogoutButton.addEventListener('click', () => { if (checkLoginStatus()) { handleLogout(); } else { openAuthModal(); }});
-        mobileLoginLogoutLink.addEventListener('click', (e) => { e.preventDefault(); if (checkLoginStatus()) { handleLogout(); } else { closeMobileMenu(); openAuthModal(); }});
-        notificationButton.addEventListener('click', (e) => { e.stopPropagation(); notificationPanel.classList.toggle('hidden'); });
-        document.addEventListener('click', (e) => { if (!notificationPanel.contains(e.target) && !notificationButton.contains(e.target)) { notificationPanel.classList.add('hidden'); }});
-        document.getElementById('load-more-notifications').addEventListener('click', () => {
-            visiblePersonalNotifications += 5;
-            renderNotifications();
-        });
-
-        const init = () => { 
-            checkLoginStatus(); 
-            loadCart(); 
-            initLanguage(); 
-        };
-        init();
-    });
-    </script>
-</body>
-</html>
+        signupForm.addEventListener('submit', (e) => { e.preventDefault(); const nameInput = signupForm.querySelector('input[type="text"]'); const emailInput = signupForm.querySelector('input[type="email"]'); const passwordInput = signupForm.querySelectorAll('input[type="password"]')[0]; const confirmPasswordInput = signupForm.querySelectorAll('input[type="password"]')[1]; const errorMessage = document.getElementById('signup-
